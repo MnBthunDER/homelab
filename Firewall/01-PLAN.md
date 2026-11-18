@@ -30,30 +30,32 @@ Objective: Design a secure, segmented network with a unified Layer 2 domain span
                           └──────────────────┘
 ```
 # fw1 interfaces
-vlanid      interface   mode        usage                   ip/netmask
-n/a         int A       interface   lan-corp                172.16.100.254/24    
-10          int B       vlan        datastore               10.1.10.0/24
-n/a         int 1-3     vlan switch mgmt-pve                10.1.1.0/24
-20          int 1-3     vlan        vlan-pve                10.1.20.0/24
-30          int 1-3     vlan        vlan-prod               10.1.30.0/24
-40          int 1-3     vlan        vlan-dmz                10.1.40.0/24
-50          int 1-3     vlan        vlan-guest              10.1.50.0/24
-n/a         int 4       vlan switch UniFI AP                10.1.1.101/32
-100         int 4       vlan        wifi-guest              192.168.100.0/24
-101         int 4       vlan        wifi-162 (cctv)         172.16.101.0/24
-102         int 4       vlan        wifi-secure             172.16.102.0/24
-103         int 4       vlan        wifi-iot                172.16.103.0/24
-n/a         int 5       vlan switch trunk                   10.1.1.254/32
-n/a         dmz         interface   cgnat (Lab Internet)    100.98.49.0/24
-n/a         wan1        interface   unused                  dhcp
-n/a         wan2        interface   unused                  dhcp
+| vlanid | interface | mode        | usage                | ip/netmask        |
+|  ----- |  -------- |  ---------- |  ------------------- |  ---------------- |
+| n/a    | int A     | interface   | lan-corp             | 172.16.100.254/24 |
+| 10     | int B     | vlan        | datastore            | 10.1.10.0/24      |
+| n/a    | int 1-3   | vlan switch | mgmt-pve             | 10.1.1.0/24       |
+| 20     | int 1-3   | vlan        | vlan-pve             | 10.1.20.0/24      |
+| 30     | int 1-3   | vlan        | vlan-prod            | 10.1.30.0/24      |
+| 40     | int 1-3   | vlan        | vlan-dmz             | 10.1.40.0/24      |
+| 50     | int 1-3   | vlan        | vlan-guest           | 10.1.50.0/24      |
+| n/a    | int 4     | vlan switch | UniFI AP             | 10.1.1.101/32     |
+| 100    | int 4     | vlan        | wifi-guest           | 192.168.100.0/24  |
+| 101    | int 4     | vlan        | wifi-162 (cctv)      | 172.16.101.0/24   |
+| 102    | int 4     | vlan        | wifi-secure          | 172.16.102.0/24   |
+| 103    | int 4     | vlan        | wifi-iot             | 172.16.103.0/24   |
+| n/a    | int 5     | vlan switch | trunk                | 10.1.1.254/32     |
+| n/a    | dmz       | interface   | cgnat (Lab Internet) | 100.98.49.0/24    |
+| n/a    | wan1      | interface   | unused               | dhcp              |
+| n/a    | wan2      | interface   | unused               | dhcp              |
 
 # fw3 interfaces
-vlanid      interface   mode        usage                   ip/netmask
-n/a         int 1       vlan switch UniFi AP                10.1.1.102/32
-n/a         int 5       vlan switch trunk                   10.1.1.252/32
-n/a         wan1        sd-wan      ISP                     dhcp
-n/a         wan2        sd-wan      unused                  n/a          
+| vlanid | interface | mode        | usage    | ip/netmask    |
+| :----- | :-------- | :---------- | :------- | :------------ |
+| n/a    | int 1     | vlan switch | UniFi AP | 10.1.1.102/32 |
+| n/a    | int 5     | vlan switch | trunk    | 10.1.1.252/32 |
+| n/a    | wan1      | sd-wan      | ISP      | dhcp          |
+| n/a    | wan2      | sd-wan      | unused   | n/a           |        
 
 Post-migration: the fw1 keeps every gateway (`*.254`), policy and DHCP
 server, but its default route and internet policies point at the fw3
