@@ -65,7 +65,7 @@ config vpn ipsec phase2-interface
 end
 
 # Time sync
-https://community.fortinet.com/t5/FortiGate/Technical-Tip-Authentication-fails-with-clock-skew-errors-in/ta-p/222360
+# https://community.fortinet.com/t5/FortiGate/Technical-Tip-Authentication-fails-with-clock-skew-errors-in/ta-p/222360
 
 config system ntp
     set ntpsync enable
