@@ -1,3 +1,3 @@
 # homelab
 
-![Homelab Network Diagram](./Homelab-V2.1.drawio.png)
+![Homelab Network Diagram](./Homelab-V2.1-Overview.drawio.png)
