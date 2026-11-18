@@ -1,0 +1,18 @@
+# Best practice is to setup the clusters on fresh install!
+
+https://www.youtube.com/watch?v=hSOFshCkSys
+
+# Datacenter > Cluster > Create Cluster (Primary node)
+# Datacenter > Cluster > Join Cluster (Remaining nodes)
+
+# Health check post cluster created
+pvecm status
+
+# Check cluster nodes
+pvecm nodes
+
+# Leave cluster node
+    pvecm delnode
+
+# Proxmox HA and Clusters new features on 9.2
+https://www.youtube.com/watch?v=tENhNnVwWyU
