@@ -51,7 +51,7 @@ Both firewalls share a unified L2 domain via an inter-floor trunk. Each has a `m
 | 30   |    10.1.30.0/24  |         production                 |
 | 40   |    10.1.40.0/24  |            dmz                     |
 | 100  | 192.168.100.0/24 |         wifi-guest                 |
-| 101  | 172.16.101.0/24  |         wifi-162                   |
+| 101  | 172.16.101.0/24  |         wifi-162 (cctv)            |
 | 102  | 172.16.102.0/24  |         wifi-secure                |
 | 103  | 172.16.103.0/24  |         wifi-iot                   |
 | 10   | 10.1.10.0/24     | datastore (on port `b`, fw1 only)              |
