@@ -1,5 +1,5 @@
 Objective: Secure, segmented network infrastructure with unified L2 domain across both floors.
-
+Constraints: Only a 1Gbps uplink is available between levels.
 ## Topology
 
 ```
