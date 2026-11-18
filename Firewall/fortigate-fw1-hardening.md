@@ -1,6 +1,6 @@
-# FortiGate 70F — security hardening (restore mgmt-trunk zero-trust)
+# FortiGate fw1 — security hardening (restore mgmt-trunk zero-trust)
 
-> **Applies on top of `fortigate-70f-plan.md` — do not apply it alone.**
+> **Applies on top of `fortigate-fw1-plan.md` — do not apply it alone.**
 > The WAN migration repoints the internet policies from `dstintf "sd-wan"`
 > to `dstintf "internal"`. That one-word change has a side effect:
 > `dstaddr "all"` now also matches the directly-connected `10.1.1.0/24`
@@ -18,7 +18,7 @@ migration, so this is NOT "allow everything everywhere". But
 `10.1.1.0/24` is the management plane:
 
 - PVE mgmt: `10.1.1.1`–`10.1.1.4` (`ip-mgmt-pve1`–`4`)
-- Firewall mgmt: `10.1.1.254` (70F), `10.1.1.252` (60E), `10.1.1.253` (OPNsense)
+- Firewall mgmt: `10.1.1.254` (fw1), `10.1.1.252` (fw3), `10.1.1.253` (OPNsense)
 - AP mgmt: `10.1.1.101` (AC Pro), `10.1.1.102` (U6 Pro)
 
 Affected source VLANs gain new reachability to `10.1.1.0/24`:
@@ -58,7 +58,7 @@ end
 
 ## Order of operations
 
-1. Apply CHANGE 1–4 from `fortigate-70f-plan.md` (default route, sd-wan
+1. Apply CHANGE 1–4 from `fortigate-fw1-plan.md` (default route, sd-wan
    dismantle, policy repoints to `internal`).
 2. Add edit 90 and `move 90 after 1` (this file).
 3. Test: from a wifi-guest / wifi-iot / wifi-secure client, `ping 10.1.1.1`

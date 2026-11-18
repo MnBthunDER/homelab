@@ -1,19 +1,19 @@
-# FortiGate 70F — forward internet to the 60E (NAT stays ON)
+# FortiGate fw1 — forward internet to the fw3 (NAT stays ON)
 
-> The 70F keeps every gateway, DHCP server and LAN policy, but stops being
-> the internet edge. It forwards internet egress to the 60E (which holds the
+> The fw1 keeps every gateway, DHCP server and LAN policy, but stops being
+> the internet edge. It forwards internet egress to the fw3 (which holds the
 > NBN public IP and NATs) **with NAT still ON** — double NAT by design. This
-> is deliberate: it is what lets the 60E get away with ZERO static routes.
-> The NBN no longer lives on the 70F; `wan2`/sd-wan is decommissioned (the
+> is deliberate: it is what lets the fw3 get away with ZERO static routes.
+> The NBN no longer lives on the fw1; `wan2`/sd-wan is decommissioned (the
 > NBN is singular — no backup path).
 
 ## Direction (confirmed)
 
-- **60E does the internet NAT** (it holds the NBN public IP on `wan1`).
-- **70F internet policies repoint to `internal` but KEEP `nat enable`** — the
-  70F NATs each client to `10.1.1.254`, then the 60E NATs to the public IP.
-  Double NAT is intentional; it eliminates the 60E return routes entirely.
-- **70F default route moves from sd-wan to `10.1.1.252`** (the 60E).
+- **fw3 does the internet NAT** (it holds the NBN public IP on `wan1`).
+- **fw1 internet policies repoint to `internal` but KEEP `nat enable`** — the
+  fw1 NATs each client to `10.1.1.254`, then the fw3 NATs to the public IP.
+  Double NAT is intentional; it eliminates the fw3 return routes entirely.
+- **fw1 default route moves from sd-wan to `10.1.1.252`** (the fw3).
 - The `internal` switch, port members, and all VLAN subinterfaces are
   UNCHANGED — the trunk and `.254` gateways stay exactly as they are.
 - You're on CGNAT, so inbound port-forwarding was already impossible — the
@@ -22,7 +22,7 @@
 ## Changes (only these)
 
 <!-- CHANGE 1: default route — replace the sd-wan default with a static via
-     the 60E. The 70F now sends unknown traffic to 10.1.1.252. wan2 is
+     the fw3. The fw1 now sends unknown traffic to 10.1.1.252. wan2 is
      decommissioned (no backup). -->
 config router static
     edit 1
@@ -35,7 +35,7 @@ config router static
 end
 
 <!-- CHANGE 2: dismantle sd-wan (no more dual-WAN). Remove both wan members so
-     the 70F no longer advertises wan2/wan1 as egresses. -->
+     the fw1 no longer advertises wan2/wan1 as egresses. -->
 config system sdwan
     set status disable
     config members
@@ -93,36 +93,36 @@ end
 
 ## Gotchas that drive the changes
 
-- **NAT stays ON — double NAT is deliberate.** The 70F NATs clients to
-  `10.1.1.254`; the 60E NATs again to the public IP. Because every source the
-  60E sees is `10.1.1.254` (directly connected), the 60E needs NO return
-  routes for the 70F-only subnets (`a` 172.16.100.0/24, vlan-datastore
+- **NAT stays ON — double NAT is deliberate.** The fw1 NATs clients to
+  `10.1.1.254`; the fw3 NATs again to the public IP. Because every source the
+  fw3 sees is `10.1.1.254` (directly connected), the fw3 needs NO return
+  routes for the fw1-only subnets (`a` 172.16.100.0/24, vlan-datastore
   10.1.10.0/24, cgnat dmz 100.98.40.0/24). Do NOT flip these to `nat disable`
-  unless you also add those routes back on the 60E.
+  unless you also add those routes back on the fw3.
 - **Do NOT add a blanket catch-all.** It is first-match and would override
   the deny rules (`trunk-block`/17, `datastore-block`/22, `162-block`/33).
   Repoint each existing policy individually.
 - **`dstintf "internal"` is intentional for both allow and deny.** It is the
-  70F's L3 interface toward `10.1.1.252`; policy ordering is preserved (e.g.
+  fw1's L3 interface toward `10.1.1.252`; policy ordering is preserved (e.g.
   `162-ntp`/32 still precedes `162-block`/33, so NTP passes and the rest is
   denied).
 
 ## Order of operations
 
-1. Apply the 60E changes first (see `fortigate-60e-plan.md`) — pre-stage.
-2. On the 70F: repoint the default route (CHANGE 1) → `10.1.1.252`.
+1. Apply the fw3 changes first (see `fortigate-fw3-plan.md`) — pre-stage.
+2. On the fw1: repoint the default route (CHANGE 1) → `10.1.1.252`.
 3. Dismantle sd-wan (CHANGE 2) — remove both wan members.
 4. Repoint the internet + deny policies (CHANGE 3 & 4) to `internal` (NAT on).
-5. Test via the EoP rig: feed 60E `wan1` from the upstairs DSL path (EoP leg
-   into `wan1`, other leg at the 70F `wan2`) — the 70F NATs and forwards, the
-   60E NATs again (double NAT).
-6. Cutover (when NBN is ready): swap the EoP leg on 60E `wan1` for the NBN ONT.
+5. Test via the EoP rig: feed fw3 `wan1` from the upstairs DSL path (EoP leg
+   into `wan1`, other leg at the fw1 `wan2`) — the fw1 NATs and forwards, the
+   fw3 NATs again (double NAT).
+6. Cutover (when NBN is ready): swap the EoP leg on fw3 `wan1` for the NBN ONT.
 7. Test internet from: a shared-VLAN client (wifi), lan-corp (`a`), a
-   cgnat/dmz host, and a vlan-datastore host — all must NAT via the 60E.
+   cgnat/dmz host, and a vlan-datastore host — all must NAT via the fw3.
 
 ## Rollback
 
-1. Unplug the NBN/EoP from 60E `wan1` and restore the DSL path to 70F `wan2`.
+1. Unplug the NBN/EoP from fw3 `wan1` and restore the DSL path to fw1 `wan2`.
 2. Restore the sd-wan default route (`set sdwan-zone "sd-wan"`) and re-add
    sd-wan members 1 (`wan2`) and 2 (`wan1`).
 3. Flip the 13 policies back to `dstintf "sd-wan"` (`nat` was left enabled
