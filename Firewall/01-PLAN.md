@@ -52,7 +52,9 @@ n/a         wan2        interface   unused                  dhcp
 # fw3 interfaces
 vlanid      interface   mode        usage                   ip/netmask
 n/a         int 1       vlan switch UniFi AP                10.1.1.102/32
-n/a         int 5       vlan switch trunk                   10.1.1.252/32          
+n/a         int 5       vlan switch trunk                   10.1.1.252/32
+n/a         wan1        sd-wan      ISP                     dhcp
+n/a         wan2        sd-wan      unused                  n/a          
 
 Post-migration: the fw1 keeps every gateway (`*.254`), policy and DHCP
 server, but its default route and internet policies point at the fw3
