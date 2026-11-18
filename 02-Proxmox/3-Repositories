@@ -1,0 +1,23 @@
+# Select your pve host > Updates > Repositories > Add > No-Subscription
+
+# File: /etc/apt/resources.lost.d/ceph.list
+    Disable: deb    https://enterprise.proxmox.com/debian/ceph-quincy   bookworm    enterprise
+
+# File: etc/apt/sources.list.d/pve-enterprise.list
+    Disable: deb    https://enterprise.proxmox.com/debian/pve           bookworm    pve-enterprise
+
+# File: /etc/apt/sources.list
+    Add: pve-no-subscription
+            deb     http://download.proxmox.com/debian/pve              bookworm    pve-no-subscription
+
+# Final Status:
+     You get updates for Proxmox VE
+     The no-subscription repository is not recommended for production use!
+
+# Console
+
+ # Updates > Refresh then Update the OS
+
+ # Reboot
+
+    # Repeat the Updates process as required until it shows "You system is up-to-date"
