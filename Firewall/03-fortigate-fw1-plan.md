@@ -80,7 +80,7 @@ config firewall policy
         set name "corp-internet"
         set srcintf "a"
         set dstintf "internal"      <!-- was "sd-wan" -->
-        set srcaddr "mac-corp-hp-usb-c-dock-g5" "mac-corp-asix-usb-to-ethernet"
+        set srcaddr "mac-corp-1" "mac-corp-2"
         set dstaddr "all"
         set schedule "always"
         set service "ALL"
