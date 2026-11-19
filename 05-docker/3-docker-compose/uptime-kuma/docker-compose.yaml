@@ -1,0 +1,64 @@
+services:
+  mariadb:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: uptime_kuma
+      MARIADB_USER: uptime_kuma
+      MARIADB_PASSWORD_FILE: /run/secrets/KUMA_DB_PASSWORD
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/KUMA_DB_ROOT_PASSWORD
+    volumes:
+      - /mnt/nas-nfs/uptime_kuma/mariadb:/var/lib/mysql
+    networks:
+      - kuma-internal
+    secrets:
+      - KUMA_DB_PASSWORD
+      - KUMA_DB_ROOT_PASSWORD
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    command: ["/bin/bash", "-c", "export UPTIME_KUMA_DB_PASSWORD=\"$$(cat /run/secrets/KUMA_DB_PASSWORD)\"; until (echo > /dev/tcp/mariadb/3306) 2>/dev/null; do echo 'Waiting for mariadb...'; sleep 2; done; echo 'mariadb is ready'; exec node server/server.js"]
+    ports:
+      - "3001:3001"
+    environment:
+      UPTIME_KUMA_DB_TYPE: mariadb
+      UPTIME_KUMA_DB_HOSTNAME: mariadb
+      UPTIME_KUMA_DB_PORT: "3306"
+      UPTIME_KUMA_DB_NAME: uptime_kuma
+      UPTIME_KUMA_DB_USERNAME: uptime_kuma
+      # UPTIME_KUMA_DB_PASSWORD is injected at runtime from /run/secrets/KUMA_DB_PASSWORD via command above
+    volumes:
+      - /mnt/nas-nfs/uptime_kuma/data:/app/data
+    networks:
+      - kuma-internal
+    secrets:
+      - KUMA_DB_PASSWORD
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      update_config:
+        order: start-first
+        failure_action: rollback
+        parallelism: 1
+
+networks:
+  kuma-internal:
+    driver: overlay
+
+secrets:
+  KUMA_DB_PASSWORD:
+    external: true
+  KUMA_DB_ROOT_PASSWORD:
+    external: true
