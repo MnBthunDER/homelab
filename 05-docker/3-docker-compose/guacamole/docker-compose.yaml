@@ -1,0 +1,88 @@
+version: "3.8"
+
+networks:
+  guac-net:
+    driver: overlay
+    attachable: true
+
+services:
+  guacd:
+    image: guacamole/guacd:1.6.0
+    environment:
+      LOG_LEVEL: info
+    networks:
+      - guac-net
+    deploy:
+      replicas: 1
+#     placement:
+#      constraints:
+#         - node.labels.guacamole == true
+#      restart_policy:
+#        condition: any
+#        delay: 5s
+#        window: 120s
+
+  mysql:
+    image: mariadb:11.4
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/GUACAMOLE_MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: guacamole_db
+      MYSQL_USER: guacamole_user
+      MYSQL_PASSWORD_FILE: /run/secrets/GUACAMOLE_MYSQL_PASSWORD
+    secrets:
+      - GUACAMOLE_MYSQL_PASSWORD
+      - GUACAMOLE_MYSQL_ROOT_PASSWORD
+    volumes:
+      - /mnt/nas-nfs/guacamole/db-data:/var/lib/mysql
+    networks:
+      - guac-net
+    deploy:
+      replicas: 1
+#     placement:
+#       constraints:
+#         - node.labels.guacamole == true
+#      restart_policy:
+#        condition: any
+#        delay: 5s
+#        window: 120s
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  guacamole:
+    image: guacamole/guacamole:1.6.0
+    environment:
+      GUACD_HOSTNAME: guacd
+      GUACD_PORT: "4822"
+      MYSQL_HOSTNAME: mysql
+      MYSQL_DATABASE: guacamole_db
+      MYSQL_USERNAME: guacamole_user
+      MYSQL_PASSWORD_FILE: /run/secrets/GUACAMOLE_MYSQL_PASSWORD
+#      BAN_ENABLED: "false"
+    secrets:
+      - GUACAMOLE_MYSQL_PASSWORD
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
+#       mode: host
+    networks:
+      - guac-net
+    deploy:
+      replicas: 1
+#     placement:
+#       constraints:
+#         - node.labels.guacamole == true
+#      restart_policy:
+#        condition: any
+#        delay: 5s
+#        window: 120s
+
+secrets:
+  GUACAMOLE_MYSQL_PASSWORD:
+    external: true
+  GUACAMOLE_MYSQL_ROOT_PASSWORD:
+    external: true
