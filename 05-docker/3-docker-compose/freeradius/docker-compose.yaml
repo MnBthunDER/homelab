@@ -1,0 +1,15 @@
+services:
+  freeradius:
+    image: freeradius/freeradius-server:latest-alpine
+    container_name: freeradius
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    volumes:
+      - /mnt/nas-nfs/freeradius/eap:/opt/etc/raddb/mods-available/eap:ro
+      - /mnt/nas-nfs/freeradius/default:/opt/etc/raddb/sites-available/default:ro
+      - /mnt/nas-nfs/freeradius/clients.conf:/opt/etc/raddb/clients.conf:ro
+      - /mnt/nas-nfs/freeradius/ssl/private:/etc/ssl/private:ro
+      - /mnt/nas-nfs/freeradius/ssl/certs:/etc/ssl/certs:ro
+    command: ["radiusd", "-X"]
+    restart: unless-stopped
