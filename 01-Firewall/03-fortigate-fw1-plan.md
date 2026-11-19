@@ -2,14 +2,14 @@
 
 > The fw1 keeps every gateway, DHCP server and LAN policy, but stops being
 > the internet edge. It forwards internet egress to the fw3 (which holds the
-> NBN public IP and NATs) **with NAT still ON** — double NAT by design. This
+> ISP public IP and NATs) **with NAT still ON** — double NAT by design. This
 > is deliberate: it is what lets the fw3 get away with ZERO static routes.
-> The NBN no longer lives on the fw1; `wan2`/sd-wan is decommissioned (the
-> NBN is singular — no backup path).
+> The ISP no longer lives on the fw1; `wan2`/sd-wan is decommissioned (the
+> ISP is singular — no backup path).
 
 ## Direction (confirmed)
 
-- **fw3 does the internet NAT** (it holds the NBN public IP on `wan1`).
+- **fw3 does the internet NAT** (it holds the ISP public IP on `wan1`).
 - **fw1 internet policies repoint to `internal` but KEEP `nat enable`** — the
   fw1 NATs each client to `10.1.1.254`, then the fw3 NATs to the public IP.
   Double NAT is intentional; it eliminates the fw3 return routes entirely.
@@ -116,13 +116,13 @@ end
 5. Test via the EoP rig: feed fw3 `wan1` from the upstairs DSL path (EoP leg
    into `wan1`, other leg at the fw1 `wan2`) — the fw1 NATs and forwards, the
    fw3 NATs again (double NAT).
-6. Cutover (when NBN is ready): swap the EoP leg on fw3 `wan1` for the NBN ONT.
+6. Cutover (when ISP is ready): swap the EoP leg on fw3 `wan1` for the ISP ONT.
 7. Test internet from: a shared-VLAN client (wifi), lan-corp (`a`), a
    cgnat/dmz host, and a vlan-datastore host — all must NAT via the fw3.
 
 ## Rollback
 
-1. Unplug the NBN/EoP from fw3 `wan1` and restore the DSL path to fw1 `wan2`.
+1. Unplug the ISP/EoP from fw3 `wan1` and restore the DSL path to fw1 `wan2`.
 2. Restore the sd-wan default route (`set sdwan-zone "sd-wan"`) and re-add
    sd-wan members 1 (`wan2`) and 2 (`wan1`).
 3. Flip the 13 policies back to `dstintf "sd-wan"` (`nat` was left enabled

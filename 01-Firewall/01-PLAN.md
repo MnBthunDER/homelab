@@ -25,7 +25,7 @@ Objective: Design a secure, segmented network with a unified Layer 2 domain span
                           │  10.1.1.252/24   │   │
                           │  ├─ int1: U6 Pro │   │
                           │  └─ int5: trunk──╫───┘
-                          │  wan1 = NBN      │
+                          │  wan1 = ISP      │
                           │  (DHCP + NAT)    │
                           └──────────────────┘
 ```
@@ -59,7 +59,7 @@ Objective: Design a secure, segmented network with a unified Layer 2 domain span
 
 Post-migration: the fw1 keeps every gateway (`*.254`), policy and DHCP
 server, but its default route and internet policies point at the fw3
-(`10.1.1.252`) with NAT on (double NAT). The fw3 holds the NBN public IP on
+(`10.1.1.252`) with NAT on (double NAT). The fw3 holds the ISP public IP on
 `wan1` and NATs all egress. A transparent-pipe/vwp pass-through was tried
 and rejected on-box (FortiOS won't accept a VLAN over the `internal`
 hard-switch as a vwp member, and there's only one inter-floor cable), so NAT
@@ -74,12 +74,12 @@ lives on the fw3.
 
 ## Future — WAN migration
 
-Make the fw3 the internet edge for the NEW NBN FTTP (terminates ground floor, plugs into `wan1`); cut over from the current DSL once the design is proven. The fw3 holds the NBN public IP on `wan1` and NATs all egress; the fw1 keeps every gateway, policy and DHCP server but forwards internet to the fw3 with NAT **ON** — intentional double NAT that lets the fw3 use ZERO static routes (the fw1 NATs clients to `10.1.1.254`, a directly-connected subnet on the fw3):
+Make the fw3 the internet edge for the NEW ISP FTTP (terminates ground floor, plugs into `wan1`); cut over from the current DSL once the design is proven. The fw3 holds the ISP public IP on `wan1` and NATs all egress; the fw1 keeps every gateway, policy and DHCP server but forwards internet to the fw3 with NAT **ON** — intentional double NAT that lets the fw3 use ZERO static routes (the fw1 NATs clients to `10.1.1.254`, a directly-connected subnet on the fw3):
 
 - fw3: per-VLAN NAT policies (`internal` + each VLAN → `wan1`). No routes.
 - fw1: default route → `10.1.1.252`; dismantle sd-wan; repoint the 13 `dstintf "sd-wan"` policies → `internal`, NAT stays on.
 
-Pre-NBN testing feeds the fw3's `wan1` over an EoP/powerline link from the upstairs DSL (fw1 `wan2`); on cutover the EoP leg is swapped for the NBN ONT.
+Pre-ISP testing feeds the fw3's `wan1` over an EoP/powerline link from the upstairs DSL (fw1 `wan2`); on cutover the EoP leg is swapped for the ISP ONT.
 
 See `fortigate-fw3-plan.md` / `fortigate-fw1-plan.md` for exact CLI changes (marked `<!-- CHANGE -->`).
 

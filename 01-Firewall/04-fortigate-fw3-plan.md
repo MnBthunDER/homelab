@@ -1,6 +1,6 @@
 # FortiGate fw3 — internet edge (NAT)
 
-> fw3 holds the NBN public IP on `wan1` and NATs **all** internet egress for
+> fw3 holds the ISP public IP on `wan1` and NATs **all** internet egress for
 > both floors. The fw1 keeps every gateway, policy and DHCP server and ALSO
 > NATs on the way through — **double NAT is the design**, and it is exactly
 > what removes every return route from this box. (You're on CGNAT, so the
@@ -13,16 +13,16 @@ The transparent-pipe / vwp approach was tried and **rejected on-box**:
 FortiOS will not accept a VLAN sub-interface over the `internal` hardware
 switch as a virtual-wire-pair member (`entry not found in datasource`), and
 there is only one inter-floor cable (no second run for a dedicated WAN
-bridge). The Virtual-VLAN-switch feature that *could* tag the NBN into a
+bridge). The Virtual-VLAN-switch feature that *could* tag the ISP into a
 VLAN on the switch fabric is **not supported on the fw3** in FortiOS 7.4
-(supported list: 40F/50G/60F/70F/.../140E). So the NBN terminates
+(supported list: 40F/50G/60F/70F/.../140E). So the ISP terminates
 on the fw3, and NAT lives on whichever box holds the public IP.
 
 ## How it works (double NAT — no return routes)
 
 ```
 client → fw1 VLAN gateway (.254) → fw1 policy dstintf "internal" (NAT on → 10.1.1.254)
-  → 10.1.1.252 via trunk → fw3 "internal" (.252) → NAT policy → wan1 (NBN) → internet
+  → 10.1.1.252 via trunk → fw3 "internal" (.252) → NAT policy → wan1 (ISP) → internet
 ```
 
 The fw1 NATs every client to `10.1.1.254` before forwarding, so the fw3 only
@@ -33,7 +33,7 @@ never appear as sources on the fw3 — **so the fw3 needs ZERO static routes.**
 
 ## What fw3 currently has
 
-- `wan1` = DHCP (currently unused; the NBN ONT plugs in here on cutover — test-feed via EoP until then)
+- `wan1` = DHCP (currently unused; the ISP ONT plugs in here on cutover — test-feed via EoP until then)
 - **No** firewall policies, **no** static routes
 - `.252` VLAN subinterfaces on `internal` (shared L2 with the fw1 — keep
   them; the fw3 needs the connected routes so replies to shared-L2 clients
@@ -168,18 +168,18 @@ end
 - **These are the only allow policies.** Everything else is implicitly denied —
   the fw3 must not route between VLANs or accept anything else.
 - **Throughput.** All house egress now traverses the 2017-era fw3. Keep
-  security profiles light if the NBN speed matters (the fw1 is the
+  security profiles light if the ISP speed matters (the fw1 is the
   faster box).
 
 ## Order of operations
 
-1. Apply CHANGE 0–1 on the fw3 (pre-stage — NBN not live yet).
+1. Apply CHANGE 0–1 on the fw3 (pre-stage — ISP not live yet).
 2. Apply the fw1 changes (see `fortigate-fw1-plan.md`).
 3. Test via the EoP rig: plug one powerline leg into fw3 `wan1`, the other end
    into the upstairs DSL path (fw1 `wan2`). The fw3 now NATs egress over the
-   simulated WAN — same forwarding path as the real NBN.
-4. Cutover (when NBN is ready): unplug the EoP leg from fw3 `wan1` and plug in
-   the NBN ONT. `wan1` re-DHCPs on the NBN public IP; nothing else changes.
+   simulated WAN — same forwarding path as the real ISP.
+4. Cutover (when ISP is ready): unplug the EoP leg from fw3 `wan1` and plug in
+   the ISP ONT. `wan1` re-DHCPs on the ISP public IP; nothing else changes.
 5. Verify:
    - fw3 `get system interface wan1` — lease acquired.
    - Internet from a shared-VLAN client (wifi), lan-corp (`a`), a cgnat dmz
@@ -188,7 +188,7 @@ end
 
 ## Rollback
 
-1. Unplug the NBN/EoP from fw3 `wan1` and restore the DSL path to the fw1's
+1. Unplug the ISP/EoP from fw3 `wan1` and restore the DSL path to the fw1's
    `wan2`.
 2. fw1: restore the sd-wan default route and sd-wan members; flip the 13
    policies back to `dstintf "sd-wan"` (`nat` was left enabled the whole time).
