@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  code-server:
+    image: mnbthunder/code-server-opencode:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # PROTECTED: Keeping your original entrypoint wrapper to read the secret files
+    entrypoint: >
+      /bin/sh -c "
+      if [ -f /run/secrets/VSCODE_PASSWORD ]; then
+        export PASSWORD=\$$(cat /run/secrets/VSCODE_PASSWORD);
+      fi;
+      exec /init
+      "
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Australia/Sydney
+      - PASSWORD_FILE=/run/secrets/VSCODE_PASSWORD
+      - HOME=/config
+      - OPENCODE_DB=/opencode-data/opencode.db
+      - OPENCODE_CONFIG_DIR=/opencode-data/config
+      - XDG_DATA_HOME=/opencode-data/share
+      - XDG_STATE_HOME=/opencode-data/state
+      - XDG_CACHE_HOME=/opencode-data/cache
+    volumes:
+      - /mnt/workspace/code_server_config:/config
+      - /mnt/workspace/Homelab:/workspace
+      - /mnt/nas-nfs/opencode:/opencode-data
+    ports:
+      - "8443:8443"
+    secrets:
+      - VSCODE_PASSWORD
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  VSCODE_PASSWORD:
+    external: true
+    
