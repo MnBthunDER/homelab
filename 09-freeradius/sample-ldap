@@ -1,0 +1,139 @@
+ldap {
+	server = "<authentik ldap FQDN>"
+	port = "636" # may need to change for you
+	identity = "<fill in>"
+	password = '<password>'
+	base_dn = "<fill in>"
+
+	user {
+		base_dn = "${..base_dn}"
+		# ak-active=TRUE filters out disabled users
+		filter = "(&(objectclass=user)(cn=%{%{Stripped-User-Name}:-%{User-Name}})(ak-active=TRUE))"
+		### access_attr = "dialupAccess" ###
+	}
+	group {
+		base_dn = "${..base_dn}"
+		filter = '(objectClass=posixGroup)'
+		name_attribute = cn
+		membership_filter = "(|(&(objectClass=GroupOfNames)(member=%{control:Ldap-UserDn}))(&(objectClass=GroupOfUniqueNames)(uniquemember=%{control:Ldap-UserDn})))"
+		membership_attribute = memberOf
+		compare_check_items = yes
+		do_xlat = yes
+		access_attr_used_for_allow = yes
+	}
+	profile {
+		filter = "(objectclass=user)"
+	}
+
+	tls {
+		start_tls = no
+		ca_file = /usr/local/etc/raddb/certs/ca_ldap1_cert.pem
+		ca_path = /usr/local/etc/raddb/certs/
+		certificate_file = /usr/local/etc/raddb/certs/radius_ldap1_cert.crt
+		private_key_file = /usr/local/etc/raddb/certs/radius_ldap1_cert.key
+		random_file = /dev/urandom
+		require_cert = "allow"
+	}
+
+
+#	valuepair_attribute = 'radiusAttribute'
+	update {
+		control:Auth-Type		:= 'radiusAuthType'
+		control:Simultaneous-Use	:= 'radiusSimultaneousUse'
+		control:Called-Station-Id	:= 'radiusCalledStationId'
+		control:Calling-Station-Id	:= 'radiusCallingStationId'
+		control:LM-Password		:= 'lmPassword'
+		control:NT-Password		:= 'ntPassword'
+		control:LM-Password		:= 'sambaLmPassword'
+		control:NT-Password		:= 'sambaNtPassword'
+		control:NT-Password		:= 'ipaNTHash'
+		control:LM-Password		:= 'dBCSPwd'
+		control:Password-With-Header	+= 'userPassword'
+		control:SMB-Account-CTRL-TEXT	:= 'acctFlags'
+		control:Expiration		:= 'radiusExpiration'
+		control:NAS-IP-Address		:= 'radiusNASIpAddress'
+		reply:Service-Type		:= 'radiusServiceType'
+		reply:Framed-Protocol		:= 'radiusFramedProtocol'
+		reply:Framed-IP-Address		:= 'radiusFramedIPAddress'
+		reply:Framed-IP-Netmask		:= 'radiusFramedIPNetmask'
+		reply:Framed-Route		:= 'radiusFramedRoute'
+		reply:Framed-Routing		:= 'radiusFramedRouting'
+		reply:Filter-Id			:= 'radiusFilterId'
+		reply:Framed-MTU		:= 'radiusFramedMTU'
+		reply:Framed-Compression	:= 'radiusFramedCompression'
+		reply:Login-IP-Host		:= 'radiusLoginIPHost'
+		reply:Login-Service		:= 'radiusLoginService'
+		reply:Login-TCP-Port		:= 'radiusLoginTCPPort'
+		reply:Callback-Number		:= 'radiusCallbackNumber'
+		reply:Callback-Id		:= 'radiusCallbackId'
+		reply:Framed-IPX-Network	:= 'radiusFramedIPXNetwork'
+		reply:Class			:= 'radiusClass'
+		reply:Session-Timeout		:= 'radiusSessionTimeout'
+		reply:Idle-Timeout		:= 'radiusIdleTimeout'
+		reply:Termination-Action	:= 'radiusTerminationAction'
+		reply:Login-LAT-Service		:= 'radiusLoginLATService'
+		reply:Login-LAT-Node		:= 'radiusLoginLATNode'
+		reply:Login-LAT-Group		:= 'radiusLoginLATGroup'
+		reply:Framed-AppleTalk-Link	:= 'radiusFramedAppleTalkLink'
+		reply:Framed-AppleTalk-Network	:= 'radiusFramedAppleTalkNetwork'
+		reply:Framed-AppleTalk-Zone	:= 'radiusFramedAppleTalkZone'
+		reply:Port-Limit		:= 'radiusPortLimit'
+		reply:Login-LAT-Port		:= 'radiusLoginLATPort'
+		reply:Reply-Message		:= 'radiusReplyMessage'
+		reply:Tunnel-Type		:= 'radiusTunnelType'
+		reply:Tunnel-Medium-Type	:= 'radiusTunnelMediumType'
+		reply:Tunnel-Private-Group-Id	:= 'radiusTunnelPrivateGroupId'
+		control:			+= 'radiusControlAttribute'
+		request:			+= 'radiusRequestAttribute'
+		reply:				+= 'radiusReplyAttribute'
+	}
+
+	edir_account_policy_check = no
+
+	options {
+		idle = 60
+		probes = 3
+		interval = 3
+### MS Active Directory Compatibility is disabled ###
+		# ldap_debug = 0x0028
+		res_timeout = 4
+		srv_timelimit = 3
+		net_timeout = 1
+	}
+
+	pool {
+		start = 0
+		min = 5
+		max = 5
+		spare = ${thread[pool].max_spare_servers}
+		uses = 0
+		retry_delay = 30
+		lifetime = 0
+		idle_timeout = 60
+	}
+	accounting {
+		reference = "%{tolower:type.%{Acct-Status-Type}}"
+		type {
+			start {
+				update {
+					description := "Online at %S"
+				}
+			}
+			interim-update {
+				update {
+					description := "Last seen at %S"
+				}
+			}
+			stop {
+				update {
+					description := "Offline at %S"
+				}
+			}
+		}
+	}
+	post-auth {
+		update {
+			description := "Authenticated at %S"
+		}
+	}
+}
