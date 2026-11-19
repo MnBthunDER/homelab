@@ -1,0 +1,18 @@
+services:
+  beszel:
+    image: "henrygd/beszel:latest"
+    ports:
+      - published: 8090
+        target: 8090
+    volumes:
+      - /mnt/nas-nfs/beszel/beszel_data:/beszel_data
+#   deploy:
+#     replicas: 1
+#     restart_policy:
+#       condition: any
+#       delay: 5s
+#       window: 120s
+#     update_config:
+#       parallelism: 1
+#       delay: 10s
+#       order: stop-first
