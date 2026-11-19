@@ -1,0 +1,244 @@
+# Two-service Docker Swarm stack: Hermes Agent + Hermes WebUI
+# (adapted from upstream docker-compose.two-container.yml)
+#
+# QUICK START (on Swarm manager):
+#   docker stack deploy -c docker-compose.yaml hermes-agent
+#   Open http://localhost:8787 (via SSH tunnel, Swarm ingress publishes on all nodes)
+#
+# Swarm adaptation: NAS binds replace upstream's node-local named volumes.
+# hermes-home is shared via /mnt/nas-nfs (visible on all nodes).
+# hermes-agent-src is intentionally NOT mounted (see service comments) --
+# the WebUI runs degraded-but-stable without it rather than failing.
+#
+# WHEN TO USE THIS:
+#   - You want isolation between the agent gateway and the WebUI
+#   - You're already running hermes-agent in its own container
+#   - You don't need the dashboard (use docker-compose.three-container.yml for that)
+#
+# WHEN NOT TO USE THIS:
+#   - You hit "Permission denied" trying to share an existing ~/.hermes directory
+#     → use docker-compose.yml (single-container) instead, OR
+#     → keep this file but switch to NAMED VOLUMES (the default) instead of bind mounts
+#   - You're on Podman 3.4 or older without keep-id namespace support
+#     → see https://github.com/sunnysktsang/hermes-suite for an all-in-one image
+#
+# KNOWN LIMITATION (#681): tools triggered from the WebUI run in the WebUI
+# container, not the agent container. If you need git/node/etc. on the
+# WebUI's filesystem, install them in the WebUI image — or use a single-
+# container setup where everything lives in one place.
+#
+# NOTE ON VOLUMES:
+#   This file uses named Docker volumes (hermes-home, hermes-agent-src) which
+#   work out of the box on every Docker installation. If you prefer bind mounts
+#   to share an existing host directory:
+#
+#     volumes:
+#       hermes-home:
+#         driver: local
+#         driver_opts:
+#           type: none
+#           o: bind
+#           device: /home/youruser/.hermes
+#
+#   When using bind mounts, BOTH containers must mount the same host path,
+#   AND your host directory must be readable by UID 1000 (the default). Run:
+#     id -u && id -g
+#   to find your host UID/GID, then put them in a .env file:
+#     echo "UID=$(id -u)" >> .env
+#     echo "GID=$(id -g)" >> .env
+
+services:
+  hermes-agent:
+    image: nousresearch/hermes-agent:latest
+    entrypoint: ["sh", "-c", 'export API_SERVER_KEY="$$(cat /run/secrets/api_server_key)" && exec /opt/hermes/docker/entrypoint-dispatch.sh gateway run']
+    secrets:
+      - source: HERMES_API_SERVER_KEY
+        target: api_server_key
+        uid: "0"
+        gid: "0"
+        mode: 0444
+    ports:
+      # Swarm ingress ignores 127.0.0.1 bindings and publishes on all nodes.
+      # Firewall 8642 to trusted networks (see agent API_SERVER warning).
+      # Other containers on hermes-net reach it via http://hermes-agent:8642.
+      - "8642:8642"
+    volumes:
+      # Persist config, state, sessions, skills, memory across restarts
+      # Long syntax (type: bind) so Swarm treats this as a host bind,
+      # not a named volume.
+      - type: bind
+        source: /mnt/nas-nfs/hermes/hermes-home
+        target: /home/hermes/.hermes
+      # NOTE: Do NOT bind-mount over /opt/hermes. That path is baked into
+      # the nousresearch/hermes-agent image and contains
+      # docker/entrypoint-dispatch.sh. Mounting an empty host dir like
+      # /mnt/nas-nfs/hermes/hermes-agent-src over it hides the image
+      # contents and causes:
+      #   sh: 1: exec: /opt/hermes/docker/entrypoint-dispatch.sh: not found
+      # If you need the source on the host for the WebUI, populate the NAS
+      # first (one-time, from a node with Docker):
+      #   docker run --rm -v /mnt/nas-nfs/hermes/hermes-agent-src:/out \
+      #     nousresearch/hermes-agent:latest \
+      #     sh -c 'cp -a /opt/hermes/. /out/'
+      # then mount it read-only to a NON-image path if needed.
+    environment:
+      - HERMES_HOME=/home/hermes/.hermes
+      # Align UID/GID across containers sharing the hermes-home volume.
+      # Defaults to 1000 to match WANTED_UID/WANTED_GID in the webui service.
+      # The agent image's entrypoint already supports usermod remapping.
+      - HERMES_UID=${UID:-1000}
+      - HERMES_GID=${GID:-1000}
+      # Gateway API server (port 8642). The WebUI's Tasks/cron health probe
+      # reaches this listener via HERMES_API_URL below. The agent only starts
+      # the listener when API_SERVER_KEY is a usable value (>=16 chars); set
+      # it in .env to enable the gateway API. Without a key the gateway daemon
+      # still runs (messaging + cron) but port 8642 stays unbound and the
+      # WebUI reports "Gateway endpoint not reachable".
+      - API_SERVER_ENABLED=true
+      - API_SERVER_HOST=0.0.0.0
+      - API_SERVER_KEY=${API_SERVER_KEY:-}
+      # Bind-mount permission handling for the agent — narrow set of overrides.
+      # NOTE: The agent's HERMES_HOME_MODE applies to the HERMES_HOME *directory*
+      # mode (default 0700) — NOT to credential files like the WebUI's variant.
+      # If you set this, you MUST keep the owner-execute bit so the agent can
+      # traverse its own home directory. 0640 BREAKS the agent (no x bit → no
+      # traversal). Use 0750 for group-traversable or 0701 for x-only.
+      # The agent's container detection (/.dockerenv) already auto-skips
+      # credential chmod inside Docker, so HERMES_SKIP_CHMOD is redundant here.
+      # - HERMES_HOME_MODE=0750
+    networks:
+      - hermes-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+      placement:
+        max_replicas_per_node: 1
+      update_config:
+        parallelism: 1
+        order: stop-first
+
+  hermes-webui:
+    image: ghcr.io/nesquena/hermes-webui:latest
+    command: ["sh", "-c", 'export HERMES_WEBUI_PASSWORD="$$(cat /run/secrets/webui_password)" HERMES_WEBUI_GATEWAY_API_KEY="$$(cat /run/secrets/api_server_key)" && exec /hermeswebui_init.bash']
+    secrets:
+      - source: HERMES_WEBUI_PASSWORD
+        target: webui_password
+        uid: "0"
+        gid: "0"
+        mode: 0444
+      - source: HERMES_API_SERVER_KEY
+        target: api_server_key
+        uid: "0"
+        gid: "0"
+        mode: 0444
+    ports:
+      # Swarm ingress ignores 127.0.0.1 -- published on all nodes.
+      # Use SSH tunnel (ssh -N -L 8787:127.0.0.1:8787 user@host) + password auth.
+      - "8787:8787"
+    volumes:
+      # Same hermes home as the agent — shares config, sessions, state
+      # (NAS bind = shared across Swarm nodes, better than node-local
+      # named volume for multi-node).
+      - type: bind
+        source: /mnt/nas-nfs/hermes/hermes-home
+        target: /home/hermeswebui/.hermes
+      # NOTE (upstream vs Swarm): upstream two-container mounts a shared
+      # named volume hermes-agent-src here (RO) for `uv pip install` of
+      # agent deps. In Swarm that named volume is node-local, so agent on
+      # node A + webui on node B would diverge. Intentionally NOT mounted:
+      # the WebUI starts in degraded-but-stable mode (your current logs:
+      # "agent dir: NOT FOUND", no model auto-detect/personality routing/
+      # CLI imports) rather than failing. To restore full functionality,
+      # pre-populate the NAS once and re-add:
+      #   mkdir -p /mnt/nas-nfs/hermes/hermes-agent-src  (lowercase!)
+      #   id=$(docker create nousresearch/hermes-agent:latest)
+      #   docker cp $id:/opt/hermes/. /mnt/nas-nfs/hermes/hermes-agent-src/
+      #   docker rm $id
+      # then add:
+      #   - type: bind
+      #     source: /mnt/nas-nfs/hermes/hermes-agent-src
+      #     target: /home/hermeswebui/.hermes/hermes-agent
+      #     read_only: true
+      # and `docker stack deploy` again. Re-run the cp after each agent upgrade.
+      # Workspace directory — browse and edit files from the WebUI (read-write).
+      # Fixed host path for Swarm: stack deploy does not expand
+      # ${HERMES_WORKSPACE:-${HOME}/workspace}, which caused
+      # `undefined volume "${HOME/workspace}"`.
+      - type: bind
+        source: /mnt/workspace/Homelab
+        target: /workspace
+        read_only: false
+    environment:
+      - HERMES_WEBUI_HOST=0.0.0.0
+      - HERMES_WEBUI_PORT=8787
+      - HERMES_WEBUI_STATE_DIR=/home/hermeswebui/.hermes/webui
+      # Let the WebUI health/status checks reach the gateway container over
+      # the compose network. Cron listing is local, but scheduled ticking and
+      # the Tasks/System gateway pill need a reachable gateway URL (#4483).
+      - HERMES_API_URL=http://hermes-agent:8642
+      # Match your host user's UID/GID for correct file permissions.
+      # In two-container setups the WebUI auto-detects UID/GID from the shared
+      # hermes-home volume, but you can override explicitly if needed (#668):
+      # Run `id -u` and `id -g` to find your values.
+      # On macOS, UIDs start at 501 — set these in a .env file:
+      #   echo "UID=$(id -u)" >> .env && echo "GID=$(id -g)" >> .env
+      - WANTED_UID=${UID:-1000}
+      - WANTED_GID=${GID:-1000}
+      # Forward the API server key so the WebUI's gateway health probe can
+      # authenticate (must match the agent's API_SERVER_KEY above).
+      - HERMES_WEBUI_GATEWAY_API_KEY=${API_SERVER_KEY:-}
+      # Optional: enable password auth. Set HERMES_WEBUI_PASSWORD in .env
+      # (required if you expose the port beyond 127.0.0.1).
+      - HERMES_WEBUI_PASSWORD=${HERMES_WEBUI_PASSWORD:-}
+      # Bind-mount permission handling for the WebUI (fixes #1389, #1399).
+      # NOTE: WebUI's HERMES_HOME_MODE is a credential-file threshold (allow
+      # group bits on .env/.signing_key/etc.), DIFFERENT from the agent's
+      # which applies to the HERMES_HOME directory itself. 0640 is correct
+      # for the WebUI; do NOT copy this value to the agent service block.
+      # - HERMES_SKIP_CHMOD=1
+      # - HERMES_HOME_MODE=0640
+    networks:
+      - hermes-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+      placement:
+        max_replicas_per_node: 1
+        # No hard constraints by default so the task schedules on any of
+        # your 3 nodes. If /mnt/workspace/Homelab only exists on specific
+        # nodes, re-add pinning AFTER labeling:
+        #   docker node update --label-add hermes-workspace=true <node>
+        # then uncomment:
+        # constraints:
+        #   - node.labels.hermes-workspace==true
+      update_config:
+        parallelism: 1
+        order: stop-first
+
+# Swarm requires overlay (swarm-scoped). If a previous deploy created
+# hermes-agent_hermes-net as bridge/local, `stack deploy` fails with:
+#   "The network hermes-agent_hermes-net cannot be used with services..."
+# Fix (on manager): docker stack rm hermes-agent; docker network rm hermes-agent_hermes-net; redeploy.
+networks:
+  hermes-net:
+    driver: overlay
+    attachable: true
+
+secrets:
+  HERMES_API_SERVER_KEY:
+    external: true
+  HERMES_WEBUI_PASSWORD:
+    external: true
+
+# NOTE: no top-level `volumes:` -- this Swarm file uses NAS binds (shared
+# storage) for hermes-home + workspace. Upstream's named volumes
+# (hermes-home, hermes-agent-src) are node-local and unsuitable for
+# multi-node Swarm without a shared volume driver.

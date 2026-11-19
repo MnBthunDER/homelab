@@ -1,0 +1,12 @@
+# cat ~/.hermes/config.yaml
+model:
+   provider: opencode-free
+   base_url: https://opencode.ai/zen/v1
+   default: nemotron-3-ultra-free
+   api_mode: chat_completions
+fallback_providers:
+   provider: nvidia
+   model: nemotron-3-ultra 
+   key_env: NVIDIA_API_KEY
+   base_url: https://integrate.api.nvidia.com/v1
+   
