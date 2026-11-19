@@ -1,10 +1,10 @@
 # locate portainer services
-root@docker1:~# docker service ls
+root@swm1:~# docker service ls
 NAME                  MODE         REPLICAS   IMAGE                           PORTS
 portainer_agent       global       3/3        portainer/agent:2.21.5
 
 # download portainer-ee:lts
-root@docker1:~# docker pull portainer/portainer-ce:lts
+root@swm1:~# docker pull portainer/portainer-ce:lts
 lts: Pulling from portainer/portainer-ce
 b2cf3e56c855: Pull complete
 5d4061146616: Pull complete
@@ -21,14 +21,14 @@ Status: Downloaded newer image for portainer/portainer-ce:lts
 docker.io/portainer/portainer-ce:lts
 
 # update portainer
-root@docker1:~# docker service update --image portainer/portainer-ce:lts --publish-add 9443:9443 --force portainer_portainer
+root@swm1:~# docker service update --image portainer/portainer-ce:lts --publish-add 9443:9443 --force portainer_portainer
 portainer_portainer
 overall progress: 1 out of 1 tasks
 1/1: running   [==================================================>]
 verify: Service portainer_portainer converged
 
 # download portainer agent
-root@docker1:~# docker pull portainer/agent:lts
+root@swm1:~# docker pull portainer/agent:lts
 lts: Pulling from portainer/agent
 b2cf3e56c855: Already exists
 5d4061146616: Already exists
