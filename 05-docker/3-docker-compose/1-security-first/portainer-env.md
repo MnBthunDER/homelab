@@ -1,6 +1,7 @@
-https://www.portainer.io/blog/using-env-files-in-stacks-with-portainer
 
-Using ENV files in Stacks with Portainer
+# Using ENV files in Stacks with Portainer
+
+Source: https://www.portainer.io/blog/using-env-files-in-stacks-with-portainer
 
 Note: The following only applies to Docker Standalone and does not work for Docker Swarm.
 
@@ -12,47 +13,27 @@ So, you have a compose/stack file that has a lot of environment variables, and y
 
 Well there is a nifty little button in Portainer "load variables from env file", and if you click that button, and select a ENV file on your PC, we auto-populate Portainer with these variables.
 
-
-
-
-
 Cool, but how do you actually use them in your stack?
 
 Well this where the documentation issue arises... we don't actually mention anywhere how to use these as a file... so you would naturally think that you need to reference these one by one, such as below:
 
-
-
 and this would work... as shown in the resulting deployment.
-
-
 
 But that's annoying.. what about just referring to the values as a file.. an ENV file even..
 
 Well, you just need to reference the env file we create in the service definition. We call the file "stack.env" and it contains all of the variables read in from the external env file.
 
-
-
 and that auto-creates the variables in the container without you having to manually enter them in via Portainer or 1:1 in the stack definition.
-
-
 
 OK but that specifies a singular ENV file, how do I use that with multiple services in a stack?
 
 well, you need a ENV file that contains all of the variables your stack needs; take this example..
 
-
-
 then in Portainer, you use the "load from file" which loads them into the stacks page like so..
-
-
 
 and then you reference them in your stack file like so..
 
-
-
 But be aware, the ENVs are populated to BOTH of the services as they share a single file. This may cause you concern (or not).
-
-
 
 So, this is how you use an external ENV file with Portainer Stacks.. expect to see this in the docs very soon.
 
