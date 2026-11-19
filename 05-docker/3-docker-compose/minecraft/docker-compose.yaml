@@ -1,0 +1,29 @@
+services:
+  minecraft:
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft
+    hostname: minecraft
+    restart: unless-stopped
+    environment:
+      - LEVEL_NAME=Oneblock # name of the world to start on boot
+      - PGID=1000
+      - PUID=1000
+      - TZ=Australia/Sydney
+      - EULA=TRUE
+      - SERVER_PORT=25565 # offset configurations in server.properties
+    tty: true
+    stdin_open: true
+    ports:
+      - target: 25565    # minecraft server players connect
+        published: 25565
+        protocol: udp
+    volumes:
+      - /mnt/nas-nfs/minecraft/data/oneblock:/data
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == swm2.domain.com # optional if you want to pin the container to a specific node in the swarm
+
+networks:
+  proxy_network:
+    external: true
