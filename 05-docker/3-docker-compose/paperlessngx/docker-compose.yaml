@@ -1,0 +1,45 @@
+services:
+  broker:
+    image: docker.io/library/redis:8
+    restart: unless-stopped
+    volumes:
+      - /mnt/nas-nfs/paperlessngx/redisdata:/data
+  db:
+    image: docker.io/library/postgres:18
+    restart: unless-stopped
+    volumes:
+      - /mnt/nas-nfs/paperlessngx/pgdata:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+      - broker
+    ports:
+      - "8010:8000"
+    volumes:
+      - /mnt/nas-nfs/paperlessngx/data:/usr/src/paperless/data
+      - /mnt/nas-nfs/paperlessngx/media:/usr/src/paperless/media
+      - /mnt/nas-nfs/paperlessngx/export:/usr/src/paperless/export
+      - /mnt/nas-nfs/paperlessngx/consume:/usr/src/paperless/consume
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: db
+      USERMAP_UID: ${USERMAP_UID}
+      USERMAP_GID: ${USERMAP_GID}
+      PAPERLESS_URL: ${PAPERLESS_URL}
+      PAPERLESS_TIME_ZONE: ${PAPERLESS_TIME_ZONE}
+      PAPERLESS_OCR_LANGUAGE: ${PAPERLESS_OCR_LANGUAGE}
+      PAPERLESS_REVERSE_PROXY_AUTH: ${PAPERLESS_REVERSE_PROXY_AUTH}
+      PAPERLESS_ALLOWED_HOSTS: ${PAPERLESS_ALLOWED_HOSTS}
+      PAPERLESS_CSRF_TRUSTED_ORIGINS: ${PAPERLESS_CSRF_TRUSTED_ORIGINS}
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
+volumes:
+  data:
+  media:
+  pgdata:
+  redisdata:
