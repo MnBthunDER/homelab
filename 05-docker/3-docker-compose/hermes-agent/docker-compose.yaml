@@ -1,0 +1,328 @@
+# Hermes Agent — Docker Swarm Stack
+# ================================
+# Derived from official source:
+#   https://github.com/NousResearch/hermes-agent/blob/main/docker-compose.yml
+# Official image (Docker Hub, multi-arch amd64/arm64):
+#   nousresearch/hermes-agent:latest  (pin a calendar tag in prod, e.g. :v2026.9.7)
+# Docs: https://hermes-agent.nousresearch.com/docs/user-guide/docker
+#
+# WHAT WAS CHANGED FOR SWARM (vs. upstream docker-compose.yml) and why:
+#   1. `build: .` removed. Swarm schedulers cannot build; they pull a registry
+#      image. All nodes must be able to `docker pull nousresearch/hermes-agent:<tag>`.
+#   2. `container_name:` removed. Swarm assigns task names; it is illegal in stacks.
+#   3. `network_mode: host` removed. Host mode is NOT supported in Swarm.
+#      Replaced with an `overlay` network + explicit `ports:` (8642 gateway API,
+#      9119 dashboard). Inside the container bind 0.0.0.0 (see API_SERVER_HOST /
+#      HERMES_DASHBOARD_HOST below).
+#   4. `restart: unless-stopped` removed. Replaced with `deploy.restart_policy`.
+#   5. `depends_on:` removed. It is ignored by `docker stack deploy`.
+#   6. Gateway + dashboard MERGED into ONE service (`hermes`, CMD `gateway run`
+#      + HERMES_DASHBOARD=1). Upstream runs them as two containers sharing
+#      host network + PID namespace. That is impossible on Swarm. The supported
+#      Swarm pattern is the documented in-container supervisor: s6-overlay runs
+#      the dashboard as a supervised sidecar inside the same task when
+#      HERMES_DASHBOARD=1 is set.
+#   7. `~/.hermes:/opt/data` replaced with a shared-storage bind:
+#        /mnt/nas-nfs/hermes/:/opt/data
+#      Every Hermes state file (.env, config.yaml, state.db, sessions, memories,
+#      skills, logs) lives under /opt/data, so all tasks must see the SAME
+#      directory. This path must exist and be NFS-mounted on EVERY Swarm node.
+#   8. Custom workspace added as a second shared-storage bind:
+#        /mnt/workspace/Homelab:/workspace
+#      This is your live project directory (NOT Hermes state). The agent reads/
+#      writes code, docs, and files here via file tools and the terminal backend.
+#      Keep it separate from /opt/data so state migrations/backups never touch
+#      your projects. Must also exist on EVERY Swarm node at the same path
+#      (NFS mount or replicated storage), otherwise tasks fail to start on
+#      nodes where it is missing.
+#   9. Secrets moved to Swarm `secrets:` (tmpfs mounts at /run/secrets/*,
+#      mode 0400, never committed to an image). See SECRETS section below.
+#      Naming convention: ALL CAPS (e.g. HERMES_API_SERVER_KEY).
+#
+# DEPLOY:
+#   docker swarm init                                   # once per cluster
+#   sudo mkdir -p /mnt/nas-nfs/hermes /mnt/workspace/Homelab
+#   sudo chown -R 10000:10000 /mnt/nas-nfs/hermes /mnt/workspace/Homelab
+#   # create secrets (see list below), then:
+#   docker stack deploy -c docker-stack.yml hermes
+#   docker stack services hermes
+#   docker service logs -f hermes_hermes
+#
+# FIRST-RUN SETUP (wizard writes ~/.hermes/.env -> here /mnt/nas-nfs/hermes/.env):
+#   docker run -it --rm -v /mnt/nas-nfs/hermes:/opt/data nousresearch/hermes-agent:latest setup
+#   # then `docker stack deploy` as above. Do NOT run setup against the live stack dir
+#   # while the service is running (two writers corrupt state.db).
+#
+# WORKSPACE USAGE (/mnt/workspace/Homelab -> /workspace in container):
+#   The mount itself only makes files visible. To make the agent WORK there:
+#   - CLI / gateway file tools: reference /workspace/... paths directly.
+#   - Terminal backend in /mnt/nas-nfs/hermes/config.yaml:
+#       terminal:
+#         backend: local
+#         cwd: /workspace
+#     (local backend because /workspace is already inside the gateway task;
+#     use `backend: docker` + docker_volumes only for nested sandboxes.)
+#   - Verify: docker exec $(docker ps -qf "name=hermes_hermes") ls -la /workspace
+#
+# SCALING WARNING — keep replicas: 1. Hermes keeps sessions in SQLite
+# (/opt/data/state.db, WAL by default). Two writers corrupt it. The docs state:
+# "Never run two Hermes gateway containers against the same data directory."
+#
+# NFS / SQLite WARNING — WAL needs coherent shared memory. The image docs warn
+# that virtiofs/9p break WAL, and explicitly say NFS/SMB/FUSE are unclassified:
+# set `database.journal_mode: delete` in /mnt/nas-nfs/hermes/config.yaml when
+# /opt/data is on NFS. See https://hermes-agent.nousresearch.com/docs/user-guide/docker
+# section "Filesystem requirements for state.db in containers".
+#
+# PORTS:
+#   8642 — gateway OpenAI-compatible API server + health endpoint
+#          (only when API_SERVER_ENABLED=true)
+#   9119 — web dashboard (only when HERMES_DASHBOARD=1; auth gate mandatory on
+#          non-loopback bind — set BASIC_AUTH_* secrets below, or OIDC/OAuth)
+#   ${TEAMS_PORT:-3978} — only if you enable the Teams gateway (Bot Framework
+#          calls INTO this port, so publish it / put it behind your LB).
+#
+# ---------------------------------------------------------------------------
+# SECRETS — create BEFORE first deploy (examples; pick only what you enable):
+#
+#   openssl rand -hex 32 | docker secret create HERMES_API_SERVER_KEY -
+#   printf 'sk-ant-...'          | docker secret create HERMES_ANTHROPIC_API_KEY -
+#   printf 'sk-...'              | docker secret create HERMES_OPENAI_API_KEY -
+#   printf '123456:ABC...'       | docker secret create HERMES_TELEGRAM_BOT_TOKEN -
+#   printf 'bot-client-secret'   | docker secret create HERMES_TEAMS_CLIENT_SECRET -
+#   printf 'dashboard-password'  | docker secret create HERMES_DASHBOARD_PASSWORD -
+#   openssl rand -hex 32 | docker secret create HERMES_DASHBOARD_AUTH_SECRET -
+#   docker secret create HERMES_GOOGLE_CHAT_SA_JSON /path/to/google-chat-sa.json
+#
+#   Rotate: printf 'new' | docker secret create HERMES_API_SERVER_KEY_V2 - \
+#           && edit this file's `secrets:` target, then
+#           docker stack deploy -c docker-stack.yml hermes
+#
+# HONEST LIMITATION (upstream, verified Sep 2026):
+#   Hermes reads secrets from real environment variables and from
+#   /opt/data/.env — it does NOT implement generic `*_FILE` expansion
+#   (e.g. API_SERVER_KEY_FILE, OPENAI_API_KEY_FILE are silently ignored;
+#   upstream issues #18709 / #19203). Postgres-style `_FILE` auto-loading does
+#   not apply here. Therefore this stack does two things:
+#     (a) mounts every sensitive value as a Swarm secret at /run/secrets/*
+#         (encrypted in Raft, tmpfs in the task, mode 0400), and
+#     (b) injects them into the supervised process tree via `environment:`
+#         using deploy-time interpolation (values come from your shell/manager
+#         env at `docker stack deploy` time, NOT hardcoded in this file).
+#   Consequence: `docker service inspect` shows resolved env values to Swarm
+#   admins — same trade-off as the documented `docker run -e KEY=...` pattern.
+#   To avoid that, keep long-lived keys in /opt/data/.env on the NFS share
+#   (chmod 600, root-owned NAS dir) and leave the corresponding `environment:`
+#   lines commented out; container `-e` overrides `.env` only when set.
+#   The Google Chat service-account JSON is the exception: it is a FILE path
+#   secret (GOOGLE_CHAT_SERVICE_ACCOUNT_JSON=/run/secrets/...), so its content
+#   never appears in inspect output.
+# ---------------------------------------------------------------------------
+
+services:
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    # Keep the image default ENTRYPOINT (entrypoint-dispatch.sh -> /init).
+    # Do NOT override `entrypoint:` — s6-overlay must stay PID 1 for the
+    # supervised gateway + dashboard, volume chown, config migration, and
+    # zombie reaping. Overriding it unsupervised leaks <defunct> processes.
+    command: ["gateway", "run"]
+    ports:
+      - target: 8642
+        published: 8642
+        protocol: tcp
+        mode: ingress
+      - target: 9119
+        published: 9119
+        protocol: tcp
+        mode: ingress
+      # Teams Bot Framework inbound (only needed if TEAMS_* enabled):
+      # - target: 3978
+      #   published: 3978
+      #   protocol: tcp
+      #   mode: ingress
+    volumes:
+      # Shared state. Must be the same NFS mount on every node.
+      - type: bind
+        source: /mnt/nas-nfs/hermes
+        target: /opt/data
+        bind:
+          create_host_path: true
+      # Custom workspace. Live projects, separate from Hermes state.
+      # Host path /mnt/workspace/Homelab must exist on EVERY node.
+      - type: bind
+        source: /mnt/workspace/Homelab
+        target: /workspace
+        bind:
+          create_host_path: true
+      # Google Chat SA JSON is mounted via `secrets:` below (target
+      # /run/secrets/HERMES_GOOGLE_CHAT_SA_JSON), NOT as a volume, so it
+      # stays encrypted in Raft. No extra volume entry needed.
+    environment:
+      # --- identity / ownership (non-secret) ---
+      # Must match the owner of /mnt/nas-nfs/hermes and /mnt/workspace/Homelab
+      # on the NAS, else the stage2 hook cannot chown and writes fail with
+      # EACCES. PUID/PGID are accepted aliases (NAS convention).
+      - HERMES_UID=${HERMES_UID:-10000}
+      - HERMES_GID=${HERMES_GID:-10000}
+      # --- workspace (non-secret pointer; content lives in the bind above) ---
+      - HERMES_WORKSPACE=/workspace
+      # --- dashboard (supervised s6 sidecar in THIS task) ---
+      - HERMES_DASHBOARD=1
+      - HERMES_DASHBOARD_HOST=0.0.0.0
+      - HERMES_DASHBOARD_PORT=9119
+      # Basic-auth provider (simplest for homelab/VPN; NOT for raw internet).
+      # Password + session secret come from Swarm secrets at deploy time.
+      # Leave the two lines active; leave values EMPTY in shell when unused.
+      - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=${DASH_USER:-admin}
+      - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=${HERMES_DASHBOARD_PASSWORD:-}
+      - HERMES_DASHBOARD_BASIC_AUTH_SECRET=${HERMES_DASHBOARD_AUTH_SECRET:-}
+      # --- OpenAI-compatible API server (gated; off unless ENABLED=true) ---
+      - API_SERVER_ENABLED=${API_SERVER_ENABLED:-true}
+      - API_SERVER_HOST=0.0.0.0
+      - API_SERVER_PORT=8642
+      # Requires >= 8 chars. Resolved at `docker stack deploy` time from the
+      # manager shell (export API_SERVER_KEY="$(docker secret inspect ...)" is
+      # NOT possible — instead export from your vault/file, e.g.
+      # `export API_SERVER_KEY="$(cat /root/secrets/api_server_key)"`).
+      # Prefer keeping it in /opt/data/.env (chmod 600) and commenting this
+      # line out if `service inspect` visibility is unacceptable.
+      - API_SERVER_KEY=${API_SERVER_KEY:-}
+      - API_SERVER_CORS_ORIGINS=${API_SERVER_CORS_ORIGINS:-}
+      # --- model provider keys (prefer /opt/data/.env; uncomment to override) ---
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      # - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      # - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      # --- Microsoft Teams (uncomment whole block to enable) ---
+      # Register bot at https://dev.botframework.com/
+      # - TEAMS_CLIENT_ID=${TEAMS_CLIENT_ID:-}
+      # - TEAMS_CLIENT_SECRET=${TEAMS_CLIENT_SECRET:-}
+      # - TEAMS_TENANT_ID=${TEAMS_TENANT_ID:-}
+      # - TEAMS_ALLOWED_USERS=${TEAMS_ALLOWED_USERS:-}
+      # - TEAMS_PORT=${TEAMS_PORT:-3978}
+      # --- Google Chat (uncomment whole block to enable) ---
+      # Setup: website/docs/user-guide/messaging/google_chat.md
+      # SA JSON stays a file-secret; only its PATH is an env var (inspect-safe).
+      # - GOOGLE_CHAT_PROJECT_ID=${GOOGLE_CHAT_PROJECT_ID:-}
+      # - GOOGLE_CHAT_SUBSCRIPTION_NAME=${GOOGLE_CHAT_SUBSCRIPTION_NAME:-}
+      # - GOOGLE_CHAT_SERVICE_ACCOUNT_JSON=/run/secrets/HERMES_GOOGLE_CHAT_SA_JSON
+      # - GOOGLE_CHAT_ALLOWED_USERS=${GOOGLE_CHAT_ALLOWED_USERS:-}
+      # --- upgrades ---
+      # - HERMES_SKIP_CONFIG_MIGRATION=${HERMES_SKIP_CONFIG_MIGRATION:-}
+#    secrets:
+      # Mounted tmpfs at /run/secrets/* (mode 0400). Hermes does not
+      # auto-read them (see header); they are the deploy-time source of truth
+      # and the inspect-safe path for the Google Chat JSON file.
+#      - source: HERMES_API_SERVER_KEY
+#        target: HERMES_API_SERVER_KEY
+#        uid: "10000"
+#        gid: "10000"
+#        mode: 0400
+#      - source: HERMES_ANTHROPIC_API_KEY
+#        target: HERMES_ANTHROPIC_API_KEY
+#        uid: "10000"
+#        gid: "10000"
+#        mode: 0400
+#      - source: HERMES_OPENAI_API_KEY
+#        target: HERMES_OPENAI_API_KEY
+#        uid: "10000"
+#        gid: "10000"
+#        mode: 0400
+#      - source: HERMES_TELEGRAM_BOT_TOKEN
+#        target: HERMES_TELEGRAM_BOT_TOKEN
+#        uid: "10000"
+#        gid: "10000"
+#        mode: 0400
+#      - source: HERMES_TEAMS_CLIENT_SECRET
+#        target: HERMES_TEAMS_CLIENT_SECRET
+#        uid: "10000"
+#        gid: "10000"
+#        mode: 0400
+#      - source: HERMES_DASHBOARD_PASSWORD
+#        target: HERMES_DASHBOARD_PASSWORD
+#        uid: "10000"
+#        gid: "10000"
+#        mode: 0400
+#      - source: HERMES_DASHBOARD_AUTH_SECRET
+#        target: HERMES_DASHBOARD_AUTH_SECRET
+#        uid: "10000"
+#        gid: "10000"
+#        mode: 0400
+      # Uncomment with the GOOGLE_CHAT_* environment block above:
+      # - source: HERMES_GOOGLE_CHAT_SA_JSON
+      #   target: HERMES_GOOGLE_CHAT_SA_JSON
+      #   uid: "10000"
+      #   gid: "10000"
+      #   mode: 0400
+    networks:
+      - hermes_net
+    # Playwright/Chromium needs ~1g shm; 64M default crashes browser tools.
+    # NOTE: `shm_size` is ignored by `docker stack deploy`. Swarm services
+    # support a /dev/shm tmpfs mount instead — uncomment if you use browser tools:
+    # tmpfs:
+    #   - /dev/shm:rw,nosuid,nodev,exec,size=1g
+    healthcheck:
+      # Gateway health endpoint on the API port. Adjust interval for NAS latency.
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8642/health || curl -fsS http://127.0.0.1:8642/v1/models || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    deploy:
+      mode: replicated
+      replicas: 1 # DO NOT SCALE. See header: SQLite state.db corrupts with 2 writers.
+      restart_policy:
+        condition: any
+        delay: 10s
+        max_attempts: 0
+        window: 60s
+      update_config:
+        parallelism: 1
+        delay: 30s
+        failure_action: rollback
+        order: stop-first # avoids two gateways briefly sharing state.db
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4G
+        reservations:
+          cpus: "1.0"
+          memory: 1G
+      # Uncomment to pin to nodes with the NFS mounts (label nodes first:
+      # `docker node update --label-add hermes-data=true <node>`):
+      # placement:
+      #   constraints:
+      #     - node.labels.hermes-data == true
+      #   preferences:
+      #     - spread: node.id
+
+networks:
+  hermes_net:
+    driver: overlay
+    attachable: false
+
+# secrets:
+  # All `external: true` — create on a manager with `docker secret create`
+  # (commands in header). `docker stack deploy` fails fast if any are missing;
+  # comment out both the top-level entry AND the service-level reference for
+  # providers you do not use.
+#  HERMES_API_SERVER_KEY:
+#    external: true
+#  HERMES_ANTHROPIC_API_KEY:
+#    external: true
+#  HERMES_OPENAI_API_KEY:
+#    external: true
+#  HERMES_TELEGRAM_BOT_TOKEN:
+#    external: true
+#  HERMES_TEAMS_CLIENT_SECRET:
+#    external: true
+#  HERMES_DASHBOARD_PASSWORD:
+#    external: true
+#  HERMES_DASHBOARD_AUTH_SECRET:
+#    external: true
+  # HERMES_GOOGLE_CHAT_SA_JSON:
+  #   external: true
