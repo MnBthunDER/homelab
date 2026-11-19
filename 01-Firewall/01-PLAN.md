@@ -1,4 +1,4 @@
-Objective: Design a secure, segmented network with a unified Layer 2 domain spanning both floors, operating within the constraint of a single 1Gbps inter-floor uplink.
+# Objective: Design a secure, segmented network with a unified Layer 2 domain spanning both floors, operating within the constraint of a single 1Gbps inter-floor uplink.
 ## Topology
 
 ```
