@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - tunnel_network
+    environment:
+      - TZ=Australia/Sydney
+      - TUNNEL_TOKEN_FILE=/run/secrets/CLOUDFLARED_TOKEN_ID
+    secrets:
+      - CLOUDFLARED_TOKEN_ID
+
+networks:
+  tunnel_network:
+    driver: overlay
+    attachable: true
+
+secrets:
+  CLOUDFLARED_TOKEN_ID:
+    external: true
