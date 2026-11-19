@@ -1,0 +1,29 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "server": {
+    "port": 4096,
+    "hostname": "0.0.0.0",
+    "mdns": false,
+    "cors": [
+      "https://opencode.domain.com"
+    ]
+  },
+  "mcp": {
+    "home-assistant": {
+      "type": "remote",
+      "url": "https://homeassistant.domain.com/api/mcp",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer <token>"
+      }
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "headers": {
+        "CONTEXT7_API_KEY": "<token>"
+      }
+    }
+  }
+}
