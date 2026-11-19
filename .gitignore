@@ -3,7 +3,7 @@ passwords.txt
 *.key
 *.pem
 *.crt
-.env
+# .env
 
 # Backup files
 *.bak
