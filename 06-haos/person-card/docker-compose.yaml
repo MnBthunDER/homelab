@@ -1,0 +1,254 @@
+# Source: https://github.com/makeitworktech/home-assistant-config/blob/main/lovelace/ultimate_person_card
+
+type: custom:swipe-card
+parameters:
+  effect: coverflow
+cards:
+  - type: custom:button-card
+    entity: person.4
+    aspect_ratio: 4/4
+    show_name: false
+    show_icon: false
+    styles:
+      card:
+        - padding: 4%
+        - background-image: |
+            [[[
+              try {
+                return (states["media_player.spotify"] && states["media_player.spotify"].state === "playing")
+                  ? 'url("/local/4-music2-bitmoji.png")'
+                  : 'url("/local/4-plain-bitmoji.png")';
+              } catch (e) { return 'none'; }
+            ]]]
+        - background-size: 90%
+        - background-repeat: no-repeat
+        - background-position: top center
+        - "--keep-background": "true"
+      custom_fields:
+        location:
+          - position: absolute
+          - left: 4%
+          - top: 4%
+        battery:
+          - position: absolute
+          - right: 4%
+          - top: 4%
+        steps:
+          - position: absolute
+          - left: 4%
+          - right: 4%
+          - top: 4%
+        cals:
+          - position: absolute
+          - left: 4%
+          - right: 4%
+          - top: 4%
+        ringer:
+          - position: absolute
+          - left: 6%
+          - right: 50%
+          - top: 4%
+        bluetooth:
+          - position: absolute
+          - left: 50%
+          - right: 4%
+          - top: 4%
+        media:
+          - position: absolute
+          - bottom: 4%
+          - right: 4%
+          - left: 4%
+    custom_fields:
+      location: |
+        [[[
+          try {
+            const s = states["person.4"]?.state || '';
+            if (s === "home") return `<ha-icon icon="mdi:home" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`;
+            if (s === "Work") return `<ha-icon icon="mdi:office-building" style="width:22px;height:22px;color:#FFA500;"></ha-icon>`;
+            return `<ha-icon icon="mdi:home-export-outline" style="width:22px;height:22px;color:#e45649;"></ha-icon>`;
+          } catch (e) { return `<ha-icon icon="mdi:help-circle" style="width:22px;height:22px;color:#e45649;"></ha-icon>`; }
+        ]]]
+      battery: |
+        [[[
+          try {
+            const pct = Number(states['sensor.pixel_6_pro_battery_level']?.state || 0);
+            const state = states['sensor.pixel_6_pro_battery_state']?.state?.toLowerCase() || '';
+
+            // Determine icon
+            let icon;
+            if (state === 'charging') {
+              icon = 'mdi:battery-charging';
+            } else if (state === 'full') {
+              icon = 'mdi:battery';
+            } else if (pct <= 5) {
+              icon = 'mdi:battery-outline';
+            } else {
+              icon = `mdi:battery-${Math.floor(pct / 10) * 10}`;
+            }
+
+            // Determine color
+            let color = '#50A14F'; // default green
+            if (state === 'charging') color = '#52adff';
+            else if (pct <= 30) color = '#e45649';
+            else if (pct <= 50) color = '#ffa229';
+
+            // Pulse animation style if charging
+            const pulseStyle = state === 'charging'
+              ? `animation: pulse 1.5s infinite;`
+              : '';
+
+            // Return with embedded CSS keyframes
+            return `
+              <style>
+                @keyframes pulse {
+                  0% { filter: drop-shadow(0 0 0px ${color}); }
+                  50% { filter: drop-shadow(0 0 6px ${color}); }
+                  100% { filter: drop-shadow(0 0 0px ${color}); }
+                }
+              </style>
+              <ha-icon icon="${icon}" style="width:20px;height:20px;color:${color};${pulseStyle}"></ha-icon>
+              <span style="color:${color};${pulseStyle}">${pct}%</span>
+            `;
+          } catch (e) {
+            return `<ha-icon icon="mdi:battery-unknown" style="width:20px;height:20px;color:#999;"></ha-icon>`;
+          }
+        ]]]
+      steps: |
+        [[[
+          try {
+            const s = Number(states['sensor.pixel_6_pro_daily_steps']?.state || 0);
+            const color = s < 5000 ? "#e45649" : "#50A14F";
+            return `<ha-icon icon="mdi:shoe-formal" style="width:25px;height:25px;color:${color};"></ha-icon><span style="color:${color};">${s}</span>`;
+          } catch (e) { return ''; }
+        ]]]
+      ringer: |
+        [[[
+          try {
+            const mode = states["sensor.pixel_6_pro_ringer_mode"]?.state || '';
+            if (mode === "silent") return `<ha-icon icon="mdi:cellphone-off" style="width:22px;height:22px;color:#e45649;"></ha-icon>`;
+            if (mode === "vibrate") return `<ha-icon icon="mdi:vibrate" style="width:22px;height:22px;color:#FFA500;"></ha-icon>`;
+            const vol = states['sensor.pixel_6_pro_volume_level_ringer']?.state || '';
+            return `<ha-icon icon="mdi:cellphone" style="width:22px;height:22px;color:#50A14F;"></ha-icon><span style="color:#50A14F;">${vol}</span>`;
+          } catch (e) { return `<ha-icon icon="mdi:cellphone" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`; }
+        ]]]
+      bluetooth: |
+        [[[
+          try {
+            const on = (states["binary_sensor.pixel_6_pro_bluetooth_state"]?.state === "on");
+            const icon = on ? 'mdi:bluetooth' : 'mdi:bluetooth-off';
+            const color = on ? '#52adff' : '#e45649';
+            return `<ha-icon icon="${icon}" style="width:22px;height:22px;color:${color};"></ha-icon>`;
+          } catch (e) { return `<ha-icon icon="mdi:bluetooth-off" style="width:22px;height:22px;color:#e45649;"></ha-icon>`; }
+        ]]]
+      media: |
+        [[[
+          try {
+            const m = states['media_player.spotify'] || {};
+            const title = m.attributes?.media_title || '';
+            const artist = m.attributes?.media_artist || '';
+            const color = (m.state === 'playing') ? '#ffffff' : '#ffffff00';
+            return `<div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:${color};"><ha-icon icon="mdi:music" style="width:20px;height:20px;color:${color};"></ha-icon><span> ${title} - ${artist}</span></div>`;
+          } catch (e) { return ''; }
+        ]]]
+  - type: custom:stack-in-card
+    mode: vertical
+    cards:
+      - type: custom:button-card
+        entity: person.4
+        aspect_ratio: 4/2.85
+        show_name: false
+        show_icon: false
+        styles:
+          card:
+            - padding: 4%
+          custom_fields:
+            name:
+              - font-size: 30px
+              - position: absolute
+              - left: 4%
+              - top: 4%
+              - color: "#ffffffff"
+            location:
+              - position: absolute
+              - left: 4%
+              - top: 20%
+              - color: "#ffffffff"
+            battery:
+              - position: absolute
+              - left: 4%
+              - top: 30%
+              - color: "#ffffffff"
+            steps:
+              - position: absolute
+              - left: 4%
+              - top: 40%
+              - color: "#ffffffff"
+            cals:
+              - position: absolute
+              - left: 4%
+              - top: 50%
+              - color: "#ffffffff"
+        custom_fields:
+          name: |
+            [[[
+              return '<span>4</span>';
+            ]]]
+          location: |
+            [[[
+              try {
+                const loc = states["device_tracker.pixel_6_pro"]?.state || '';
+                if (loc === "not_home") return `<ha-icon icon="mdi:home-export-outline" style="width:22px;height:22px;"></ha-icon><span>Location: Not Home</span>`;
+                if (loc === "Work") return `<ha-icon icon="mdi:office-building" style="width:22px;height:22px;"></ha-icon><span>Location: Work</span>`;
+                return `<ha-icon icon="mdi:home" style="width:22px;height:22px;"></ha-icon><span>Location: Home</span>`;
+              } catch (e) { return '<span>Location: Unknown</span>'; }
+            ]]]
+          battery: |
+            [[[
+              try {
+                const pct = states['sensor.pixel_6_pro_battery_level']?.state || '';
+                const st = states['sensor.pixel_6_pro_battery_state']?.state || '';
+                return `<ha-icon icon="mdi:battery" style="width:20px;height:20px;"></ha-icon><span>Battery: ${pct}% (${st})</span>`;
+              } catch (e) { return ''; }
+            ]]]
+          steps: |
+            [[[
+              try {
+                const s = states['sensor.pixel_6_pro_daily_steps']?.state || 0;
+                return `<ha-icon icon="mdi:shoe-formal" style="width:20px;height:20px;"></ha-icon><span>Steps: ${s} / 10000</span>`;
+              } catch (e) { return ''; }
+            ]]]
+          cals: |
+            [[[
+              try {
+                const calsIn = states['sensor.pixel_6_pro_total_calories_burned']?.state || 0;
+                const goal = states['input_number.calorie_goal']?.state || 2000;
+                return `
+                  <ha-icon icon="mdi:food-apple" style="width:20px;height:20px;"></ha-icon>
+                  <span>Calories: ${calsIn} / ${goal}</span>
+                `;
+              } catch (e) {
+                return '';
+              }
+            ]]]
+        card_mod:
+          style: |
+            ha-card { 
+              background-color: rgba(0,0,0,0);
+              box-shadow: none;
+            }
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.pixel_6_pro_daily_steps
+        hours_to_show: 48
+        graph: line
+        show:
+          state: false
+          name: false
+          icon: false
+        points_per_hour: 1
+        card_mod:
+          style: |
+            ha-card { 
+              background-color: rgba(0,0,0,0);
+              box-shadow: none;
+            }

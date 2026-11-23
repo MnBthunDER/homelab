@@ -1,0 +1,104 @@
+type: vertical-stack
+cards:
+  - type: custom:firemote-card
+    entity: switch.hisense_tv
+    device_family: none
+    device_type: other
+    compatibility_mode: default
+    scale: "97"
+    custom_launchers:
+      - friendly_name: Netflix
+        label: NETFLIX
+        icon: mdi:netflix
+        color: red
+        background: white
+        script: executa_hisense_netflix
+      - friendly_name: YouTube
+        label: YouTube
+        icon: mdi:youtube
+        color: blue
+        background: white
+        script: executa_hisense_youtube
+      - friendly_name: Prime Video
+        label: Prime Video
+        icon: mdi:amazon
+        color: orange
+        background: white
+        script: executa_hisense_prime_video
+    app_launch_1: customlauncher Netflix
+    app_launch_2: customlauncher YouTube
+    app_launch_3: customlauncher Prime Video
+    defaultRemoteStyle_override: HO3
+    button_overrides:
+      power-button:
+        script: executa_hisense_power
+      volume-up-button:
+        script: executa_hisense_volume_up
+      volume-down-button:
+        script: executa_hisense_volume_down
+      channel-up-button:
+        script: executa_hisense_channel_up
+      channel-down-button:
+        script: executa_hisense_channel_down
+      home-button:
+        script: executa_hisense_home
+      apps-button:
+        tap_action:
+          action: perform-action
+          perform_action: script.executa_hisense_netflix
+          target: {}
+        entity: script.executa_hisense_netflix
+      mute-button:
+        script: executa_hisense_mute
+      back-button:
+        script: executa_hisense_back
+      up-button:
+        script: executa_hisense_up
+      down-button:
+        script: executa_hisense_down
+      left-button:
+        script: executa_hisense_left
+      right-button:
+        script: executa_hisense_right
+      center-button:
+        script: executa_hisense_ok
+      num0-button:
+        script: executa_hisense_0
+      num1-button:
+        script: executa_hisense_1
+      num2-button:
+        script: executa_hisense_2
+      num3-button:
+        script: executa_hisense_3
+      num4-button:
+        script: executa_hisense_4
+      num5-button:
+        script: executa_hisense_5
+      num6-button:
+        script: executa_hisense_6
+      num7-button:
+        script: executa_hisense_7
+      num8-button:
+        script: executa_hisense_8
+      num9-button:
+        script: executa_hisense_9
+      subtitle-button:
+        script: executa_hisense_subtitles
+      menu-button:
+        script: executa_hisense_menu
+      tv-button:
+        script: executa_epg
+      input-button:
+        script: executa_hisense_input_tv
+      blue-button:
+        script: executa_hisense_input_av
+      red-button:
+        script: executa_hisense_input_hdmi_1
+      green-button:
+        script: executa_hisense_input_hdmi_2
+      yellow-button:
+        script: executa_hisense_input_hdmi_3
+      settings-button:
+        script: executa_hisense_menu
+      info-button:
+        script: executa_hisense_up

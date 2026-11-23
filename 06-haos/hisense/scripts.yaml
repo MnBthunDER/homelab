@@ -1,0 +1,249 @@
+# https://github.com/Krazy998/mqtt-hisensetv/blob/master/README.md
+
+executa_hisense_power:
+  alias: TV - Power
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_POWER'
+
+executa_hisense_input_tv:
+  alias: TV - Input TV
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/ui_service/XX:XX:XX:XX:XX:XX$normal/actions/changesource'
+        payload: '{"displayname":"TV","hotel_mode":"","isDemo":false,"is_lock":"","is_signal":"","sourceid":"0","sourcename":"TV"}'
+
+executa_hisense_input_hdmi_1:
+  alias: TV - Input HDMI 1
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/ui_service/XX:XX:XX:XX:XX:XX$normal/actions/changesource'
+        payload: '{"displayname": "HDMI1","hotel_mode": "","isDemo": false,"is_lock": "","is_signal": "","sourceid": "4","sourcename": "HDMI1"}'
+
+executa_hisense_input_hdmi_2:
+  alias: TV - Input HDMI 2
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/ui_service/XX:XX:XX:XX:XX:XX$normal/actions/changesource'
+        payload: '{"displayname": "HDMI2","hotel_mode": "","isDemo": false,"is_lock": "","is_signal": "","sourceid": "5","sourcename": "HDMI2"}'
+
+executa_hisense_input_av:
+  alias: TV - Input AV
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/ui_service/XX:XX:XX:XX:XX:XX$normal/actions/changesource'
+        payload: '{"displayname":"AV","hotel_mode":"","isDemo":false,"is_lock":"","is_signal":"","sourceid":"1","sourcename":"AV"}'
+
+executa_hisense_volume_up:
+  alias: TV - Volume up
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_VOLUMEUP'
+        
+executa_hisense_volume_down:
+  alias: TV - Volume down
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_VOLUMEDOWN'
+
+executa_hisense_channel_up:
+  alias: TV - Channel up
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_CHANNELUP'
+        
+executa_hisense_channel_down:
+  alias: TV - Channel down
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_CHANNELDOWN'
+
+executa_hisense_home:
+  alias: TV - Home
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_HOME'
+
+executa_hisense_netflix:
+  alias: TV - Netflix
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/ui_service/XX:XX:XX:XX:XX:XX$normal/actions/launchapp'
+        payload: '{"appIcon":"","appId":"1","has_detail_page":0,"isLocalApp":1,"name":"Netflix","storeType":0,"type":0,"url":"netflix","urlType":37}'
+
+executa_hisense_mute:
+  alias: TV - Mute
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_MUTE'
+
+executa_hisense_back:
+  alias: TV - Back
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_RETURNS'
+
+executa_hisense_up:
+  alias: TV - Up
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_UP'
+
+executa_hisense_down:
+  alias: TV - Down
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_DOWN'
+
+executa_hisense_left:
+  alias: TV - Left
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_LEFT'
+
+executa_hisense_right:
+  alias: TV - Right
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_RIGHT'
+
+executa_hisense_ok:
+  alias: TV - OK
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_OK'
+
+executa_hisense_0:
+  alias: TV - Number 0
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_0'
+
+executa_hisense_1:
+  alias: TV - Number 1
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_1'
+
+executa_hisense_2:
+  alias: TV - Number 2
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_2'
+
+executa_hisense_3:
+  alias: TV - Number 3
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_3'
+
+executa_hisense_4:
+  alias: TV - Number 4
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_4'
+
+executa_hisense_5:
+  alias: TV - Number 5
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_5'
+
+executa_hisense_6:
+  alias: TV - Number 6
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_6'
+
+executa_hisense_7:
+  alias: TV - Number 7
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_7'
+
+executa_hisense_8:
+  alias: TV - Number 8
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_8'
+
+executa_hisense_9:
+  alias: TV - Number 9
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_9'
+
+executa_hisense_subtitles:
+  alias: TV - Subtitles
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_SUBTITLE'
+
+executa_hisense_menu:
+  alias: TV - Menu
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_MENU'
+
+executa_hisense_epg:
+  alias: TV - EPG
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+        payload: 'KEY_EPG'

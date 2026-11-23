@@ -1,0 +1,55 @@
+# Hisense TV    
+switch:
+  - platform: template
+    switches:
+      hisense_tv:
+        icon_template: >
+          {% if is_state('sensor.hisense_tv','fake_sleep_0') %}
+            {{ 'mdi:television-classic-off' }}
+          {% else %}
+            {{ 'mdi:television-classic' }}
+          {% endif %}
+        friendly_name: 'Hisense TV'
+        value_template: >
+          {{ not is_state('sensor.hisense_tv', 'fake_sleep_0') }}
+        turn_on:
+#          service: mqtt.publish
+#          data:
+#            topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+#            payload: 'KEY_POWER'
+          service: remote.send_command
+          target:
+            entity_id: remote.km6  
+          data:
+            command: POWER
+        turn_off:
+          service: mqtt.publish
+          data:
+            topic: '/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey'
+            payload: 'KEY_POWER'
+mqtt:
+  sensor:
+    - name: "Hisense TV Source"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: >
+        {% if value_json.statetype == "app" %}
+          {{ value_json.name }}
+        {% elif value_json.statetype == "sourceswitch" %}
+          {{ value_json.displayname }}
+        {% elif value_json.statetype == "livetv" %}
+          {{ value_json.channel_name }}
+        {% else %}
+          Unknown
+        {% endif %}
+      icon: mdi:video-input-hdmi
+    - name: "Hisense TV Channel"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: "{{ value_json.channel_name }}"
+    
+    - name: "Hisense TV Program"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: "{{ value_json.progname }}"
+    
+    - name: "Hisense TV Program Details"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: "{{ value_json.detail }}"

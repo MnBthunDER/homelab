@@ -1,0 +1,202 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: switch.hisense_tv
+        tap_action:
+          action: toggle
+        show_state: true
+      - type: entity
+        entity: sensor.hisense_tv
+        icon: mdi:video-input-hdmi
+  - type: horizontal-stack
+    cards:
+      - type: button
+        entity: script.executa_hisense_input_tv
+        name: TV
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_input_tv
+      - type: button
+        entity: script.executa_hisense_input_hdmi_1
+        name: HDMI 1
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_input_hdmi_1
+      - type: button
+        entity: script.executa_hisense_input_hdmi_2
+        name: HDMI 2
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_input_hdmi_2
+      - type: button
+        entity: script.executa_hisense_input_hdmi_3
+        name: HDMI 3
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_input_hdmi_3
+  - type: horizontal-stack
+    cards:
+      - type: button
+        entity: script.executa_hisense_mute
+        name: Mute
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_mute
+      - type: button
+        entity: script.executa_hisense_home
+        name: Home
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_home
+      - type: button
+        entity: script.executa_hisense_back
+        name: Back
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_back
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: button
+            entity: script.executa_hisense_up
+            name: ▲
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_up
+      - type: horizontal-stack
+        cards:
+          - type: button
+            entity: script.executa_hisense_left
+            name: ◀
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_left
+          - type: button
+            entity: script.executa_hisense_ok
+            name: OK
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_ok
+          - type: button
+            entity: script.executa_hisense_right
+            name: ▶
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_right
+      - type: horizontal-stack
+        cards:
+          - type: button
+            entity: script.executa_hisense_down
+            name: ▼
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_down
+  - type: horizontal-stack
+    cards:
+      - type: button
+        entity: script.executa_hisense_channel_up
+        name: CH +
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_channel_up
+      - type: button
+        entity: script.executa_hisense_channel_down
+        name: CH -
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_channel_down
+      - type: button
+        entity: script.executa_hisense_volume_up
+        name: Vol +
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_volume_up
+      - type: button
+        entity: script.executa_hisense_volume_down
+        name: Vol -
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_volume_down
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: button
+        entity: script.executa_hisense_1
+        name: "1"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_1
+      - type: button
+        entity: script.executa_hisense_2
+        name: "2"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_2
+      - type: button
+        entity: script.executa_hisense_3
+        name: "3"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_3
+      - type: button
+        entity: script.executa_hisense_4
+        name: "4"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_4
+      - type: button
+        entity: script.executa_hisense_5
+        name: "5"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_5
+      - type: button
+        entity: script.executa_hisense_6
+        name: "6"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_6
+      - type: button
+        entity: script.executa_hisense_7
+        name: "7"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_7
+      - type: button
+        entity: script.executa_hisense_8
+        name: "8"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_8
+      - type: button
+        entity: script.executa_hisense_9
+        name: "9"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_9
+      - type: button
+        entity: script.executa_hisense_0
+        name: "0"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_0
+  - type: horizontal-stack
+    cards:
+      - type: button
+        entity: script.executa_hisense_netflix
+        name: Netflix
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_netflix
+      - type: button
+        entity: script.executa_hisense_home
+        name: Menu
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_home

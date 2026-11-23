@@ -1,0 +1,98 @@
+type: vertical-stack
+cards:
+  - type: heading
+    heading: ⚙️ Quick access to core Rocky settings
+    heading_style: subtitle
+  - square: false
+    type: grid
+    columns: 3
+    cards:
+      - type: custom:mushroom-template-card
+        entity: select.rocky_mop_intensity
+        icon: mdi:water-opacity
+        primary: Mop
+        secondary: |
+          {{ states('select.rocky_mop_intensity') | capitalize }}
+        tap_action:
+          action: more-info
+        hold_action:
+          action: perform-action
+          target:
+            entity_id: select.rocky_mop_intensity
+          perform_action: select.select_next
+          data:
+            cycle: true
+        color: blue
+        vertical: true
+        features_position: bottom
+      - type: custom:mushroom-template-card
+        entity: select.rocky_route
+        icon: mdi:map-marker-path
+        primary: Route
+        secondary: |
+          {{ states('select.rocky_route') | capitalize }}
+        tap_action:
+          action: more-info
+        hold_action:
+          action: perform-action
+          target:
+            entity_id: select.rocky_route
+          perform_action: select.select_next
+          data:
+            cycle: true
+        color: amber
+        vertical: true
+      - type: custom:mushroom-template-card
+        icon: mdi:battery
+        primary: Battery
+        secondary: |
+          {{ states('sensor.rocky_battery') }}%
+        tap_action:
+          action: more-info
+        color: purple
+        vertical: true
+        features_position: bottom
+        entity: sensor.rocky_battery
+  - square: false
+    type: grid
+    columns: 3
+    cards:
+      - type: custom:mushroom-template-card
+        entity: select.rocky_selected_map
+        icon: mdi:floor-plan
+        primary: Floor Selector
+        secondary: |
+          {{ states('select.rocky_selected_map') }}
+        color: teal
+        vertical: true
+        features_position: bottom
+      - type: custom:mushroom-template-card
+        entity: switch.rocky_off_peak_charging
+        icon: mdi:power-socket-au
+        primary: Valley Power
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        color: |
+          {% if is_state('switch.rocky_off_peak_charging', 'on') %}
+            green
+          {% else %}
+            grey
+          {% endif %}
+        vertical: true
+        features_position: bottom
+      - type: custom:mushroom-template-card
+        entity: input_button.rocky_empty_the_bin
+        icon: mdi:trash-can-outline
+        primary: Empty Bin
+        tap_action:
+          action: call-service
+          service: input_button.press
+          target:
+            entity_id: input_button.rocky_empty_the_bin
+        double_tap_action:
+          action: more-info
+        color: red
+        vertical: true
+        features_position: bottom

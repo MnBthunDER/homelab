@@ -1,0 +1,4657 @@
+views:
+  - title: Mobile
+    sections:
+      - type: grid
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: person.1
+                icon_type: entity-picture
+                fill_container: true
+                layout: vertical
+              - type: custom:mushroom-entity-card
+                entity: person.2
+                icon_type: entity-picture
+                layout: vertical
+                fill_container: true
+                tap_action:
+                  action: navigate
+                  navigation_path: '#pop-up-2'
+              - type: custom:mushroom-entity-card
+                entity: person.3
+                layout: vertical
+                icon_type: entity-picture
+                fill_container: true
+                tap_action:
+                  action: navigate
+                  navigation_path: '#pop-up-3'
+              - type: custom:mushroom-entity-card
+                entity: person.4
+                layout: vertical
+                icon_type: entity-picture
+                tap_action:
+                  action: navigate
+                  navigation_path: '#pop-up-4'
+                fill_container: true
+          - alert_classes:
+              - connectivity
+            cover_classes: []
+            sensor_classes:
+              - temperature
+              - humidity
+            toggle_domains:
+              - switch
+              - media_player
+              - vacuum
+              - light
+            popup_domains:
+              - media_player
+              - input_button
+              - remote
+              - vacuum
+              - automation
+              - number
+              - binary_sensor
+              - sensor
+              - switch
+              - device_tracker
+              - update
+              - button
+              - camera
+              - select
+              - time
+              - light
+            type: custom:area-card-plus
+            area: living_room
+            mirrored: true
+            customization_domain: []
+            customization_alert: []
+            customization_cover: []
+            customization_sensor: []
+            grid_options:
+              columns: 6
+              rows: 2
+            display_type: picture
+            design: V1
+            v2_color:
+              - 96
+              - 1
+              - 6
+            show_sensor_icons: false
+            wrap_sensor_icons: false
+            show_active: false
+            area_name: ' Living Room'
+            layout: vertical
+            area_icon: ''
+            extra_entities: []
+            double_tap_action:
+              action: navigate
+              navigation_path: '#pop-up-living'
+            hide_unavailable: true
+            popup_sort: state
+            hidden_entities:
+              - sensor.rocky_total_dust_collection_count
+              - sensor.rocky_total_duration
+              - sensor.rocky_total_clean_count
+              - sensor.rocky_total_clean_area
+              - sensor.rocky_side_brush_left
+              - sensor.rocky_sensor_dirty_left
+              - sensor.rocky_mop_drying_remaining_time
+              - sensor.rocky_main_brush_left
+              - sensor.rocky_last_clean_start
+              - sensor.rocky_last_clean_end
+              - sensor.rocky_last_clean_duration
+              - sensor.rocky_last_clean_area
+              - sensor.rocky_filter_left
+              - sensor.rocky_dock_washing_mode
+              - sensor.rocky_dock_status
+              - sensor.rocky_dock_mop_wash_mode_interval
+              - sensor.rocky_dock_dust_collection_mode
+              - sensor.rocky_current_room
+              - sensor.rocky_current_map_selected
+              - sensor.rocky_current_error
+              - sensor.rocky_current_clean_duration
+              - sensor.rocky_current_clean_area
+              - sensor.rocky_cleaning_progress
+              - number.rocky_sound_volume
+              - camera.rocky_map
+              - button.rocky_reset_filter_consumable
+              - button.rocky_reset_main_brush_consumable
+              - button.rocky_reset_sensor_consumable
+              - binary_sensor.rocky_mop_drying
+              - binary_sensor.rocky_water_shortage
+              - binary_sensor.rocky_water_box_attached
+              - remote.km6_2
+              - time.rocky_dnd_end
+              - time.rocky_dnd_start
+              - time.rocky_off_peak_charging_end
+              - time.rocky_off_peak_charging_start
+              - switch.rocky_child_lock
+              - switch.rocky_dnd_switch
+              - sensor.ac_pro_cpu_utilization
+              - sensor.ac_pro_memory_utilization
+              - sensor.ac_pro_uplink_mac
+              - sensor.ac_pro_uptime
+              - select.rocky_mop_intensity
+              - select.rocky_route
+              - button.ac_pro_restart
+              - button.rocky_reset_side_brush_consumable
+              - media_player.km6_2
+              - media_player.km6_3
+            excluded_entities: []
+            custom_buttons:
+              - icon: mdi:vacuum
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: more-info
+                hold_action:
+                  action: toggle
+                entity: button.rocky_living
+                color: primary
+              - name: ''
+                icon: mdi:rug
+                tap_action:
+                  action: none
+                entity: button.rocky_carpet
+                color: amber
+            columns: 4
+            ungroup_areas: false
+          - alert_classes:
+              - safety
+              - connectivity
+            cover_classes: []
+            sensor_classes:
+              - temperature
+              - humidity
+            toggle_domains:
+              - switch
+              - light
+            popup_domains:
+              - switch
+              - binary_sensor
+              - device_tracker
+              - update
+              - sensor
+              - button
+              - event
+              - conversation
+              - light
+            type: custom:area-card-plus
+            area: office
+            columns: 4
+            mirrored: false
+            customization_domain: []
+            customization_alert: []
+            customization_cover: []
+            customization_sensor: []
+            custom_buttons: []
+            grid_options:
+              columns: 6
+              rows: 2
+            design: V1
+            v2_color:
+              - 16
+              - 22
+              - 71
+            show_sensor_icons: false
+            wrap_sensor_icons: false
+            show_active: false
+            area_name: ' Office'
+            area_icon: ''
+            layout: vertical
+            double_tap_action:
+              action: navigate
+              navigation_path: '#pop-up-office'
+            hide_unavailable: true
+            popup_sort: state
+            display_type: picture
+            ungroup_areas: false
+          - alert_classes:
+              - connectivity
+            cover_classes: []
+            sensor_classes:
+              - temperature
+              - humidity
+            toggle_domains:
+              - switch
+              - light
+            popup_domains:
+              - input_button
+              - remote
+              - device_tracker
+              - sensor
+              - update
+              - binary_sensor
+              - light
+              - button
+              - switch
+              - automation
+            type: custom:area-card-plus
+            area: dining
+            columns: 4
+            mirrored: true
+            customization_domain: []
+            customization_alert: []
+            customization_cover: []
+            customization_sensor: []
+            custom_buttons:
+              - icon: mdi:vacuum
+                tap_action:
+                  action: more-info
+                entity: button.rocky_dining
+                double_tap_action:
+                  action: more-info
+                hold_action:
+                  action: toggle
+                color: primary
+            grid_options:
+              columns: 6
+              rows: 2
+            design: V1
+            v2_color:
+              - 81
+              - 98
+              - 179
+            show_sensor_icons: false
+            wrap_sensor_icons: false
+            show_active: false
+            area_name: ' Dining'
+            layout: vertical
+            popup_sort: state
+            ungroup_areas: false
+            hide_unavailable: false
+            extra_entities:
+              - binary_sensor.uptimekuma_acpro
+              - sensor.ac_pro_state
+              - update.ac_pro
+              - device_tracker.ac_pro
+            area_icon: ''
+            display_type: picture
+          - alert_classes: []
+            cover_classes: []
+            sensor_classes:
+              - temperature
+              - humidity
+            toggle_domains: []
+            popup_domains:
+              - input_button
+            type: custom:area-card-plus
+            area: kitchen
+            columns: 4
+            mirrored: false
+            customization_domain: []
+            customization_alert: []
+            customization_cover: []
+            customization_sensor: []
+            custom_buttons:
+              - icon: mdi:vacuum
+                tap_action:
+                  action: more-info
+                entity: button.rocky_kitchen
+                double_tap_action:
+                  action: more-info
+                hold_action:
+                  action: toggle
+                color: primary
+            grid_options:
+              columns: 6
+              rows: 2
+            display_type: picture
+            design: V1
+            v2_color:
+              - 81
+              - 98
+              - 179
+            show_sensor_icons: false
+            wrap_sensor_icons: false
+            show_active: false
+            area_name: ' Kitchen'
+            layout: vertical
+            popup_sort: state
+            ungroup_areas: false
+            hide_unavailable: true
+            extra_entities: []
+            area_icon: ''
+          - alert_classes: []
+            cover_classes: []
+            sensor_classes:
+              - temperature
+              - humidity
+            toggle_domains:
+              - switch
+            popup_domains:
+              - camera
+              - switch
+              - device_tracker
+              - sensor
+            type: custom:area-card-plus
+            area: garage
+            columns: 4
+            mirrored: true
+            customization_domain: []
+            customization_alert: []
+            customization_cover: []
+            customization_sensor: []
+            custom_buttons: []
+            grid_options:
+              columns: 6
+              rows: 2
+            design: V1
+            v2_color:
+              - 81
+              - 98
+              - 179
+            show_sensor_icons: false
+            wrap_sensor_icons: false
+            show_active: false
+            area_name: ' Garage'
+            layout: vertical
+            popup_sort: state
+            ungroup_areas: false
+            hide_unavailable: true
+            extra_entities: []
+            area_icon: ''
+            display_type: camera
+          - alert_classes: []
+            cover_classes: []
+            sensor_classes:
+              - temperature
+              - humidity
+            toggle_domains:
+              - switch
+            popup_domains:
+              - camera
+              - switch
+              - device_tracker
+              - sensor
+            type: custom:area-card-plus
+            area: attic
+            columns: 4
+            mirrored: false
+            customization_domain: []
+            customization_alert: []
+            customization_cover: []
+            customization_sensor: []
+            custom_buttons: []
+            grid_options:
+              columns: 6
+              rows: 2
+            display_type: picture
+            design: V1
+            v2_color:
+              - 81
+              - 98
+              - 179
+            show_sensor_icons: false
+            wrap_sensor_icons: false
+            show_active: false
+            layout: vertical
+            area_icon: ''
+            popup_sort: state
+            hide_unavailable: true
+            area_name: Attic
+      - type: grid
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-weather'
+            button_type: name
+            show_header: false
+            close_on_click: false
+            bg_opacity: '0'
+            background_update: false
+            sub_button:
+              main: []
+              bottom: []
+            slider_fill_orientation: left
+            slider_value_position: right
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: markdown
+                    content: >-
+                      #  🏠 Dundas Weather Forecast
+
+                      {{  states('sensor.pirateweather_home_minutely_summary')}}
+                      {{ states('sensor.pirateweather_home_hourly_summary') }} 
+
+
+                      {{ states('sensor.pirateweather_home_daily_summary') }}
+
+
+                      {{ states('sensor.dundas_uv_forecast_0') }}
+                  - type: custom:clock-weather-card
+                    entity: weather.pirateweather_home
+                    sun_entity: sun.sun
+                    temperature_sensor: sensor.pirateweather_home_temperature
+                    humidity_sensor: sensor.pirateweather_home_humidity
+                    weather_icon_type: line
+                    animated_icon: true
+                    forecast_rows: 5
+                    locale: en-GB
+                    time_pattern: HH:mm
+                    time_format: 12
+                    date_pattern: ccc, d.MM.yy
+                    hide_today_section: false
+                    hide_forecast_section: false
+                    show_humidity: true
+                    hide_clock: true
+                    hide_date: true
+                    hourly_forecast: false
+                    use_browser_time: false
+                    show_decimal: true
+                    apparent_sensor: sensor.pirateweather_home_apparent_temperature
+                    aqi_sensor: sensor.pirateweather_home_air_quality_index
+                    sections:
+                      header:
+                        rows:
+                          - segments:
+                              - type: icon
+                                icon: mdi:thermometer
+                              - type: weather
+                                attribute: apparent_temperature
+                              - type: spacer
+                              - type: weather
+                              - type: spacer
+                              - type: entity
+                                entity_id: sensor.pirateweather_home_air_quality_index
+                                unit_attribute: device_class
+                          - font_size: 4rem
+                            alignment: center
+                            segments:
+                              - type: time
+                          - alignment: center
+                            segments:
+                              - type: icon
+                                icon: mdi:calendar
+                              - type: date
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.pirateweather_home_uv_index
+                            name: PirateWeather
+                        icon: mdi:sun-wireless-outline
+                        align_state: center
+                        name: UV Index
+                        show:
+                          legend: false
+                          labels: false
+                        color_thresholds:
+                          - value: 0
+                            color: '#00FF00'
+                          - value: 3
+                            color: '#FFFF00'
+                          - value: 6
+                            color: '#FFA500'
+                          - value: 8
+                            color: '#FF0000'
+                          - value: 11
+                            color: '#800080'
+                        animate: true
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.pirateweather_home_temperature
+                            name: Temperature
+                        icon: mdi:sun-wireless-outline
+                        align_state: center
+                        name: Temperature
+                        show:
+                          legend: false
+                          labels: false
+                        color_thresholds:
+                          - value: 0
+                            color: '#A1EDDE'
+                          - value: 10
+                            color: '#4D93DD'
+                          - value: 20
+                            color: '#4BDCE3'
+                          - value: 25
+                            color: '#EFF2B1'
+                          - value: 30
+                            color: '#FFD512'
+                          - value: 35
+                            color: '#F68838'
+                          - value: 36
+                            color: '#F53B3B'
+                        animate: true
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.pirateweather_home_air_quality_index
+                            name: PirateWeather
+                        align_state: center
+                        name: Dundas AQI
+                        show:
+                          legend: false
+                          labels: false
+                        color_thresholds:
+                          - value: 0
+                            color: '#00FF00'
+                          - value: 50
+                            color: '#FFFF00'
+                          - value: 100
+                            color: '#FFA500'
+                          - value: 150
+                            color: '#FF0000'
+                          - value: 200
+                            color: '#800080'
+                        animate: true
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.york_street_air_quality_index
+                            name: World's Air Quality Index
+                        align_state: center
+                        name: York St AQI
+                        icon: mdi:air-filter
+                        show:
+                          legend: false
+                          labels: false
+                        color_thresholds:
+                          - value: 0
+                            color: '#00FF00'
+                          - value: 50
+                            color: '#FFFF00'
+                          - value: 100
+                            color: '#FFA500'
+                          - value: 150
+                            color: '#FF0000'
+                          - value: 200
+                            color: '#800080'
+                        animate: true
+                  - type: custom:hourly-weather
+                    entity: weather.pirateweather_home
+                    label_spacing: '1'
+                    icons: true
+                    show_wind: 'true'
+                    show_date: 'false'
+                    show_precipitation_amounts: true
+                    show_precipitation_probability: true
+                    num_segments: '5'
+                  - type: custom:horizon-card
+                    moon: false
+                    refresh_period: 30
+                    fields:
+                      sunrise: true
+                      sunset: true
+                      dawn: true
+                      noon: true
+                      dusk: true
+                      azimuth: true
+                      sun_azimuth: true
+                      moon_azimuth: true
+                      elevation: true
+                      sun_elevation: true
+                      moon_elevation: true
+                      moonrise: true
+                      moonset: true
+                      moon_phase: true
+                    southern_flip: true
+                    language: en
+                    time_format: language
+                    number_format: language
+                    time_zone: Australia/Sydney
+                    no_card: false
+                    debug_level: 0
+                  - type: custom:lunar-phase-card
+                    entity: ''
+                    12hr_format: true
+                    calendar_modal: true
+                    compact_view: false
+                    default_card: base
+                    hide_buttons: false
+                    mile_unit: false
+                    moon_position: left
+                    number_decimals: 2
+                    selected_language: en
+                    show_background: true
+                    southern_hemisphere: true
+                    use_custom: false
+                    use_default: true
+                    use_entity: false
+                    graph_config:
+                      graph_type: dynamic
+                      y_ticks: false
+                      x_ticks: false
+                      show_time: true
+                      show_current: true
+                      show_highest: true
+                      y_ticks_position: left
+                      y_ticks_step_size: 30
+                      time_step_size: 30
+                    font_customize:
+                      header_font_size: x-large
+                      header_font_style: capitalize
+                      header_font_color: ''
+                      label_font_size: auto
+                      label_font_style: none
+                      label_font_color: ''
+                      hide_label: false
+                    latitude: -33.79955298245075
+                    longitude: 151.0427534580231
+                    location:
+                      city: Sydney
+                      country: Australia
+                    theme:
+                      selected_theme: default
+                      theme_mode: auto
+                    hide_items: []
+                  - name: ''
+                    height: null
+                    show_feels_like: false
+                    show_wind: true
+                    show_wind_gust: true
+                    show_wind_direction: true
+                    show_humidity: true
+                    show_min_temp: false
+                    show_hourly_forecast: true
+                    hourly_forecast_hours: 5
+                    show_daily_forecast: true
+                    daily_forecast_days: 5
+                    show_sunrise_sunset: true
+                    show_clock: true
+                    clock_position: top
+                    clock_format: 12h
+                    overlay_opacity: 1
+                    language: auto
+                    wind_speed_unit: kmh
+                    sunrise_entity: ''
+                    sunset_entity: ''
+                    type: custom:dynamic-weather-card
+                    entity: weather.dundas_hourly
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-living'
+            button_type: name
+            bg_blur: '8'
+            bg_opacity: '0.5'
+            close_on_click: true
+            show_header: false
+            sub_button:
+              main: []
+              bottom: []
+            slider_fill_orientation: left
+            slider_value_position: right
+            cards:
+              - type: custom:mushroom-title-card
+                title: 🛋️ Living Area Devices
+                subtitle: Connectivity & Battery Overview
+              - type: custom:mushroom-entity-card
+                entity: device_tracker.u6_pro
+                name: U6 Pro
+                icon: mdi:access-point-network
+                icon_color: blue
+                layout: vertical
+                tap_action:
+                  action: navigate
+                  navigation_path: /dashboard-mushroom/unifi
+                hold_action:
+                  action: url
+                  url_path: https://unifi.company.com/
+                fill_container: true
+                grid_options:
+                  columns: 6
+              - type: custom:mushroom-entity-card
+                entity: sensor.u6_pro_clients
+                name: Connected Clients
+                icon: mdi:lan-connect
+                icon_color: teal
+                layout: vertical
+                fill_container: true
+                grid_options:
+                  columns: 6
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    name: 📱 4’s Pixel 6 Pro
+                    icon: mdi:battery-high
+                    entities:
+                      - entity: sensor.pixel_6_pro_battery_level
+                    color_thresholds:
+                      - value: 20
+                        color: '#d32f2f'
+                      - value: 50
+                        color: '#f9a825'
+                      - value: 80
+                        color: '#388e3c'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 📘 Home Tablet
+                    icon: mdi:tablet
+                    entities:
+                      - entity: sensor.sm_t500_battery_level
+                    color_thresholds:
+                      - value: 20
+                        color: '#d32f2f'
+                      - value: 50
+                        color: '#fbc02d'
+                      - value: 80
+                        color: '#43a047'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 📱 4’s iPhone
+                    icon: mdi:cellphone
+                    entities:
+                      - entity: sensor.4s_iphone_battery_level
+                    color_thresholds:
+                      - value: 20
+                        color: '#c62828'
+                      - value: 50
+                        color: '#ffb300'
+                      - value: 80
+                        color: '#2e7d32'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 📗 R’s Tablet
+                    icon: mdi:tablet
+                    entities:
+                      - entity: sensor.sm_t720_battery_level
+                    color_thresholds:
+                      - value: 20
+                        color: '#d32f2f'
+                      - value: 50
+                        color: '#fbc02d'
+                      - value: 80
+                        color: '#43a047'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 📱 2’s Nubia
+                    icon: mdi:cellphone
+                    entities:
+                      - entity: sensor.focus_5g_battery_level
+                    color_thresholds:
+                      - value: 20
+                        color: '#e53935'
+                      - value: 50
+                        color: '#fbc02d'
+                      - value: 80
+                        color: '#7cb342'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 💜 2’s Tablet
+                    icon: mdi:tablet
+                    entities:
+                      - entity: sensor.sm_x610_battery_level
+                    color_thresholds:
+                      - value: 20
+                        color: '#e53935'
+                      - value: 50
+                        color: '#fbc02d'
+                      - value: 80
+                        color: '#7cb342'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 🤖 Rocky
+                    icon: mdi:robot-vacuum
+                    entities:
+                      - entity: sensor.rocky_battery
+                    color_thresholds:
+                      - value: 20
+                        color: '#ef5350'
+                      - value: 50
+                        color: '#ffee58'
+                      - value: 80
+                        color: '#66bb6a'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                columns: 2
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-office'
+            button_type: name
+            bg_blur: '8'
+            bg_opacity: '0.5'
+            close_on_click: true
+            show_header: false
+            sub_button:
+              main: []
+              bottom: []
+            slider_fill_orientation: left
+            slider_value_position: right
+            cards:
+              - type: custom:mushroom-title-card
+                title: 🖥️ Office Devices
+                subtitle: Network & NAS Performance Overview
+              - type: grid
+                square: false
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.uptimekuma_noc_company_com
+                    name: NOC
+                    icon: mdi:server-network
+                    icon_color: indigo
+                    layout: vertical
+                    tap_action:
+                      action: navigate
+                      navigation_path: /dashboard-mushroom/uptime-kuma
+                    hold_action:
+                      action: url
+                      url_path: https://noc.company.com
+                  - type: custom:mushroom-entity-card
+                    entity: device_tracker.ac_pro
+                    name: AC Pro
+                    icon: mdi:access-point-network
+                    icon_color: blue
+                    layout: vertical
+                    fill_container: true
+                    tap_action:
+                      action: navigate
+                      navigation_path: /dashboard-mushroom/unifi
+                    hold_action:
+                      action: url
+                      url_path: https://unifi.company.com/
+                    secondary_info: state
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.ac_pro_clients
+                    name: Connected Clients
+                    icon: mdi:lan-connect
+                    icon_color: teal
+                    layout: vertical
+                    fill_container: true
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.nas1_volume_1_status
+                    name: Volume 1
+                    icon: mdi:nas
+                    layout: vertical
+                    hold_action:
+                      action: url
+                      url_path: https://synology.company.com
+                    icon_color: cyan
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.nas1_usb_disk_1_status
+                    name: USB Disk 1
+                    icon: mdi:harddisk
+                    icon_color: purple
+                    layout: vertical
+                    hold_action:
+                      action: url
+                      url_path: https://synology.company.com/
+                columns: 2
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    name: 🌡️ NAS Temperature
+                    icon: mdi:thermometer
+                    entities:
+                      - entity: sensor.nas1_temperature
+                    color_thresholds:
+                      - value: 30
+                        color: '#43a047'
+                      - value: 40
+                        color: '#f9a825'
+                      - value: 50
+                        color: '#e53935'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 🌡️ Disk Avg Temp
+                    icon: mdi:harddisk
+                    entities:
+                      - entity: sensor.nas1_volume_1_average_disk_temp
+                    color_thresholds:
+                      - value: 30
+                        color: '#43a047'
+                      - value: 40
+                        color: '#f9a825'
+                      - value: 50
+                        color: '#e53935'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                columns: 2
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    name: 🧠 CPU Usage
+                    icon: mdi:cpu-64-bit
+                    entities:
+                      - entity: sensor.nas1_cpu_utilization_total
+                    color_thresholds:
+                      - value: 40
+                        color: '#43a047'
+                      - value: 70
+                        color: '#f9a825'
+                      - value: 90
+                        color: '#e53935'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: 💾 Memory Usage
+                    icon: mdi:memory
+                    entities:
+                      - entity: sensor.nas1_memory_usage_real
+                    color_thresholds:
+                      - value: 40
+                        color: '#43a047'
+                      - value: 70
+                        color: '#f9a825'
+                      - value: 90
+                        color: '#e53935'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                columns: 2
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:mini-graph-card
+                    name: ⬇️ Download
+                    icon: mdi:download-network
+                    entities:
+                      - entity: sensor.nas1_download_throughput
+                    color_thresholds:
+                      - value: 333
+                        color: '#43a047'
+                      - value: 666
+                        color: '#f9a825'
+                      - value: 950
+                        color: '#e53935'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                  - type: custom:mini-graph-card
+                    name: ⬆️ Upload
+                    icon: mdi:upload-network
+                    entities:
+                      - entity: sensor.nas1_upload_throughput
+                    color_thresholds:
+                      - value: 333
+                        color: '#43a047'
+                      - value: 666
+                        color: '#f9a825'
+                      - value: 950
+                        color: '#e53935'
+                    show:
+                      fill: true
+                      state: true
+                      icon: false
+                    line_width: 3
+                    height: 60
+                columns: 2
+        column_span: 1
+      - type: grid
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-4'
+            button_type: state
+            show_header: false
+            styles: ''
+            margin: 0px
+            bg_opacity: '0'
+            width_desktop: ''
+            bg_blur: '0'
+            close_on_click: false
+            sub_button:
+              main: []
+              bottom: []
+            slider_fill_orientation: left
+            slider_value_position: right
+            cards:
+              - type: custom:swipe-card
+                parameters:
+                  effect: coverflow
+                cards:
+                  - type: custom:button-card
+                    entity: person.4
+                    aspect_ratio: 4/4
+                    show_name: false
+                    show_icon: false
+                    styles:
+                      card:
+                        - padding: 4%
+                        - background-image: |
+                            [[[
+                              try {
+                                return (states["binary_sensor.pixel_6_pro_music_active"] && states["binary_sensor.pixel_6_pro_music_active"].state === "on")
+                                  ? 'url("/local/images/4-music-bitmoji.png")'
+                                  : 'url("/local/images/4-bitmoji.png")';
+                              } catch (e) { return 'none'; }
+                            ]]]
+                        - background-size: 90%
+                        - background-repeat: no-repeat
+                        - background-position: top center
+                        - --keep-background: 'true'
+                      custom_fields:
+                        location:
+                          - position: absolute
+                          - left: 4%
+                          - top: 4%
+                        battery:
+                          - position: absolute
+                          - right: 4%
+                          - top: 4%
+                        androidauto:
+                          - position: absolute
+                          - left: 4%
+                          - right: 4%
+                          - top: 4%
+                        ringer:
+                          - position: absolute
+                          - left: 6%
+                          - right: 50%
+                          - top: 4%
+                        bluetooth:
+                          - position: absolute
+                          - left: 50%
+                          - right: 4%
+                          - top: 4%
+                        media:
+                          - position: absolute
+                          - bottom: 4%
+                          - right: 4%
+                          - left: 4%
+                    custom_fields:
+                      location: |
+                        [[[
+                          try {
+                            const s = states["person.4"]?.state || '';
+                            if (s === "home") return `<ha-icon icon="mdi:home" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`;
+                            if (s === "Work") return `<ha-icon icon="mdi:office-building" style="width:22px;height:22px;color:#FFA500;"></ha-icon>`;
+                            return `<ha-icon icon="mdi:home-export-outline" style="width:22px;height:22px;color:#e45649;"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:help-circle" style="width:22px;height:22px;color:#e45649;"></ha-icon>`; }
+                        ]]]
+                      battery: |
+                        [[[
+                          try {
+                            const pct = Number(states['sensor.pixel_6_pro_battery_level']?.state || 0);
+                            const state = states['sensor.pixel_6_pro_battery_state']?.state?.toLowerCase() || '';
+                            let icon;
+                            if (state === 'charging') icon = 'mdi:battery-charging';
+                            else if (state === 'full') icon = 'mdi:battery';
+                            else if (pct <= 5) icon = 'mdi:battery-outline';
+                            else icon = `mdi:battery-${Math.floor(pct / 10) * 10}`;
+                            let color = '#50A14F';
+                            if (state === 'charging') color = '#52adff';
+                            else if (pct <= 30) color = '#e45649';
+                            else if (pct <= 50) color = '#ffa229';
+                            const pulseStyle = state === 'charging' ? `animation: pulse 1.5s infinite;` : '';
+                            return `
+                              <style>
+                                @keyframes pulse {
+                                  0% { filter: drop-shadow(0 0 0px ${color}); }
+                                  50% { filter: drop-shadow(0 0 6px ${color}); }
+                                  100% { filter: drop-shadow(0 0 0px ${color}); }
+                                }
+                              </style>
+                              <div style="display:flex;align-items:center;gap:4px;">
+                                <ha-icon icon="${icon}" style="width:18px;height:18px;color:${color};${pulseStyle}"></ha-icon>
+                                <span style="font-size:13px;font-weight:600;color:${color};${pulseStyle}">${pct}%</span>
+                              </div>`;
+                          } catch (e) { return `<ha-icon icon="mdi:battery-unknown" style="width:18px;height:18px;color:#999;"></ha-icon>`; }
+                        ]]]
+                      androidauto: |
+                        [[[
+                          try {
+                            const mode = states["binary_sensor.pixel_6_pro_android_auto"]?.state || '';
+                            if (mode === "off" || mode === "Disconnected") return `<ha-icon icon="mdi:car-off" style="width:20px;height:20px;color:#FFA500;"></ha-icon>`;
+                            return `<ha-icon icon="mdi:car" style="width:20px;height:20px;color:#50A14F;"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:cellphone" style="width:20px;height:20px;color:#50A14F;"></ha-icon>`; }
+                        ]]]
+                      ringer: |
+                        [[[
+                          try {
+                            const mode = states["sensor.pixel_6_pro_ringer_mode"]?.state || '';
+                            if (mode === "silent") return `<ha-icon icon="mdi:cellphone-off" style="width:20px;height:20px;color:#e45649;"></ha-icon>`;
+                            if (mode === "vibrate") return `<ha-icon icon="mdi:vibrate" style="width:20px;height:20px;color:#FFA500;"></ha-icon>`;
+                            return `<ha-icon icon="mdi:cellphone" style="width:20px;height:20px;color:#50A14F;"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:cellphone" style="width:20px;height:20px;color:#50A14F;"></ha-icon>`; }
+                        ]]]
+                      bluetooth: |
+                        [[[
+                          try {
+                            const on = (states["binary_sensor.pixel_6_pro_bluetooth_state"]?.state === "on");
+                            const icon = on ? 'mdi:bluetooth' : 'mdi:bluetooth-off';
+                            const color = on ? '#52adff' : '#e45649';
+                            return `<ha-icon icon="${icon}" style="width:20px;height:20px;color:${color};"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:bluetooth-off" style="width:20px;height:20px;color:#e45649;"></ha-icon>`; }
+                        ]]]
+                      media: |
+                        [[[
+                          try {
+                            const m = states['media_player.spotify_mnbthunder'] || {};
+                            const title = m.attributes?.media_title || '';
+                            const artist = m.attributes?.media_artist || '';
+                            const color = (m.state === 'playing') ? '#ffffff' : '#ffffff00';
+                            return `<div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:${color};font-size:13px;"><ha-icon icon="mdi:music" style="width:16px;height:16px;color:${color};"></ha-icon><span> ${title} - ${artist}</span></div>`;
+                          } catch (e) { return ''; }
+                        ]]]
+                  - type: custom:stack-in-card
+                    mode: vertical
+                    cards:
+                      - type: custom:button-card
+                        entity: person.4
+                        aspect_ratio: 4/1
+                        show_name: false
+                        show_icon: false
+                        styles:
+                          card:
+                            - padding: 6%
+                            - background: |
+                                [[[
+                                  return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                                ]]]
+                            - border-radius: 24px
+                            - box-shadow: 0 8px 32px rgba(102,126,234,0.35)
+                          custom_fields:
+                            greeting:
+                              - font-size: 13px
+                              - font-weight: 500
+                              - position: absolute
+                              - left: 6%
+                              - top: 12%
+                              - color: rgba(255,255,255,0.7)
+                            name:
+                              - font-size: 30px
+                              - font-weight: 700
+                              - position: absolute
+                              - left: 6%
+                              - top: 30%
+                              - color: '#ffffff'
+                              - letter-spacing: -0.5px
+                            location:
+                              - font-size: 14px
+                              - font-weight: 400
+                              - position: absolute
+                              - left: 6%
+                              - top: 68%
+                              - color: rgba(255,255,255,0.85)
+                            avatar_ring:
+                              - position: absolute
+                              - right: 6%
+                              - top: 50%
+                              - transform: translateY(-50%)
+                        custom_fields:
+                          greeting: |
+                            [[[
+                              const h = new Date().getHours();
+                              let g = 'Good evening';
+                              if (h < 12) g = 'Good morning';
+                              else if (h < 17) g = 'Good afternoon';
+                              return `<span>${g}</span>`;
+                            ]]]
+                          name: |
+                            [[[
+                              return '<span>4</span>';
+                            ]]]
+                          location: |
+                            [[[
+                              try {
+                                const loc = states["sensor.pixel_6_pro_geocoded_location"]?.state || '';
+                                if (!loc || loc === "unknown" || loc === "unavailable") {
+                                  return `<ha-icon icon="mdi:map-marker" style="width:14px;height:14px;"></ha-icon><span> Location unknown</span>`;
+                                }
+                                return `<ha-icon icon="mdi:map-marker" style="width:14px;height:14px;"></ha-icon><span> ${loc}</span>`;
+                              } catch (e) { return '<span>Location unknown</span>'; }
+                            ]]]
+                          avatar_ring: |
+                            [[[
+                              try {
+                                const s = Number(states['sensor.pixel_6_pro_daily_steps']?.state || 0);
+                                const goal = 10000;
+                                const pct = Math.min(s / goal, 1);
+                                const circumference = 2 * Math.PI * 22;
+                                const offset = circumference * (1 - pct);
+                                const color = s >= goal ? '#50A14F' : '#ffffff';
+                                return `
+                                  <svg width="56" height="56" viewBox="0 0 56 56">
+                                    <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4"/>
+                                    <circle cx="28" cy="28" r="22" fill="none" stroke="${color}" stroke-width="4"
+                                      stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"
+                                      stroke-linecap="round" transform="rotate(-90 28 28)"
+                                      style="transition: stroke-dashoffset 1s ease;"/>
+                                    <text x="28" y="32" text-anchor="middle" fill="white" font-size="16" font-weight="700">${Math.round(pct * 100)}%</text>
+                                  </svg>`;
+                              } catch (e) { return ''; }
+                            ]]]
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            entity: sensor.pixel_6_pro_daily_steps
+                            aspect_ratio: 1/1.15
+                            show_name: false
+                            show_icon: false
+                            styles:
+                              card:
+                                - padding: 8%
+                                - background: rgba(25,25,35,0.65)
+                                - border-radius: 20px
+                                - backdrop-filter: blur(10px)
+                                - box-shadow: 0 4px 16px rgba(0,0,0,0.15)
+                                - border: 1px solid rgba(255,255,255,0.06)
+                              custom_fields:
+                                ring:
+                                  - position: absolute
+                                  - top: 50%
+                                  - left: 50%
+                                  - transform: translate(-50%, -56%)
+                                value:
+                                  - position: absolute
+                                  - top: 50%
+                                  - left: 50%
+                                  - transform: translate(-50%, -42%)
+                                  - font-size: 18px
+                                  - font-weight: 700
+                                  - color: '#ffffff'
+                                  - text-align: center
+                                  - line-height: 1
+                                label:
+                                  - position: absolute
+                                  - bottom: 12%
+                                  - left: 50%
+                                  - transform: translateX(-50%)
+                                  - font-size: 12px
+                                  - font-weight: 500
+                                  - color: rgba(255,255,255,0.5)
+                                  - text-align: center
+                                  - text-transform: uppercase
+                                  - letter-spacing: 1px
+                                icon:
+                                  - position: absolute
+                                  - top: 10%
+                                  - left: 50%
+                                  - transform: translateX(-50%)
+                            custom_fields:
+                              icon: |
+                                [[[
+                                  return `<ha-icon icon="mdi:shoe-formal" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`;
+                                ]]]
+                              ring: |
+                                [[[
+                                  try {
+                                    const steps = Number(states['sensor.pixel_6_pro_daily_steps']?.state || 0);
+                                    const goal = 5000;
+                                    const pct = Math.min(steps / goal, 1);
+                                    const circumference = 2 * Math.PI * 40;
+                                    const offset = circumference * (1 - pct);
+                                    const color = steps >= goal ? '#50A14F' : (steps >= 5000 ? '#FFA500' : '#e45649');
+                                    return `
+                                      <svg width="110" height="110" viewBox="0 0 110 110">
+                                        <circle cx="55" cy="55" r="40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
+                                        <circle cx="55" cy="55" r="40" fill="none" stroke="${color}" stroke-width="8"
+                                          stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"
+                                          stroke-linecap="round" transform="rotate(-90 55 55)"
+                                          style="transition: stroke-dashoffset 1s ease-in-out;"/>
+                                      </svg>`;
+                                  } catch (e) { return ''; }
+                                ]]]
+                              value: |
+                                [[[
+                                  try {
+                                    const steps = Number(states['sensor.pixel_6_pro_daily_steps']?.state || 0);
+                                    return `<span>${steps.toLocaleString()}</span>`;
+                                  } catch (e) { return '<span>0</span>'; }
+                                ]]]
+                              label: |
+                                [[[
+                                  return '<span>Steps</span>';
+                                ]]]
+                          - type: custom:button-card
+                            entity: sensor.pixel_6_pro_total_calories_burned
+                            aspect_ratio: 1/1.15
+                            show_name: false
+                            show_icon: false
+                            styles:
+                              card:
+                                - padding: 8%
+                                - background: rgba(25,25,35,0.65)
+                                - border-radius: 20px
+                                - backdrop-filter: blur(10px)
+                                - box-shadow: 0 4px 16px rgba(0,0,0,0.15)
+                                - border: 1px solid rgba(255,255,255,0.06)
+                              custom_fields:
+                                ring:
+                                  - position: absolute
+                                  - top: 50%
+                                  - left: 50%
+                                  - transform: translate(-50%, -56%)
+                                value:
+                                  - position: absolute
+                                  - top: 50%
+                                  - left: 50%
+                                  - transform: translate(-50%, -42%)
+                                  - font-size: 18px
+                                  - font-weight: 700
+                                  - color: '#ffffff'
+                                  - text-align: center
+                                  - line-height: 1
+                                label:
+                                  - position: absolute
+                                  - bottom: 12%
+                                  - left: 50%
+                                  - transform: translateX(-50%)
+                                  - font-size: 12px
+                                  - font-weight: 500
+                                  - color: rgba(255,255,255,0.5)
+                                  - text-align: center
+                                  - text-transform: uppercase
+                                  - letter-spacing: 1px
+                                icon:
+                                  - position: absolute
+                                  - top: 10%
+                                  - left: 50%
+                                  - transform: translateX(-50%)
+                            custom_fields:
+                              icon: |
+                                [[[
+                                  return `<ha-icon icon="mdi:fire" style="width:22px;height:22px;color:#ff6b6b;"></ha-icon>`;
+                                ]]]
+                              ring: |
+                                [[[
+                                  try {
+                                    const cals = Number(states['sensor.pixel_6_pro_total_calories_burned']?.state || 0);
+                                    const goal = Number(states['input_number.calorie_goal']?.state || 2000);
+                                    const pct = Math.min(cals / goal, 1);
+                                    const circumference = 2 * Math.PI * 40;
+                                    const offset = circumference * (1 - pct);
+                                    return `
+                                      <svg width="110" height="110" viewBox="0 0 110 110">
+                                        <circle cx="55" cy="55" r="40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
+                                        <circle cx="55" cy="55" r="40" fill="none" stroke="#ff6b6b" stroke-width="8"
+                                          stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"
+                                          stroke-linecap="round" transform="rotate(-90 55 55)"
+                                          style="transition: stroke-dashoffset 1s ease-in-out;"/>
+                                      </svg>`;
+                                  } catch (e) { return ''; }
+                                ]]]
+                              value: |
+                                [[[
+                                  try {
+                                    const cals = Number(states['sensor.pixel_6_pro_total_calories_burned']?.state || 0);
+                                    return `<span>${Math.round(cals).toLocaleString()}</span>`;
+                                  } catch (e) { return '<span>0</span>'; }
+                                ]]]
+                              label: |
+                                [[[
+                                  return '<span>Calories</span>';
+                                ]]]
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.pixel_6_pro_daily_steps
+                        name: Steps (48h)
+                        line_color: '#667eea'
+                        color_thresholds:
+                          - value: 0
+                            color: '#e45649'
+                          - value: 5000
+                            color: '#50A14F'
+                        hours_to_show: 48
+                        points_per_hour: 1
+                        show:
+                          graph: bar
+                          icon: false
+                        style: |
+                          ha-card {
+                            background: rgba(25,25,35,0.45) !important;
+                            border-radius: 20px !important;
+                            backdrop-filter: blur(6px);
+                            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+                            border: 1px solid rgba(255,255,255,0.06);
+                          }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.pixel_6_pro_daily_distance
+                        name: Distance (48h)
+                        line_color: '#667eea'
+                        color_thresholds:
+                          - value: 0
+                            color: '#e45649'
+                          - value: 2000
+                            color: '#50A14F'
+                        hours_to_show: 48
+                        points_per_hour: 1
+                        show:
+                          graph: bar
+                          icon: false
+                        style: |
+                          ha-card {
+                            background: rgba(25,25,35,0.45) !important;
+                            border-radius: 20px !important;
+                            backdrop-filter: blur(6px);
+                            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+                            border: 1px solid rgba(255,255,255,0.06);
+                          }
+            trigger_close: false
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-2'
+            button_type: switch
+            show_header: false
+            styles: ''
+            margin: 0px
+            bg_opacity: '0'
+            width_desktop: ''
+            bg_blur: '0'
+            close_on_click: true
+            sub_button:
+              main: []
+              bottom: []
+            slider_fill_orientation: left
+            slider_value_position: right
+            cards:
+              - type: custom:swipe-card
+                parameters:
+                  effect: coverflow
+                cards:
+                  - type: custom:button-card
+                    entity: person.2
+                    aspect_ratio: 4/4
+                    show_name: false
+                    show_icon: false
+                    styles:
+                      card:
+                        - padding: 4%
+                        - background-image: |
+                            [[[
+                              try {
+                                return (states["media_player.spotify_mnbthunder"] && states["media_player.spotify_mnbthunder"].state === "playing")
+                                  ? 'url("/local/images/2-music-bitmoji1.png")'
+                                  : 'url("/local/images/2-bitmoji1.png")';
+                              } catch (e) { return 'none'; }
+                            ]]]
+                        - background-size: 90%
+                        - background-repeat: no-repeat
+                        - background-position: top center
+                        - --keep-background: 'true'
+                      custom_fields:
+                        location:
+                          - position: absolute
+                          - left: 4%
+                          - top: 4%
+                        battery:
+                          - position: absolute
+                          - right: 4%
+                          - top: 4%
+                        steps:
+                          - position: absolute
+                          - left: 4%
+                          - right: 4%
+                          - top: 4%
+                        cals:
+                          - position: absolute
+                          - left: 4%
+                          - right: 4%
+                          - top: 4%
+                        ringer:
+                          - position: absolute
+                          - left: 6%
+                          - right: 50%
+                          - top: 4%
+                        bluetooth:
+                          - position: absolute
+                          - left: 50%
+                          - right: 4%
+                          - top: 4%
+                        media:
+                          - position: absolute
+                          - bottom: 4%
+                          - right: 4%
+                          - left: 4%
+                    custom_fields:
+                      location: |
+                        [[[
+                          try {
+                            const s = states["person.2"]?.state || '';
+                            if (s === "home") return `<ha-icon icon="mdi:home" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`;
+                            if (s === "Work") return `<ha-icon icon="mdi:office-building" style="width:22px;height:22px;color:#FFA500;"></ha-icon>`;
+                            return `<ha-icon icon="mdi:home-export-outline" style="width:22px;height:22px;color:#e45649;"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:help-circle" style="width:22px;height:22px;color:#e45649;"></ha-icon>`; }
+                        ]]]
+                      battery: |
+                        [[[
+                          try {
+                            const pct = Number(states['sensor.focus_5g_battery_level']?.state || 0);
+                            const state = states['sensor.focus_5g_battery_state']?.state?.toLowerCase() || '';
+
+                            // Determine icon
+                            let icon;
+                            if (state === 'charging') {
+                              icon = 'mdi:battery-charging';
+                            } else if (state === 'full') {
+                              icon = 'mdi:battery';
+                            } else if (pct <= 5) {
+                              icon = 'mdi:battery-outline';
+                            } else {
+                              icon = `mdi:battery-${Math.floor(pct / 10) * 10}`;
+                            }
+
+                            // Determine color
+                            let color = '#50A14F'; // default green
+                            if (state === 'charging') color = '#52adff';
+                            else if (pct <= 30) color = '#e45649';
+                            else if (pct <= 50) color = '#ffa229';
+
+                            // Pulse animation style if charging
+                            const pulseStyle = state === 'charging'
+                              ? `animation: pulse 1.5s infinite;`
+                              : '';
+
+                            // Return with embedded CSS keyframes
+                            return `
+                              <style>
+                                @keyframes pulse {
+                                  0% { filter: drop-shadow(0 0 0px ${color}); }
+                                  50% { filter: drop-shadow(0 0 6px ${color}); }
+                                  100% { filter: drop-shadow(0 0 0px ${color}); }
+                                }
+                              </style>
+                              <ha-icon icon="${icon}" style="width:20px;height:20px;color:${color};${pulseStyle}"></ha-icon>
+                              <span style="color:${color};${pulseStyle}">${pct}%</span>
+                            `;
+                          } catch (e) {
+                            return `<ha-icon icon="mdi:battery-unknown" style="width:20px;height:20px;color:#999;"></ha-icon>`;
+                          }
+                        ]]]
+                      steps: |
+                        [[[
+                          try {
+                            const s = Number(states['sensor.focus_5g_daily_steps']?.state || 0);
+                            const color = s < 5000 ? "#e45649" : "#50A14F";
+                            return `<ha-icon icon="mdi:shoe-formal" style="width:25px;height:25px;color:${color};"></ha-icon><span style="color:${color};">${s}</span>`;
+                          } catch (e) { return ''; }
+                        ]]]
+                      ringer: |
+                        [[[
+                          try {
+                            const mode = states["sensor.focus_5g_ringer_mode"]?.state || '';
+                            if (mode === "silent") return `<ha-icon icon="mdi:cellphone-off" style="width:22px;height:22px;color:#e45649;"></ha-icon>`;
+                            if (mode === "vibrate") return `<ha-icon icon="mdi:vibrate" style="width:22px;height:22px;color:#FFA500;"></ha-icon>`;
+                            const vol = states['sensor.focus_5g_volume_level_ringer']?.state || '';
+                            return `<ha-icon icon="mdi:cellphone" style="width:22px;height:22px;color:#50A14F;"></ha-icon><span style="color:#50A14F;">${vol}</span>`;
+                          } catch (e) { return `<ha-icon icon="mdi:cellphone" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`; }
+                        ]]]
+                      bluetooth: |
+                        [[[
+                          try {
+                            const on = (states["binary_sensor.focus_5g_bluetooth_state"]?.state === "on");
+                            const icon = on ? 'mdi:bluetooth' : 'mdi:bluetooth-off';
+                            const color = on ? '#52adff' : '#e45649';
+                            return `<ha-icon icon="${icon}" style="width:22px;height:22px;color:${color};"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:bluetooth-off" style="width:22px;height:22px;color:#e45649;"></ha-icon>`; }
+                        ]]]
+                      media: |
+                        [[[
+                          try {
+                            const m = states['media_player.spotify_mnbthunder'] || {};
+                            const title = m.attributes?.media_title || '';
+                            const artist = m.attributes?.media_artist || '';
+                            const color = (m.state === 'playing') ? '#ffffff' : '#ffffff00';
+                            return `<div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:${color};"><ha-icon icon="mdi:music" style="width:20px;height:20px;color:${color};"></ha-icon><span> ${title} - ${artist}</span></div>`;
+                          } catch (e) { return ''; }
+                        ]]]
+                  - type: custom:stack-in-card
+                    mode: vertical
+                    cards:
+                      - type: custom:button-card
+                        entity: person.2
+                        aspect_ratio: 4/2.85
+                        show_name: false
+                        show_icon: false
+                        styles:
+                          card:
+                            - padding: 4%
+                          custom_fields:
+                            name:
+                              - font-size: 30px
+                              - position: absolute
+                              - left: 4%
+                              - top: 4%
+                              - color: '#ffffffff'
+                            location:
+                              - position: absolute
+                              - left: 4%
+                              - top: 20%
+                              - color: '#ffffffff'
+                            battery:
+                              - position: absolute
+                              - left: 4%
+                              - top: 30%
+                              - color: '#ffffffff'
+                            steps:
+                              - position: absolute
+                              - left: 4%
+                              - top: 40%
+                              - color: '#ffffffff'
+                            cals:
+                              - position: absolute
+                              - left: 4%
+                              - top: 50%
+                              - color: '#ffffffff'
+                        custom_fields:
+                          name: |
+                            [[[
+                              return '<span>2</span>';
+                            ]]]
+                          location: |
+                            [[[
+                              try {
+                                const loc = states["sensor.focus_5g_geocoded_location"]?.state || '';
+
+                                if (!loc || loc === "unknown" || loc === "unavailable") {
+                                  return `<span>Location: Unknown</span>`;
+                                }
+
+                                return `<ha-icon icon="mdi:map-marker" style="width:22px;height:22px;"></ha-icon>
+                                        <span> ${loc} </span>`;
+                              } catch (e) {
+                                return '<span>Location: Unknown</span>';
+                              }
+                            ]]]
+                          battery: |
+                            [[[
+                              try {
+                                const pct = states['sensor.focus_5g_battery_level']?.state || '';
+                                const st = states['sensor.focus_5g_battery_state']?.state || '';
+                                return `<ha-icon icon="mdi:battery" style="width:20px;height:20px;"></ha-icon><span>Battery: ${pct}% (${st})</span>`;
+                              } catch (e) { return ''; }
+                            ]]]
+                          steps: |
+                            [[[
+                              try {
+                                const s = states['sensor.focus_5g_daily_steps']?.state || 0;
+                                return `<ha-icon icon="mdi:shoe-formal" style="width:20px;height:20px;"></ha-icon><span>Steps: ${s} / 10000</span>`;
+                              } catch (e) { return ''; }
+                            ]]]
+                          cals: |
+                            [[[
+                              try {
+                                const calsIn = states['sensor.focus_5g_total_calories_burned']?.state || 0;
+                                const goal = states['input_number.calorie_goal']?.state || 2000;
+                                return `
+                                  <ha-icon icon="mdi:food-apple" style="width:20px;height:20px;"></ha-icon>
+                                  <span>Calories: ${calsIn} / ${goal}</span>
+                                `;
+                              } catch (e) {
+                                return '';
+                              }
+                            ]]]
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background-color: rgba(0,0,0,0);
+                              box-shadow: none;
+                            }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.focus_5g_daily_steps
+                        hours_to_show: 48
+                        graph: line
+                        show:
+                          state: false
+                          name: false
+                          icon: false
+                        points_per_hour: 1
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background-color: rgba(0,0,0,0);
+                              box-shadow: none;
+                            }
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-3'
+            button_type: switch
+            show_header: false
+            styles: ''
+            margin: 0px
+            bg_opacity: '0'
+            width_desktop: ''
+            bg_blur: '0'
+            close_on_click: true
+            sub_button:
+              main: []
+              bottom: []
+            slider_fill_orientation: left
+            slider_value_position: right
+            cards:
+              - type: custom:swipe-card
+                parameters:
+                  effect: coverflow
+                cards:
+                  - type: custom:button-card
+                    entity: person.3
+                    aspect_ratio: 4/4
+                    show_name: false
+                    show_icon: false
+                    styles:
+                      card:
+                        - padding: 4%
+                        - background-image: |
+                            [[[
+                              try {
+                                return (states["media_player.spotify_mnbthunder"] && states["media_player.spotify_mnbthunder"].state === "playing")
+                                  ? 'url("/local/images/3-music-bitmoji.png")'
+                                  : 'url("/local/images/3-bitmoji.png")';
+                              } catch (e) { return 'none'; }
+                            ]]]
+                        - background-size: 90%
+                        - background-repeat: no-repeat
+                        - background-position: top center
+                        - --keep-background: 'true'
+                      custom_fields:
+                        location:
+                          - position: absolute
+                          - left: 4%
+                          - top: 4%
+                        battery:
+                          - position: absolute
+                          - right: 4%
+                          - top: 4%
+                        steps:
+                          - position: absolute
+                          - left: 4%
+                          - right: 4%
+                          - top: 4%
+                        cals:
+                          - position: absolute
+                          - left: 4%
+                          - right: 4%
+                          - top: 4%
+                        ringer:
+                          - position: absolute
+                          - left: 6%
+                          - right: 50%
+                          - top: 4%
+                        bluetooth:
+                          - position: absolute
+                          - left: 50%
+                          - right: 4%
+                          - top: 4%
+                        media:
+                          - position: absolute
+                          - bottom: 4%
+                          - right: 4%
+                          - left: 4%
+                    custom_fields:
+                      location: |
+                        [[[
+                          try {
+                            const s = states["person.3"]?.state || '';
+                            if (s === "home") return `<ha-icon icon="mdi:home" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`;
+                            if (s === "Work") return `<ha-icon icon="mdi:office-building" style="width:22px;height:22px;color:#FFA500;"></ha-icon>`;
+                            return `<ha-icon icon="mdi:home-export-outline" style="width:22px;height:22px;color:#e45649;"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:help-circle" style="width:22px;height:22px;color:#e45649;"></ha-icon>`; }
+                        ]]]
+                      battery: |
+                        [[[
+                          try {
+                            const pct = Number(states['sensor.sm_t720_battery_level']?.state || 0);
+                            const state = states['sensor.sm_t720_battery_state']?.state?.toLowerCase() || '';
+
+                            // Determine icon
+                            let icon;
+                            if (state === 'charging') {
+                              icon = 'mdi:battery-charging';
+                            } else if (state === 'full') {
+                              icon = 'mdi:battery';
+                            } else if (pct <= 5) {
+                              icon = 'mdi:battery-outline';
+                            } else {
+                              icon = `mdi:battery-${Math.floor(pct / 10) * 10}`;
+                            }
+
+                            // Determine color
+                            let color = '#50A14F'; // default green
+                            if (state === 'charging') color = '#52adff';
+                            else if (pct <= 30) color = '#e45649';
+                            else if (pct <= 50) color = '#ffa229';
+
+                            // Pulse animation style if charging
+                            const pulseStyle = state === 'charging'
+                              ? `animation: pulse 1.5s infinite;`
+                              : '';
+
+                            // Return with embedded CSS keyframes
+                            return `
+                              <style>
+                                @keyframes pulse {
+                                  0% { filter: drop-shadow(0 0 0px ${color}); }
+                                  50% { filter: drop-shadow(0 0 6px ${color}); }
+                                  100% { filter: drop-shadow(0 0 0px ${color}); }
+                                }
+                              </style>
+                              <ha-icon icon="${icon}" style="width:20px;height:20px;color:${color};${pulseStyle}"></ha-icon>
+                              <span style="color:${color};${pulseStyle}">${pct}%</span>
+                            `;
+                          } catch (e) {
+                            return `<ha-icon icon="mdi:battery-unknown" style="width:20px;height:20px;color:#999;"></ha-icon>`;
+                          }
+                        ]]]
+                      steps: |
+                        [[[
+                          try {
+                            const s = Number(states['sensor.sm_t720_steps_sensor']?.state || 0);
+                            const color = s < 5000 ? "#e45649" : "#50A14F";
+                            return `<ha-icon icon="mdi:shoe-formal" style="width:25px;height:25px;color:${color};"></ha-icon><span style="color:${color};">${s}</span>`;
+                          } catch (e) { return ''; }
+                        ]]]
+                      ringer: |
+                        [[[
+                          try {
+                            const mode = states["sensor.sm_t720_ringer_mode"]?.state || '';
+                            if (mode === "silent") return `<ha-icon icon="mdi:cellphone-off" style="width:22px;height:22px;color:#e45649;"></ha-icon>`;
+                            if (mode === "vibrate") return `<ha-icon icon="mdi:vibrate" style="width:22px;height:22px;color:#FFA500;"></ha-icon>`;
+                            const vol = states['sensor.sm_t720_volume_level_ringer']?.state || '';
+                            return `<ha-icon icon="mdi:cellphone" style="width:22px;height:22px;color:#50A14F;"></ha-icon><span style="color:#50A14F;">${vol}</span>`;
+                          } catch (e) { return `<ha-icon icon="mdi:cellphone" style="width:22px;height:22px;color:#50A14F;"></ha-icon>`; }
+                        ]]]
+                      bluetooth: |
+                        [[[
+                          try {
+                            const on = (states["binary_sensor.sm_t720_bluetooth_state"]?.state === "on");
+                            const icon = on ? 'mdi:bluetooth' : 'mdi:bluetooth-off';
+                            const color = on ? '#52adff' : '#e45649';
+                            return `<ha-icon icon="${icon}" style="width:22px;height:22px;color:${color};"></ha-icon>`;
+                          } catch (e) { return `<ha-icon icon="mdi:bluetooth-off" style="width:22px;height:22px;color:#e45649;"></ha-icon>`; }
+                        ]]]
+                      media: |
+                        [[[
+                          try {
+                            const m = states['media_player.spotify_mnbthunder'] || {};
+                            const title = m.attributes?.media_title || '';
+                            const artist = m.attributes?.media_artist || '';
+                            const color = (m.state === 'playing') ? '#ffffff' : '#ffffff00';
+                            return `<div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:${color};"><ha-icon icon="mdi:music" style="width:20px;height:20px;color:${color};"></ha-icon><span> ${title} - ${artist}</span></div>`;
+                          } catch (e) { return ''; }
+                        ]]]
+                  - type: custom:stack-in-card
+                    mode: vertical
+                    cards:
+                      - type: custom:button-card
+                        entity: person.3
+                        aspect_ratio: 4/2.85
+                        show_name: false
+                        show_icon: false
+                        styles:
+                          card:
+                            - padding: 4%
+                          custom_fields:
+                            name:
+                              - font-size: 30px
+                              - position: absolute
+                              - left: 4%
+                              - top: 4%
+                              - color: '#ffffffff'
+                            location:
+                              - position: absolute
+                              - left: 4%
+                              - top: 20%
+                              - color: '#ffffffff'
+                            battery:
+                              - position: absolute
+                              - left: 4%
+                              - top: 30%
+                              - color: '#ffffffff'
+                            steps:
+                              - position: absolute
+                              - left: 4%
+                              - top: 40%
+                              - color: '#ffffffff'
+                            cals:
+                              - position: absolute
+                              - left: 4%
+                              - top: 50%
+                              - color: '#ffffffff'
+                        custom_fields:
+                          name: |
+                            [[[
+                              return '<span>3</span>';
+                            ]]]
+                          location: |
+                            [[[
+                              try {
+                                const loc = states["device_tracker.sm_t720"]?.state || '';
+                                if (loc === "not_home") return `<ha-icon icon="mdi:home-export-outline" style="width:22px;height:22px;"></ha-icon><span>Location: Not Home</span>`;
+                                if (loc === "Work") return `<ha-icon icon="mdi:office-building" style="width:22px;height:22px;"></ha-icon><span>Location: Work</span>`;
+                                return `<ha-icon icon="mdi:home" style="width:22px;height:22px;"></ha-icon><span>Location: Home</span>`;
+                              } catch (e) { return '<span>Location: Unknown</span>'; }
+                            ]]]
+                          battery: |
+                            [[[
+                              try {
+                                const pct = states['sensor.sm_t720_battery_level']?.state || '';
+                                const st = states['sensor.sm_t720_battery_state']?.state || '';
+                                return `<ha-icon icon="mdi:battery" style="width:20px;height:20px;"></ha-icon><span>Battery: ${pct}% (${st})</span>`;
+                              } catch (e) { return ''; }
+                            ]]]
+                          steps: |
+                            [[[
+                              try {
+                                const s = states['sensor.sm_t720_steps_sensor']?.state || 0;
+                                return `<ha-icon icon="mdi:shoe-formal" style="width:20px;height:20px;"></ha-icon><span>Steps: ${s} / 10000</span>`;
+                              } catch (e) { return ''; }
+                            ]]]
+                          cals: |
+                            [[[
+                              try {
+                                const calsIn = states['sensor.sm_t720_total_calories_burned']?.state || 0;
+                                const goal = states['input_number.calorie_goal']?.state || 2000;
+                                return `
+                                  <ha-icon icon="mdi:food-apple" style="width:20px;height:20px;"></ha-icon>
+                                  <span>Calories: ${calsIn} / ${goal}</span>
+                                `;
+                              } catch (e) {
+                                return '';
+                              }
+                            ]]]
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background-color: rgba(0,0,0,0);
+                              box-shadow: none;
+                            }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.sensor.sm_t720_steps_sensor
+                        hours_to_show: 48
+                        graph: line
+                        show:
+                          state: false
+                          name: false
+                          icon: false
+                        points_per_hour: 1
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background-color: rgba(0,0,0,0);
+                              box-shadow: none;
+                            }
+        column_span: 1
+      - type: grid
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-hisense'
+            button_type: name
+            bg_opacity: '0'
+            bg_blur: '0'
+            show_header: false
+            sub_button:
+              main: []
+              bottom: []
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: custom:firemote-card
+                    entity: none
+                    device_family: none
+                    device_type: other
+                    compatibility_mode: default
+                    scale: '97'
+                    custom_launchers:
+                      - friendly_name: Netflix
+                        label: NETFLIX
+                        icon: mdi:netflix
+                        color: red
+                        background: white
+                        script: executa_hisense_netflix
+                      - friendly_name: YouTube
+                        label: YouTube
+                        icon: mdi:youtube
+                        color: blue
+                        background: white
+                        script: executa_hisense_youtube
+                      - friendly_name: Prime Video
+                        label: Prime Video
+                        icon: mdi:amazon
+                        color: orange
+                        background: white
+                        script: executa_hisense_prime_video
+                    app_launch_1: customlauncher Netflix
+                    app_launch_2: customlauncher YouTube
+                    app_launch_3: customlauncher Prime Video
+                    defaultRemoteStyle_override: HO4
+                    button_overrides:
+                      power-button:
+                        script: executa_hisense_power
+                      volume-up-button:
+                        script: executa_hisense_volume_up
+                      volume-down-button:
+                        script: executa_hisense_volume_down
+                      channel-up-button:
+                        script: executa_hisense_channel_up
+                      channel-down-button:
+                        script: executa_hisense_channel_down
+                      home-button:
+                        script: executa_hisense_home
+                      apps-button:
+                        tap_action:
+                          action: perform-action
+                          perform_action: script.executa_hisense_netflix
+                          target: {}
+                        entity: script.executa_hisense_netflix
+                      mute-button:
+                        script: executa_hisense_mute
+                      back-button:
+                        script: executa_hisense_back
+                      up-button:
+                        script: executa_hisense_up
+                      down-button:
+                        script: executa_hisense_down
+                      left-button:
+                        script: executa_hisense_left
+                      right-button:
+                        script: executa_hisense_right
+                      center-button:
+                        script: executa_hisense_ok
+                      num0-button:
+                        script: executa_hisense_0
+                      num1-button:
+                        script: executa_hisense_1
+                      num2-button:
+                        script: executa_hisense_2
+                      num3-button:
+                        script: executa_hisense_3
+                      num4-button:
+                        script: executa_hisense_4
+                      num5-button:
+                        script: executa_hisense_5
+                      num6-button:
+                        script: executa_hisense_6
+                      num7-button:
+                        script: executa_hisense_7
+                      num8-button:
+                        script: executa_hisense_8
+                      num9-button:
+                        script: executa_hisense_9
+                      subtitle-button:
+                        script: executa_hisense_subtitles
+                      menu-button:
+                        script: executa_hisense_menu
+                      tv-button:
+                        script: executa_epg
+                      input-button:
+                        script: executa_hisense_input_tv
+                      blue-button:
+                        script: executa_hisense_input_av
+                      red-button:
+                        script: executa_hisense_input_hdmi_1
+                      green-button:
+                        script: executa_hisense_input_hdmi_2
+                      yellow-button:
+                        script: executa_hisense_input_hdmi_3
+                      settings-button:
+                        script: executa_hisense_menu
+                      info-button:
+                        script: executa_hisense_up
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#pop-up-km6'
+            button_type: name
+            bg_opacity: '0'
+            bg_blur: '0'
+            show_header: false
+            sub_button:
+              main: []
+              bottom: []
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: custom:firemote-card
+                    entity: media_player.android_tv_172_16_103_113
+                    device_family: chromecast
+                    device_type: chromecast-4k
+                    compatibility_mode: default
+                    android_tv_remote_entity: remote.google_tv_streamer_2
+                    defaultRemoteStyle_override: ''
+                    app_launcher_relative_size: 0
+                    app_launch_1: netflix
+                    app_launch_2: smart-tube-next
+                    show_media_controls: true
+                    scale: '94'
+                    visible_name_text: ''
+                    name_position: hidden
+                    app_launch_3: jellyfin
+                    app_launch_4: ''
+                    button_overrides:
+                      input-button:
+                        script: executa_hisense_input_tv
+                      volume-up-button:
+                        script: executa_hisense_volume_up
+                      volume-down-button:
+                        script: executa_hisense_volume_down
+    type: sections
+    max_columns: 1
+    icon: mdi:home
+    cards: []
+    path: home
+    badges:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: back
+        alignment: justify
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.uptimekuma_8888
+        icon: mdi:web
+        show_entity_picture: false
+        visibility:
+          - condition: state
+            entity: binary_sensor.uptimekuma_8888
+            state_not: 'on'
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        tap_action:
+          action: navigate
+          navigation_path: '#pop-up-hisense'
+        icon: mdi:television-box
+        show_entity_picture: true
+        hold_action:
+          action: navigate
+          navigation_path: '#pop-up-hisense-epg'
+        color: primary
+        visibility:
+          - condition: state
+            entity: remote.google_tv_streamer_2
+            state: 'on'
+        entity: switch.hisense_tv
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: remote.google_tv_streamer_2
+        tap_action:
+          action: navigate
+          navigation_path: '#pop-up-km6'
+        icon: mdi:google
+        color: primary
+        show_entity_picture: true
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        state_content: temperature
+        tap_action:
+          action: navigate
+          navigation_path: '#pop-up-weather'
+        entity: sensor.pirateweather_home_minutely_summary
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: false
+        state_content: temperature
+        tap_action:
+          action: navigate
+          navigation_path: '#pop-up-weather'
+        entity: weather.pirateweather_home
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: true
+        entity: sensor.pirateweather_home_uv_index
+        visibility:
+          - condition: numeric_state
+            above: 3
+            entity: sensor.pirateweather_home_uv_index
+        show_entity_picture: false
+        icon: mdi:sun-wireless-outline
+        tap_action:
+          action: navigate
+          navigation_path: '#pop-up-weather'
+        color: purple
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        visibility:
+          - condition: numeric_state
+            above: 35
+        entity: sensor.pirateweather_home_air_quality_index
+        name: Dundas
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        visibility:
+          - condition: numeric_state
+            above: 35
+        entity: sensor.york_street_air_quality_index
+        icon: mdi:air-filter
+        name:
+          type: device
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: camera.c61215399
+        show_entity_picture: false
+        name: Garage
+        visibility:
+          - condition: state
+            entity: camera.c61215399
+            state_not: idle
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: camera.c61214889
+        show_entity_picture: false
+        visibility:
+          - condition: state
+            entity: camera.c61214889
+            state_not: idle
+        name: Attic
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_cleaning_progress
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_cleaning_progress
+            above: 0
+        name: Rocky
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-mobile/rocky
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.speedtest_ping
+        show_entity_picture: false
+        visibility:
+          - condition: numeric_state
+            entity: sensor.speedtest_ping
+            above: 49
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.jellyfin_km6_active_clients
+        name: jellyfin
+        visibility:
+          - condition: numeric_state
+            entity: sensor.jellyfin_km6_active_clients
+            above: 0
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: switch.rocky_off_peak_charging
+        color: teal
+        visibility:
+          - condition: state
+            entity: switch.rocky_off_peak_charging
+            state_not: 'on'
+        show_entity_picture: true
+        name: Rocky Off-Peak
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.rocky_water_shortage
+        visibility:
+          - condition: state
+            entity: binary_sensor.rocky_water_shortage
+            state_not: 'off'
+        show_entity_picture: true
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_battery
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_battery
+            below: 30
+        show_entity_picture: true
+        name: Rocky
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.pixel_6_pro_battery_level
+        show_entity_picture: true
+        name: 4's Pixel 6 Pro
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.pixel_6_pro_battery_level
+                    below: 30
+                  - condition: not
+                    conditions:
+                      - condition: state
+                        entity: sensor.pixel_6_pro_battery_state
+                        state: charging
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.pixel_6_pro_battery_level
+                    above: 80
+                  - condition: state
+                    entity: sensor.pixel_6_pro_battery_state
+                    state: charging
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.sm_t500_battery_level
+        show_entity_picture: true
+        visibility:
+          - condition: and
+            conditions:
+              - condition: numeric_state
+                entity: sensor.sm_t500_battery_level
+                below: 30
+              - condition: not
+                conditions:
+                  - condition: state
+                    entity: sensor.sm_t500_battery_state
+                    state: charging
+        name: Home Tab
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.4s_iphone_battery_level
+        show_entity_picture: true
+        name: 4's iPhone
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.4s_iphone_battery_level
+                    below: 30
+                  - condition: not
+                    conditions:
+                      - condition: state
+                        entity: sensor.pixel_6_pro_battery_state
+                        state: charging
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.4s_iphone_battery_level
+                    above: 80
+                  - condition: state
+                    entity: sensor.4s_iphone_battery_state
+                    state: charging
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.sm_x610_battery_level
+        show_entity_picture: true
+        name: 2's Tablet
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.sm_x610_battery_level
+                    below: 20
+                  - condition: not
+                    conditions:
+                      - condition: state
+                        entity: sensor.sm_x610_battery_state
+                        state: charging
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.sm_x610_battery_level
+                    above: 80
+                  - condition: state
+                    entity: sensor.sm_x610_battery_state
+                    state: charging
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.focus_5g_battery_level
+        show_entity_picture: true
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.focus_5g_battery_level
+                    below: 20
+                  - condition: not
+                    conditions:
+                      - condition: state
+                        entity: sensor.focus_5g_battery_state
+                        state: charging
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.focus_5g_battery_level
+                    above: 80
+                  - condition: state
+                    entity: sensor.focus_5g_battery_state
+                    state: charging
+        name: 2's Nubia
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.sm_t720_battery_level
+        show_entity_picture: true
+        name: R's Tablet
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.sm_t720_battery_level
+                    below: 20
+                  - condition: not
+                    conditions:
+                      - condition: state
+                        entity: sensor.sm_t720_battery_state
+                        state: charging
+              - condition: and
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.sm_t720_battery_level
+                    above: 80
+                  - condition: state
+                    entity: sensor.sm_t720_battery_state
+                    state: charging
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: menu
+          - type: action
+            tap_action:
+              action: navigate
+              navigation_path: https://home.company.com/config/dashboard
+            icon: mdi:cog
+        alignment: justify
+    header:
+      layout: center
+      badges_position: bottom
+      badges_wrap: scroll
+      card:
+        type: markdown
+        content: >-
+          # Welcome Home, {{ user }} 🏠
+
+          🌦️ Dundas Weather Forecast is {{ 
+          states('sensor.pirateweather_home_minutely_summary')}}  {{
+          states('sensor.dundas_uv_forecast_0') }}
+        text_only: true
+    visible:
+      - user: ccad21c5f9d547c0b9c227b121be591c
+      - user: b8867df6fdee4b6b82cfe697f5dd1ab0
+    dense_section_placement: false
+    background:
+      opacity: 70
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image: /api/image/serve/b7e1339a3f25b42ff24bfabd3f19488d/original
+  - type: sections
+    max_columns: 3
+    title: Rocky
+    path: rocky
+    icon: mdi:robot-vacuum
+    sections:
+      - type: grid
+        cards:
+          - type: picture-elements
+            image: /local/images/s8proultra.png
+            elements:
+              - type: state-label
+                entity: sensor.rocky_current_room
+                style:
+                  top: 10%
+                  left: 15%
+                  font-size: 14px
+                  color: white
+                  text-shadow: 1px 1px 2px black
+              - type: state-label
+                entity: sensor.rocky_status
+                style:
+                  top: 10%
+                  left: 50%
+                  font-size: 14px
+                  color: white
+                  text-shadow: 1px 1px 2px black
+              - type: state-label
+                entity: vacuum.rocky
+                style:
+                  top: 10%
+                  left: 87%
+                  font-size: 14px
+                  color: white
+                  text-shadow: 1px 1px 2px black
+                tap_action:
+                  action: more-info
+              - type: icon
+                icon: mdi:play
+                title: Start
+                style:
+                  top: 85%
+                  left: 10%
+                  transform: scale(1)
+                tap_action:
+                  action: call-service
+                  service: vacuum.start
+                  target:
+                    entity_id: vacuum.rocky
+              - type: icon
+                icon: mdi:pause
+                title: Pause
+                style:
+                  top: 85%
+                  left: 25%
+                  transform: scale(1)
+                tap_action:
+                  action: call-service
+                  service: vacuum.pause
+                  target:
+                    entity_id: vacuum.rocky
+              - type: icon
+                icon: mdi:stop
+                title: Stop
+                style:
+                  top: 85%
+                  left: 40%
+                  transform: scale(1)
+                tap_action:
+                  action: call-service
+                  service: vacuum.stop
+                  target:
+                    entity_id: vacuum.rocky
+              - type: icon
+                icon: mdi:target
+                title: Locate
+                style:
+                  top: 85%
+                  left: 55%
+                  transform: scale(1)
+                tap_action:
+                  action: call-service
+                  service: vacuum.locate
+                  target:
+                    entity_id: vacuum.rocky
+              - type: icon
+                icon: mdi:home
+                title: Dock
+                style:
+                  top: 85%
+                  left: 70%
+                  transform: scale(1)
+                tap_action:
+                  action: call-service
+                  service: vacuum.return_to_base
+                  target:
+                    entity_id: vacuum.rocky
+              - type: state-label
+                entity: sensor.rocky_battery
+                style:
+                  top: 90%
+                  left: 90%
+                  transform: translate(-50%, -50%)
+                  font-size: 14px
+                  text-shadow: 1px 1px 2px black
+                  color: >
+                    {% set b = states('vacuum.rocky') | int %} {% if b > 80
+                    %}lime {% elif b > 50 %}yellow {% elif b > 20 %}orange {%
+                    else %}red {% endif %}
+                prefix: 🔋
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: ⚙️ Quick access to core Rocky settings
+                heading_style: subtitle
+              - square: false
+                type: grid
+                columns: 3
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: select.rocky_mop_intensity
+                    icon: mdi:water-opacity
+                    primary: Mop
+                    secondary: |
+                      {{ states('select.rocky_mop_intensity') | capitalize }}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: perform-action
+                      target:
+                        entity_id: select.rocky_mop_intensity
+                      perform_action: select.select_next
+                      data:
+                        cycle: true
+                    color: blue
+                    vertical: true
+                    features_position: bottom
+                  - type: custom:mushroom-template-card
+                    entity: select.rocky_route
+                    icon: mdi:map-marker-path
+                    primary: Route
+                    secondary: |
+                      {{ states('select.rocky_route') | capitalize }}
+                    tap_action:
+                      action: more-info
+                    hold_action:
+                      action: perform-action
+                      target:
+                        entity_id: select.rocky_route
+                      perform_action: select.select_next
+                      data:
+                        cycle: true
+                    color: amber
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    entity: sensor.rocky_battery
+                    icon: >-
+                      {% set battery = states('sensor.rocky_battery') | int(0)
+                      %}
+
+                      {% if battery >= 95 %}
+                        mdi:battery
+                      {% elif battery >= 85 %}
+                        mdi:battery-90
+                      {% elif battery >= 75 %}
+                        mdi:battery-80
+                      {% elif battery >= 65 %}
+                        mdi:battery-70
+                      {% elif battery >= 55 %}
+                        mdi:battery-60
+                      {% elif battery >= 45 %}
+                        mdi:battery-50
+                      {% elif battery >= 35 %}
+                        mdi:battery-40
+                      {% elif battery >= 25 %}
+                        mdi:battery-30
+                      {% elif battery >= 15 %}
+                        mdi:battery-20
+                      {% elif battery >= 5 %}
+                        mdi:battery-10
+                      {% else %}
+                        mdi:battery-alert
+                      {% endif %}
+                    primary: Battery
+                    secondary: |
+                      {{ states('sensor.rocky_battery') }}%
+                    tap_action:
+                      action: more-info
+                    color: >-
+                      {% set battery = states('sensor.rocky_battery') | int(0)
+                      %}
+
+                      {% if battery >= 60 %}
+                        green
+                      {% elif battery >= 30 %}
+                        amber
+                      {% else %}
+                        red
+                      {% endif %}
+                    vertical: true
+                    features_position: bottom
+              - square: false
+                type: grid
+                columns: 3
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: select.rocky_selected_map
+                    icon: mdi:floor-plan
+                    primary: Floor Selector
+                    secondary: |
+                      {{ states('select.rocky_selected_map') }}
+                    color: teal
+                    vertical: true
+                    features_position: bottom
+                  - type: custom:mushroom-template-card
+                    entity: switch.rocky_off_peak_charging
+                    icon: mdi:power-socket-au
+                    primary: Valley Power
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: more-info
+                    color: |
+                      {% if is_state('switch.rocky_off_peak_charging', 'on') %}
+                        green
+                      {% else %}
+                        grey
+                      {% endif %}
+                    vertical: true
+                    features_position: bottom
+                  - type: custom:mushroom-template-card
+                    entity: input_button.rocky_empty_the_bin
+                    icon: mdi:trash-can-outline
+                    primary: Empty Bin
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.rocky_empty_the_bin
+                      confirmation:
+                        text: Empty Rocky's dust bin?
+                    double_tap_action:
+                      action: more-info
+                    color: red
+                    vertical: true
+                    features_position: bottom
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: 🧼 Choose a preset cleaning area
+                heading_style: subtitle
+              - type: grid
+                columns: 3
+                square: false
+                cards:
+                  - type: custom:mushroom-template-card
+                    icon: mdi:home-floor-g
+                    primary: G Floor
+                    color: teal
+                    features_position: bottom
+                    vertical: true
+                    tap_action:
+                      action: toggle
+                      confirmation:
+                        text: Start full cleaning?
+                    entity: button.rocky_full
+                  - type: custom:mushroom-template-card
+                    icon: mdi:countertop-outline
+                    primary: Kitchen
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.full_clean_kitchen
+                      confirmation:
+                        text: Start cleaning the Kitchen area?
+                    color: green
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:silverware-fork-knife
+                    primary: Dining
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.full_clean_dining
+                      confirmation:
+                        text: Start cleaning the Dining area?
+                    color: amber
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:sofa-outline
+                    primary: Living
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.full_clean_living
+                      confirmation:
+                        text: Start cleaning the Living area?
+                    color: blue
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:table-chair
+                    primary: Kitchen + Dining
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.full_clean_kitchen_dining
+                      confirmation:
+                        text: Start cleaning the Kitchen + Dining area?
+                    color: purple
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:door-closed
+                    primary: Corridor
+                    tap_action:
+                      action: perform-action
+                      target:
+                        entity_id: input_button.full_clean_corridor
+                      confirmation:
+                        text: Start cleaning the Corridor?
+                      perform_action: input_button.press
+                    features_position: bottom
+                    vertical: true
+                    color: violet
+              - type: heading
+                heading: 🧹Light clean or touch-up areas
+                heading_style: subtitle
+              - type: grid
+                columns: 3
+                square: false
+                cards:
+                  - type: custom:mushroom-template-card
+                    icon: mdi:home-floor-2
+                    primary: 2nd Floor
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.vacuum_2nd_floor
+                      confirmation:
+                        text: Vacuum the 2nd Floor?
+                    color: grey
+                    features_position: bottom
+                    vertical: true
+                    entity: button.rocky_l2_vac
+                  - type: custom:mushroom-template-card
+                    icon: mdi:countertop-outline
+                    primary: Kitchen
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.vacuum_kitchen
+                      confirmation:
+                        text: Vacuum the Kitchen?
+                    color: light-green
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:silverware-fork-knife
+                    primary: Dining
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.vacuum_dining
+                      confirmation:
+                        text: Vacuum the Dining area?
+                    color: lime
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:sofa-outline
+                    primary: Living
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.vacuum_living
+                      confirmation:
+                        text: Vacuum the Living area?
+                    color: cyan
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:table-chair
+                    primary: Kitchen + Dining
+                    tap_action:
+                      action: call-service
+                      service: input_button.press
+                      target:
+                        entity_id: input_button.vacuum_kitchen_dining
+                      confirmation:
+                        text: Vacuum the Kitchen + Dining area?
+                    color: orange
+                    features_position: bottom
+                    vertical: true
+                  - type: custom:mushroom-template-card
+                    icon: mdi:door-closed
+                    primary: Corridor
+                    tap_action:
+                      action: perform-action
+                      target:
+                        entity_id: input_button.vacuum_corridor
+                      confirmation:
+                        text: Start cleaning the Corridor?
+                      perform_action: input_button.press
+                      data: {}
+                    features_position: bottom
+                    vertical: true
+                    color: violet
+            visibility:
+              - condition: state
+                entity: binary_sensor.rocky_cleaning
+                state_not: 'on'
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - entity: select.rocky_selected_map
+                    state: Level 1
+                card:
+                  type: custom:xiaomi-vacuum-map-card
+                  map_source:
+                    camera: image.rocky_level_1_custom
+                  calibration_source:
+                    camera: true
+                  entity: vacuum.rocky
+                  vacuum_platform: Roborock
+                  map_locked: true
+                  map_modes:
+                    - template: vacuum_clean_zone
+                    - template: vacuum_goto
+                    - template: vacuum_clean_segment
+                      predefined_selections:
+                        - id: '16'
+                          icon:
+                            name: mdi:countertop-outline
+                            x: 33350
+                            'y': 25525
+                          label:
+                            text: Kitchen
+                            x: 33350
+                            'y': 25525
+                            offset_y: 35
+                          outline:
+                            - - 31450
+                              - 24450
+                            - - 35250
+                              - 24450
+                            - - 35250
+                              - 26600
+                            - - 31450
+                              - 26600
+                        - id: '17'
+                          icon:
+                            name: mdi:sofa-outline
+                            x: 24625
+                            'y': 26925
+                          label:
+                            text: Living room
+                            x: 24625
+                            'y': 26925
+                            offset_y: 35
+                          outline:
+                            - - 20750
+                              - 24400
+                            - - 28500
+                              - 24400
+                            - - 28500
+                              - 29450
+                            - - 20750
+                              - 29450
+                        - id: '18'
+                          icon:
+                            name: mdi:door-closed
+                            x: 33050
+                            'y': 27625
+                          label:
+                            text: Corridor
+                            x: 33050
+                            'y': 27625
+                            offset_y: 35
+                          outline:
+                            - - 30950
+                              - 25950
+                            - - 35150
+                              - 25950
+                            - - 35150
+                              - 29300
+                            - - 30950
+                              - 29300
+                        - id: '19'
+                          icon:
+                            name: mdi:toilet
+                            x: 34900
+                            'y': 28625
+                          label:
+                            text: Bathroom
+                            x: 34900
+                            'y': 28625
+                            offset_y: 35
+                          outline:
+                            - - 34100
+                              - 28000
+                            - - 35700
+                              - 28000
+                            - - 35700
+                              - 29250
+                            - - 34100
+                              - 29250
+                        - id: '20'
+                          icon:
+                            name: mdi:silverware-fork-knife
+                            x: 29700
+                            'y': 26800
+                          label:
+                            text: Dining room
+                            x: 29700
+                            'y': 26800
+                            offset_y: 35
+                          outline:
+                            - - 28500
+                              - 24400
+                            - - 30900
+                              - 24400
+                            - - 30900
+                              - 29200
+                            - - 28500
+                              - 29200
+              - type: conditional
+                conditions:
+                  - entity: select.rocky_selected_map
+                    state: Level 2
+                card:
+                  type: custom:xiaomi-vacuum-map-card
+                  map_source:
+                    camera: image.rocky_level_2_custom
+                  calibration_source:
+                    camera: true
+                  entity: vacuum.rocky
+                  vacuum_platform: Roborock
+                  map_locked: true
+                  map_modes:
+                    - template: vacuum_clean_zone
+                    - template: vacuum_goto
+                    - template: vacuum_clean_segment
+                      predefined_selections:
+                        - id: '16'
+                          icon:
+                            name: mdi:broom
+                            x: 17250
+                            'y': 24500
+                          label:
+                            text: Master Bathroom
+                            x: 17250
+                            'y': 24500
+                            offset_y: 35
+                          outline:
+                            - - 16200
+                              - 23850
+                            - - 18300
+                              - 23850
+                            - - 18300
+                              - 25150
+                            - - 16200
+                              - 25150
+                        - id: '17'
+                          icon:
+                            name: mdi:broom
+                            x: 22300
+                            'y': 26100
+                          label:
+                            text: Corridor
+                            x: 22300
+                            'y': 26100
+                            offset_y: 35
+                          outline:
+                            - - 20950
+                              - 23850
+                            - - 23650
+                              - 23850
+                            - - 23650
+                              - 28350
+                            - - 20950
+                              - 28350
+                        - id: '18'
+                          icon:
+                            name: mdi:broom
+                            x: 24800
+                            'y': 27650
+                          label:
+                            text: Office
+                            x: 24800
+                            'y': 27650
+                            offset_y: 35
+                          outline:
+                            - - 22450
+                              - 26500
+                            - - 27150
+                              - 26500
+                            - - 27150
+                              - 28800
+                            - - 22450
+                              - 28800
+                        - id: '20'
+                          icon:
+                            name: mdi:broom
+                            x: 17950
+                            'y': 26750
+                          label:
+                            text: Master Bedroom
+                            x: 17950
+                            'y': 26750
+                            offset_y: 35
+                          outline:
+                            - - 14850
+                              - 24800
+                            - - 21050
+                              - 24800
+                            - - 21050
+                              - 28700
+                            - - 14850
+                              - 28700
+                        - id: '21'
+                          icon:
+                            name: mdi:broom
+                            x: 19675
+                            'y': 23625
+                          label:
+                            text: Corridor1
+                            x: 19675
+                            'y': 23625
+                            offset_y: 35
+                          outline:
+                            - - 18350
+                              - 22100
+                            - - 21000
+                              - 22100
+                            - - 21000
+                              - 25150
+                            - - 18350
+                              - 25150
+                        - id: '22'
+                          icon:
+                            name: mdi:broom
+                            x: 21275
+                            'y': 27500
+                          label:
+                            text: Common Bathroom
+                            x: 21275
+                            'y': 27500
+                            offset_y: 35
+                          outline:
+                            - - 20250
+                              - 27000
+                            - - 22300
+                              - 27000
+                            - - 22300
+                              - 28000
+                            - - 20250
+                              - 28000
+                        - id: '24'
+                          icon:
+                            name: mdi:broom
+                            x: 25325
+                            'y': 25175
+                          label:
+                            text: 2's bedroom
+                            x: 25325
+                            'y': 25175
+                            offset_y: 35
+                          outline:
+                            - - 23450
+                              - 23950
+                            - - 27200
+                              - 23950
+                            - - 27200
+                              - 26400
+                            - - 23450
+                              - 26400
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: 🧰 Rocky Consumable Maintenance
+                heading_style: subtitle
+              - type: heading
+                heading: Rocky
+                heading_style: section
+              - type: grid
+                square: false
+                columns: 2
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: button.rocky_reset_main_brush_consumable
+                    icon: mdi:broom
+                    primary: Main Brush
+                    secondary: Reset
+                    color: blue
+                    vertical: true
+                    tap_action:
+                      action: perform-action
+                      perform_action: button.press
+                      target:
+                        entity_id: button.rocky_reset_main_brush_consumable
+                      confirmation:
+                        text: Reset the Main Brush consumable?
+                    hold_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: button.rocky_reset_side_brush_consumable
+                    icon: mdi:broom
+                    primary: Side Brush
+                    secondary: Reset
+                    color: teal
+                    vertical: true
+                    tap_action:
+                      action: perform-action
+                      perform_action: button.press
+                      target:
+                        entity_id: button.rocky_reset_side_brush_consumable
+                      confirmation:
+                        text: Reset the Side Brush consumable?
+                    hold_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: button.rocky_reset_air_filter_consumable
+                    icon: mdi:air-filter
+                    primary: Air Filter
+                    secondary: Reset
+                    color: green
+                    vertical: true
+                    tap_action:
+                      action: perform-action
+                      perform_action: button.press
+                      target:
+                        entity_id: button.rocky_reset_air_filter_consumable
+                      confirmation:
+                        text: Reset the Air Filter consumable?
+                    hold_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: button.rocky_reset_sensor_consumable
+                    icon: mdi:radar
+                    primary: Sensors
+                    secondary: Reset
+                    color: amber
+                    vertical: true
+                    tap_action:
+                      action: perform-action
+                      perform_action: button.press
+                      target:
+                        entity_id: button.rocky_reset_sensor_consumable
+                      confirmation:
+                        text: Reset the Sensor consumable?
+                    hold_action:
+                      action: more-info
+              - type: heading
+                heading: Dock
+                heading_style: section
+              - type: grid
+                square: false
+                columns: 2
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: button.rocky_dock_reset_cleaning_brush_consumable
+                    icon: mdi:brush
+                    primary: Cleaning Brush
+                    secondary: Reset
+                    color: deep-orange
+                    vertical: true
+                    tap_action:
+                      action: perform-action
+                      perform_action: button.press
+                      target:
+                        entity_id: button.rocky_dock_reset_cleaning_brush_consumable
+                      confirmation:
+                        text: Reset the Dock Cleaning Brush consumable?
+                    hold_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: button.rocky_dock_reset_strainer_consumable
+                    icon: mdi:water-outline
+                    primary: Strainer
+                    secondary: Reset
+                    color: cyan
+                    vertical: true
+                    tap_action:
+                      action: perform-action
+                      perform_action: button.press
+                      target:
+                        entity_id: button.rocky_dock_reset_strainer_consumable
+                      confirmation:
+                        text: Reset the Dock Strainer consumable?
+                    hold_action:
+                      action: more-info
+    badges:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: back
+        alignment: justify
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_cleaning_progress
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_cleaning_progress
+            above: 0
+        name: Rocky
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-mobile/rocky
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: device_tracker.roborock_vacuum_a70
+        visibility:
+          - condition: state
+            entity: device_tracker.roborock_vacuum_a70
+            state_not: home
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_sensor_time_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_sensor_time_left
+            below: 0
+        name: Sensor time
+        icon: mdi:eye
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_side_brush_time_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_side_brush_time_left
+            below: 0
+        name: Side brush
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_filter_time_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_filter_time_left
+            below: 0
+        name: Filter time
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_main_brush_time_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_main_brush_time_left
+            below: 0
+        icon: ''
+        name: Main brush
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_dock_strainer_time_left
+        visibility:
+          - condition: numeric_state
+            below: 0
+            entity: sensor.rocky_dock_strainer_time_left
+        name: Dock strainer
+      - type: entity
+        show_name: true
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_dock_maintenance_brush_time_left
+        visibility:
+          - condition: numeric_state
+            below: 0
+        name: Dock brush
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.rocky_water_shortage
+        visibility:
+          - condition: state
+            entity: binary_sensor.rocky_water_shortage
+            state_not: 'off'
+        name: Water shortage
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.rocky_water_box_attached
+        visibility:
+          - condition: state
+            state_not: 'on'
+        show_entity_picture: false
+        name: Water box
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.rocky_mop_attached
+        visibility:
+          - condition: state
+            state_not: 'on'
+        show_entity_picture: false
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_vacuum_error
+        visibility:
+          - condition: state
+            state_not: none
+        show_entity_picture: false
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.rocky_dock_clean_water_box
+        visibility:
+          - condition: state
+            state_not: 'off'
+        show_entity_picture: false
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.rocky_dock_cleaning_fluid
+        visibility:
+          - condition: state
+            state_not: 'off'
+        show_entity_picture: false
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: switch.rocky_off_peak_charging
+        visibility:
+          - condition: state
+            entity: switch.rocky_off_peak_charging
+            state_not: 'on'
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_battery
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_battery
+            below: 30
+        show_entity_picture: true
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: binary_sensor.rocky_mop_drying
+        visibility:
+          - condition: state
+            entity: binary_sensor.rocky_mop_drying
+            state: 'on'
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.rocky_dock_dirty_water_box
+        visibility:
+          - condition: state
+            state_not: 'off'
+        show_entity_picture: false
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_dock_dock_error
+        visibility:
+          - condition: state
+            state_not: ok
+        show_entity_picture: false
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: menu
+        alignment: justify
+    visible:
+      - user: ccad21c5f9d547c0b9c227b121be591c
+      - user: b8867df6fdee4b6b82cfe697f5dd1ab0
+    cards: []
+    header:
+      layout: responsive
+      badges_position: bottom
+      badges_wrap: scroll
+    background:
+      opacity: 33
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image:
+        media_content_id: media-source://image_upload/b7e1339a3f25b42ff24bfabd3f19488d
+        media_content_type: image/png
+        metadata:
+          title: blue-wood.png
+          thumbnail: /api/image/serve/b7e1339a3f25b42ff24bfabd3f19488d/256x256
+          media_class: image
+          children_media_class: null
+          navigateIds:
+            - {}
+            - media_content_type: app
+              media_content_id: media-source://image_upload
+  - type: sections
+    max_columns: 3
+    icon: mdi:domain
+    path: uptime-kuma
+    sections:
+      - type: grid
+        cards:
+          - type: custom:mini-graph-card
+            name: 8.8.8.8
+            icon: mdi:pulse
+            entities:
+              - entity: sensor.8_8_8_8_round_trip_time_minimum
+                name: Latency
+                color: '#4caf50'
+              - entity: sensor.8_8_8_8_jitter
+                name: Jitter
+                color: '#2196f3'
+            show:
+              icon: true
+              name: true
+              state: true
+              graph: line
+              labels: true
+            hours_to_show: 12
+            points_per_hour: 6
+            line_width: 2
+            height: 120
+            decimals: 1
+            animate: true
+          - type: custom:mini-graph-card
+            name: Internet Speed
+            icon: mdi:speedometer
+            entities:
+              - entity: sensor.speedtest_download
+                name: Download
+                color: '#4caf50'
+              - entity: sensor.speedtest_upload
+                name: Upload
+                color: '#2196f3'
+            show:
+              icon: true
+              name: true
+              state: true
+              graph: bar
+              labels: true
+            bar_spacing: 6
+            height: 60
+            animate: true
+            decimals: 1
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: UL_IoT
+                icon: mdi:wifi
+                entities:
+                  - entity: sensor.ul_iot
+                    name: Clients
+                    color: '#4caf50'
+                show:
+                  icon: true
+                  name: true
+                  state: true
+                  graph: bar
+                  labels: true
+                bar_spacing: 6
+                height: 60
+                animate: true
+                decimals: 0
+              - type: custom:mini-graph-card
+                name: UL_Secure
+                icon: mdi:wifi
+                entities:
+                  - entity: sensor.ul_secure_clients
+                    name: Clients
+                    color: '#4caf50'
+                show:
+                  icon: true
+                  name: true
+                  state: true
+                  graph: bar
+                  labels: true
+                bar_spacing: 6
+                height: 60
+                animate: true
+                decimals: 0
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                name: UL_162
+                icon: mdi:wifi
+                entities:
+                  - entity: sensor.ul_162
+                    name: Clients
+                    color: '#4caf50'
+                show:
+                  icon: true
+                  name: true
+                  state: true
+                  graph: bar
+                  labels: true
+                bar_spacing: 6
+                height: 60
+                animate: true
+                decimals: 0
+              - type: custom:mini-graph-card
+                name: UL_Guest
+                icon: mdi:wifi
+                entities:
+                  - entity: sensor.ul_guest
+                    name: Clients
+                    color: '#4caf50'
+                show:
+                  icon: true
+                  name: true
+                  state: true
+                  graph: bar
+                  labels: true
+                bar_spacing: 6
+                height: 60
+                animate: true
+                decimals: 0
+      - type: grid
+        cards:
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_8888
+                icon: mdi:pulse
+                title_template: 8.8.8.8
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_https
+                icon: mdi:certificate
+                title_template: HTTPS
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_tcp
+                icon: mdi:protocol
+                title_template: TCP
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_opnsense
+                icon: mdi:wall-fire
+                title_template: OPNsense
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_swm1
+                icon: mdi:docker
+                title_template: Node 1
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_swm2
+                icon: mdi:docker
+                title_template: Node 2
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_swm3
+                icon: mdi:docker
+                title_template: Node 3
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_pve1
+                icon: mdi:server
+                title_template: pve1
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_pve2
+                icon: mdi:server
+                title_template: pve2
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_pve4
+                icon: mdi:server
+                title_template: pve4
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_acpro
+                icon: mdi:record-circle-outline
+                title_template: AC Pro
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_u6pro
+                icon: mdi:record-circle-outline
+                title_template: U6 Pro
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_netbird1
+                icon: mdi:bird
+                title_template: Netbird1
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_netbird2
+                icon: mdi:bird
+                title_template: Netbird2
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_netbird3
+                icon: mdi:bird
+                title_template: Netbird3
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_patchmon
+                icon: mdi:passport-check
+                title_template: PatchMon
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+      - type: grid
+        cards:
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_npmplus
+                icon: mdi:alpha-n
+                title_template: NPMplus
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_portainer
+                icon: mdi:docker
+                title_template: Portainer
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_unifi
+                icon: mdi:access-point-network
+                title_template: UniFi
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_minecraft
+                icon: mdi:minecraft
+                title_template: Minecraft
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_pterodactyl
+                icon: mdi:controller
+                title_template: Ptero Panel
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_pteronode02
+                icon: mdi:server
+                title_template: Ptero 02
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - square: false
+            type: grid
+            columns: 2
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_authentik
+                icon: mdi:shield-account
+                title_template: Authentik
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_jellyfin
+                icon: mdi:play
+                title_template: Jellyfin
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_vscode
+                icon: mdi:microsoft-visual-studio-code
+                title_template: VS Code
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_cloudflared
+                icon: mdi:tunnel
+                title_template: Cloudflared
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_guacamole
+                icon: mdi:web-box
+                title_template: Guacamole
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_mgmt
+                icon: mdi:server
+                title_template: Mgmt
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_beszel
+                icon: mdi:monitor-dashboard
+                title_template: Beszel
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_file
+                icon: mdi:file
+                title_template: File
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_ping
+                icon: mdi:pulse
+                title_template: Ping
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+              - type: custom:uptime-card
+                entity: binary_sensor.uptimekuma_home
+                icon: mdi:home-assistant
+                title_template: Home Assistant
+                layout: horizontal
+                status_adaptive_color: true
+                show:
+                  footer: false
+                  status: true
+                duration:
+                  quantity: 1
+                  unit: hour
+                style: |
+                  ha-card {
+                    border-radius: 12px;
+                    padding: 6px;
+                    font-size: 12px;
+                    box-shadow: none;
+                  }
+      - type: grid
+        cards: []
+      - type: grid
+        cards: []
+    cards: []
+    title: Uptime Kuma
+    badges:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: back
+        alignment: justify
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.uptimekuma_noc_company_com
+        name: noc
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.speedtest_ping
+        show_entity_picture: false
+        visibility:
+          - condition: numeric_state
+            entity: sensor.speedtest_ping
+            above: 49
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: script.speedtest_run_now
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        visibility:
+          - condition: state
+            entity: binary_sensor.uptimekuma_8888
+            state_not: 'on'
+        icon: mdi:web
+        entity: binary_sensor.uptimekuma_8888
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: menu
+        alignment: justify
+    visible:
+      - user: ccad21c5f9d547c0b9c227b121be591c
+    header:
+      layout: responsive
+      badges_position: bottom
+      badges_wrap: scroll
+    background:
+      opacity: 100
+      alignment: center
+      size: auto
+      repeat: repeat
+      attachment: fixed
+      image:
+        media_content_id: media-source://image_upload/b7e1339a3f25b42ff24bfabd3f19488d
+        media_content_type: image/png
+        metadata:
+          title: blue-wood.png
+          thumbnail: /api/image/serve/b7e1339a3f25b42ff24bfabd3f19488d/256x256
+          media_class: image
+          children_media_class: null
+          navigateIds:
+            - {}
+            - media_content_type: app
+              media_content_id: media-source://image_upload
+  - type: sections
+    max_columns: 4
+    title: UniFi
+    path: unifi
+    icon: mdi:wifi
+    sections:
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: picture-elements
+                image: https://cdn.ecomm.ui.com/products/8e88b222-7a55-4cf0-8677-ae9b6347fe84/0d5e6870-de73-4467-b81d-2a7628899767.png
+                aspect_ratio: '3'
+                elements:
+                  - type: state-label
+                    icon: mdi:access-point
+                    entity: device_tracker.u6_pro
+                    style:
+                      top: 10%
+                      left: 7%
+                      color: white
+                      font-size: 14px
+                      text-shadow: 1px 1px 2px black
+                  - type: state-label
+                    entity: sensor.u6_pro_uplink_mac
+                    style:
+                      top: 10%
+                      right: -12%
+                      color: white
+                      font-size: 14px
+                      text-shadow: 1px 1px 2px black
+                  - type: state-label
+                    entity: sensor.u6_pro_clients
+                    style:
+                      bottom: -10%
+                      left: 4%
+                      color: white
+                      font-size: 14px
+                      text-shadow: 1px 1px 2px black
+                  - type: state-label
+                    entity: sensor.u6_pro_state
+                    style:
+                      bottom: -10%
+                      left: 89%
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: CPU
+                    entities:
+                      - sensor.u6_pro_cpu_utilization
+                    color_thresholds:
+                      - value: 40
+                        color: '#43a047'
+                      - value: 70
+                        color: '#f9a825'
+                      - value: 90
+                        color: '#e53935'
+                    line_width: 4
+                    hours_to_show: 1
+                    points_per_hour: 60
+                    animate: true
+                    icon: mdi:cpu-64-bit
+                    show:
+                      icon: true
+                      name: true
+                      state: true
+                  - type: custom:mini-graph-card
+                    name: Memory
+                    entities:
+                      - sensor.u6_pro_memory_utilization
+                    color_thresholds:
+                      - value: 40
+                        color: '#43a047'
+                      - value: 70
+                        color: '#f9a825'
+                      - value: 90
+                        color: '#e53935'
+                    line_width: 4
+                    hours_to_show: 1
+                    points_per_hour: 60
+                    animate: true
+                    icon: mdi:memory
+                    show:
+                      icon: true
+                      name: true
+                      state: true
+              - type: entities
+                title: Controls
+                entities:
+                  - entity: update.u6_pro
+                  - entity: light.u6_pro_led
+                  - entity: button.u6_pro_restart
+                    name: Restart
+                  - entity: sensor.u6_pro_uptime
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: picture-elements
+                image: https://cdn.ecomm.ui.com/products/8e88b222-7a55-4cf0-8677-ae9b6347fe84/0d5e6870-de73-4467-b81d-2a7628899767.png
+                aspect_ratio: '3'
+                elements:
+                  - type: state-label
+                    icon: mdi:access-point
+                    entity: device_tracker.ac_pro
+                    style:
+                      top: 10%
+                      left: 7%
+                      color: white
+                      font-size: 14px
+                      text-shadow: 1px 1px 2px black
+                  - type: state-label
+                    entity: sensor.ac_pro_uplink_mac
+                    style:
+                      top: 10%
+                      right: -12%
+                      color: white
+                      font-size: 14px
+                      text-shadow: 1px 1px 2px black
+                  - type: state-label
+                    entity: sensor.ac_pro_clients
+                    style:
+                      bottom: -10%
+                      left: 4%
+                      color: white
+                      font-size: 14px
+                      text-shadow: 1px 1px 2px black
+                  - type: state-label
+                    entity: sensor.ac_pro_state
+                    style:
+                      bottom: -10%
+                      left: 89%
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: CPU
+                    entities:
+                      - sensor.ac_pro_cpu_utilization
+                    color_thresholds:
+                      - value: 40
+                        color: '#43a047'
+                      - value: 70
+                        color: '#f9a825'
+                      - value: 90
+                        color: '#e53935'
+                    line_width: 4
+                    hours_to_show: 1
+                    points_per_hour: 60
+                    animate: true
+                    icon: mdi:cpu-64-bit
+                    show:
+                      icon: true
+                      name: true
+                      state: true
+                  - type: custom:mini-graph-card
+                    name: Memory
+                    entities:
+                      - sensor.ac_pro_memory_utilization
+                    color_thresholds:
+                      - value: 40
+                        color: '#43a047'
+                      - value: 70
+                        color: '#f9a825'
+                      - value: 90
+                        color: '#e53935'
+                    line_width: 4
+                    hours_to_show: 1
+                    points_per_hour: 60
+                    animate: true
+                    icon: mdi:memory
+                    show:
+                      icon: true
+                      name: true
+                      state: true
+              - type: entities
+                title: Controls
+                entities:
+                  - entity: update.ac_pro
+                  - entity: light.ac_pro_led
+                  - entity: button.ac_pro_restart
+                    name: Restart
+                  - entity: sensor.ac_pro_uptime
+    badges:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: back
+        alignment: justify
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.uptimekuma_noc_company_com
+        name: noc
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-mushroom/uptime-kuma
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        visibility:
+          - condition: state
+            entity: binary_sensor.uptimekuma_8888
+            state_not: 'on'
+        icon: mdi:web
+        entity: binary_sensor.uptimekuma_8888
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: menu
+        alignment: justify
+    visible:
+      - user: ccad21c5f9d547c0b9c227b121be591c
+    cards: []
+    header:
+      layout: responsive
+      badges_position: bottom
+      badges_wrap: scroll
+    background:
+      opacity: 33
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image:
+        media_content_id: media-source://image_upload/b7e1339a3f25b42ff24bfabd3f19488d
+        media_content_type: image/png
+        metadata:
+          title: blue-wood.png
+          thumbnail: /api/image/serve/b7e1339a3f25b42ff24bfabd3f19488d/256x256
+          media_class: image
+          children_media_class: null
+          navigateIds:
+            - {}
+            - media_content_type: app
+              media_content_id: media-source://image_upload

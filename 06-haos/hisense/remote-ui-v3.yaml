@@ -1,0 +1,312 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: entity
+        entity: sensor.hisense_tv_source
+        icon: mdi:video-input-hdmi
+        name: Source
+  - type: horizontal-stack
+    cards:
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_input_tv
+        name: TV
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_input_tv
+        icon: mdi:television-box
+      - show_name: true
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_input_hdmi_1
+        name: HDMI 1
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_input_hdmi_1
+        icon: mdi:hdmi-port
+      - show_name: true
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_input_hdmi_2
+        name: HDMI 2
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_input_hdmi_2
+        icon: mdi:hdmi-port
+      - show_name: true
+        show_icon: true
+        type: button
+        tap_action:
+          action: perform-action
+          perform_action: script.executa_hisense_input_av
+          target: {}
+        entity: script.executa_hisense_input_av
+        name: AV
+        icon: mdi:video-input-component
+  - type: horizontal-stack
+    cards:
+      - show_name: false
+        show_icon: true
+        type: button
+        tap_action:
+          action: perform-action
+          perform_action: script.executa_hisense_netflix
+          target: {}
+        entity: script.executa_hisense_netflix
+        name: Netflix
+        icon: mdi:netflix
+        show_state: false
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_home
+        name: Home
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_home
+        icon: mdi:home-outline
+      - show_name: false
+        show_icon: true
+        type: button
+        tap_action:
+          action: toggle
+        entity: script.executa_epg
+        icon: mdi:television-guide
+        name: EPG
+      - show_name: false
+        show_icon: true
+        type: button
+        tap_action:
+          action: perform-action
+          perform_action: script.executa_hisense_subtitles
+          target: {}
+        entity: script.executa_hisense_subtitles
+        icon: mdi:subtitles-outline
+        name: Subtitles
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_mute
+        name: Mute
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_mute
+        icon: mdi:volume-off
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: script.executa_hisense_menu
+              target: {}
+            show_state: false
+            entity: script.executa_hisense_menu
+            icon: mdi:menu
+          - show_name: false
+            show_icon: true
+            type: button
+            entity: script.executa_hisense_up
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_up
+            icon: mdi:arrow-up-drop-circle-outline
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: script.executa_hisense_volume_up
+              target: {}
+            entity: script.executa_hisense_volume_up
+            icon: mdi:volume-plus
+            hold_action:
+              action: perform-action
+              perform_action: script.executa_hisense_volume_up
+              target: {}
+      - type: horizontal-stack
+        cards:
+          - show_name: false
+            show_icon: true
+            type: button
+            entity: script.executa_hisense_left
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_left
+            icon: mdi:arrow-left-drop-circle-outline
+          - show_name: false
+            show_icon: true
+            type: button
+            entity: script.executa_hisense_ok
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_ok
+            icon: mdi:image-filter-center-focus-strong
+          - show_name: false
+            show_icon: true
+            type: button
+            entity: script.executa_hisense_right
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_right
+            icon: mdi:arrow-right-drop-circle-outline
+      - type: horizontal-stack
+        cards:
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: script.executa_hisense_back
+              target: {}
+            entity: script.executa_hisense_back
+            icon: mdi:keyboard-backspace
+            show_state: false
+            hold_action:
+              action: perform-action
+              perform_action: script.executa_hisense_back
+              target: {}
+          - show_name: false
+            show_icon: true
+            type: button
+            entity: script.executa_hisense_down
+            tap_action:
+              action: call-service
+              service: script.executa_hisense_down
+            icon: mdi:arrow-down-drop-circle-outline
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: script.executa_hisense_volume_down
+              target: {}
+            entity: script.executa_hisense_volume_down
+            icon: mdi:volume-minus
+            show_state: false
+            hold_action:
+              action: perform-action
+              perform_action: script.executa_hisense_volume_down
+              target: {}
+  - type: horizontal-stack
+    cards: []
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_1
+        name: "1"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_1
+        icon: mdi:numeric-1-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_2
+        name: "2"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_2
+        icon: mdi:numeric-2-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_3
+        name: "3"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_3
+        icon: mdi:numeric-3-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_4
+        name: "4"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_4
+        icon: mdi:numeric-4-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_5
+        name: "5"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_5
+        icon: mdi:numeric-5-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_6
+        name: "6"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_6
+        icon: mdi:numeric-6-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_7
+        name: "7"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_7
+        icon: mdi:numeric-7-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_8
+        name: "8"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_8
+        icon: mdi:numeric-8-box
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_9
+        name: "9"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_9
+        icon: mdi:numeric-9-box
+      - show_name: true
+        show_icon: false
+        type: button
+        tap_action:
+          action: perform-action
+          perform_action: script.executa_hisense_channel_up
+          target: {}
+        show_state: false
+        entity: script.executa_hisense_channel_up
+        icon: mdi:television-box
+        name: CH +
+      - show_name: false
+        show_icon: true
+        type: button
+        entity: script.executa_hisense_0
+        name: "0"
+        tap_action:
+          action: call-service
+          service: script.executa_hisense_0
+        icon: mdi:numeric-0-box
+      - show_name: true
+        show_icon: false
+        type: button
+        tap_action:
+          action: perform-action
+          perform_action: script.executa_hisense_channel_down
+          target: {}
+        entity: script.executa_hisense_channel_down
+        name: CH -
+        show_state: false

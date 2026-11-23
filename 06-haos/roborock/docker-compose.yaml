@@ -1,0 +1,85 @@
+# how-can-i-clean-a-specific-room
+# https://www.home-assistant.io/integrations/roborock
+# https://www.youtube.com/watch?v=3aWua8vUHfE&t=95s
+
+# load_multi_map
+
+# received_devices=[], lon=None, lat=None, geo_name=None, rooms=[HomeDataRoom(id=15480003, name='Living'), HomeDataRoom(id=15439595, name='L2 Stairs'), HomeDataRoom(id=15439592, name='L1 Stairs'), HomeDataRoom(id=15439575, name='Master Bathroom'), HomeDataRoom(id=15439566, name='Master Bedroom'), HomeDataRoom(id=15439553, name='Common Bathroom'), HomeDataRoom(id=15439522, name='Study'), HomeDataRoom(id=15330351, name='Corridor1'), HomeDataRoom(id=15330254, name='Bedroom1'), HomeDataRoom(id=15330242, name='Bedroom'), HomeDataRoom(id=15330212, name='Stairs'), HomeDataRoom(id=15330209, name='Wardrobe'), HomeDataRoom(id=15329945, name='Office'), HomeDataRoom(id=15329944, name="Guest's bedroom"), HomeDataRoom(id=15329943, name='Bathroom1'), HomeDataRoom(id=15329942, name='Master bedroom'), HomeDataRoom(id=15299013, name='Dining'), HomeDataRoom(id=15294133, name='Corridor'), HomeDataRoom(id=15294097, name='Bathroom'), HomeDataRoom(id=15294075, name='Living room'), HomeDataRoom(id=15294070, name='Dining room'), HomeDataRoom(id=15294064, name='Kitchen')])
+
+# get_room_mapping: [[16, '15294064', 14], [17, '15294075', 6], [18, '15294133', 8], [19, '15294097', 15], [20, '15294070', 13]]
+# get_room_mapping: [[16, '15439575', 15], [17, '15294133', 8], [18, '15329945', 9], [20, '15439566', 1], [21, '15330351', 8], [22, '15439553', 15], [24, '15329944', 1]]
+
+# Developer Tools > Actions > Roborock: Get Maps
+vacuum.rocky:
+  maps:
+    - flag: 0
+      name: Level 1
+      rooms:
+        "16": Kitchen
+        "17": Living room
+        "18": Corridor
+        "19": Bathroom
+        "20": Dining room
+    - flag: 1
+      name: Level 2
+      rooms:
+        "16": Master Bathroom
+        "17": Corridor
+        "18": Office
+        "20": Master Bedroom
+        "21": Corridor1
+        "22": Common Bathroom
+        "24": Guest's bedroom
+
+# Developer Tools > Actions > Vacuum: Send command
+action: vacuum.send_command
+data:
+  command: app_segment_clean
+  params: 16
+  repeat: 2
+target:
+  entity_id: vacuum.rocky
+
+# Step 1: Create a Home Assistant Script
+# You'll need to create a script in Home Assistant to send the correct command to the vacuum.
+
+# Go to Home Assistant > Settings > Automations & Scenes > Scripts
+# Click "Create Script"
+# Select "Edit in YAML"
+# Paste the following Full Clean - G Floor YAML:
+# More sample here: https://github.com/PiotrMachowski/lovelace-xiaomi-vacuum-map-card/blob/v2.3.2/docs/templates/Roborock.md
+
+action: vacuum.send_command
+data:
+  command: app_segment_clean
+  params:
+    - segments:
+        - 17 # Living room
+        - 20 # Dining room
+        - 16 # Kitchen
+        - 18 # Corridor
+        - 19 # Bathroom
+      repeat: 2 # 2 passes
+      clean_mode: 2 # Vacuum + Mop mode
+target:
+  entity_id: vacuum.rocky
+
+# Click "Save"
+
+# Step 2: Add a Button to Home Assistant Dashboard
+# Now, let's create a button in Lovelace UI to trigger this script.
+
+# Go to Dashboard > Edit Dashboard
+
+# Click "Add Card"
+
+# Select "Button"
+
+# Set the following:
+
+Name: "Clean Level 1"
+Icon: mdi:robot-vacuum
+Tap Action:
+Action: "Call Service"
+Service: script.vacuum_and_mop_level_1 (Replace with the script name you saved earlier)
+# Click "Save"

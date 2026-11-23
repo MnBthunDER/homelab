@@ -1,0 +1,1036 @@
+ - type: sections
+    max_columns: 4
+    title: Rocky
+    path: rocky
+    icon: mdi:robot-vacuum
+    sections:
+      - type: grid
+        cards:
+          - show_state: true
+            show_name: true
+            camera_view: auto
+            type: picture-entity
+            entity: vacuum.rocky
+            image: /api/image/serve/712a8bf426240ba3ceddc6874c625d83/512x512
+          - type: tile
+            entity: select.rocky_mop_intensity
+            features_position: bottom
+            vertical: false
+            name: Mop intensity
+          - type: tile
+            features_position: bottom
+            vertical: false
+            show_entity_picture: false
+            entity: select.rocky_route
+            name: Route
+          - type: tile
+            entity: input_button.rocky_empty_the_bin
+            features_position: bottom
+            vertical: false
+            hide_state: true
+            name: Empty the bin
+          - type: tile
+            entity: input_select.floor_selector
+            features_position: bottom
+            vertical: false
+          - type: custom:xiaomi-vacuum-map-card
+            map_source:
+              camera: camera.rocky_map
+            calibration_source:
+              camera: true
+            entity: vacuum.rocky
+            vacuum_platform: humbertogontijo/homeassistant-roborock
+            map_locked: true
+            map_modes:
+              - template: vacuum_clean_zone
+              - template: vacuum_goto
+              - template: vacuum_clean_segment
+                predefined_selections:
+                  - id: '16'
+                    icon:
+                      name: mdi:broom
+                      x: 33350
+                      'y': 25675
+                    label:
+                      text: Room 16
+                      x: 33350
+                      'y': 25675
+                      offset_y: 35
+                    outline:
+                      - - 31450
+                        - 24750
+                      - - 35250
+                        - 24750
+                      - - 35250
+                        - 26600
+                      - - 31450
+                        - 26600
+                  - id: '17'
+                    icon:
+                      name: mdi:broom
+                      x: 26475
+                      'y': 26475
+                    label:
+                      text: Room 17
+                      x: 26475
+                      'y': 26475
+                      offset_y: 35
+                    outline:
+                      - - 24400
+                        - 24400
+                      - - 28550
+                        - 24400
+                      - - 28550
+                        - 28550
+                      - - 24400
+                        - 28550
+                  - id: '18'
+                    icon:
+                      name: mdi:broom
+                      x: 33050
+                      'y': 27625
+                    label:
+                      text: Room 18
+                      x: 33050
+                      'y': 27625
+                      offset_y: 35
+                    outline:
+                      - - 30950
+                        - 25950
+                      - - 35150
+                        - 25950
+                      - - 35150
+                        - 29300
+                      - - 30950
+                        - 29300
+                  - id: '19'
+                    icon:
+                      name: mdi:broom
+                      x: 34900
+                      'y': 28625
+                    label:
+                      text: Room 19
+                      x: 34900
+                      'y': 28625
+                      offset_y: 35
+                    outline:
+                      - - 34100
+                        - 28000
+                      - - 35700
+                        - 28000
+                      - - 35700
+                        - 29250
+                      - - 34100
+                        - 29250
+                  - id: '20'
+                    icon:
+                      name: mdi:broom
+                      x: 29725
+                      'y': 26800
+                    label:
+                      text: Room 20
+                      x: 29725
+                      'y': 26800
+                      offset_y: 35
+                    outline:
+                      - - 28550
+                        - 24400
+                      - - 30900
+                        - 24400
+                      - - 30900
+                        - 29200
+                      - - 28550
+                        - 29200
+              - template: vacuum_clean_segment
+                predefined_selections:
+                  - id: '16'
+                    icon:
+                      name: mdi:broom
+                      x: 17250
+                      'y': 24500
+                    label:
+                      text: Room 16
+                      x: 17250
+                      'y': 24500
+                      offset_y: 35
+                    outline:
+                      - - 16200
+                        - 23850
+                      - - 18300
+                        - 23850
+                      - - 18300
+                        - 25150
+                      - - 16200
+                        - 25150
+                  - id: '17'
+                    icon:
+                      name: mdi:broom
+                      x: 22300
+                      'y': 26100
+                    label:
+                      text: Room 17
+                      x: 22300
+                      'y': 26100
+                      offset_y: 35
+                    outline:
+                      - - 20950
+                        - 23850
+                      - - 23650
+                        - 23850
+                      - - 23650
+                        - 28350
+                      - - 20950
+                        - 28350
+                  - id: '18'
+                    icon:
+                      name: mdi:broom
+                      x: 24800
+                      'y': 27650
+                    label:
+                      text: Room 18
+                      x: 24800
+                      'y': 27650
+                      offset_y: 35
+                    outline:
+                      - - 22450
+                        - 26500
+                      - - 27150
+                        - 26500
+                      - - 27150
+                        - 28800
+                      - - 22450
+                        - 28800
+                  - id: '20'
+                    icon:
+                      name: mdi:broom
+                      x: 17950
+                      'y': 26750
+                    label:
+                      text: Room 20
+                      x: 17950
+                      'y': 26750
+                      offset_y: 35
+                    outline:
+                      - - 14850
+                        - 24800
+                      - - 21050
+                        - 24800
+                      - - 21050
+                        - 28700
+                      - - 14850
+                        - 28700
+                  - id: '21'
+                    icon:
+                      name: mdi:broom
+                      x: 19675
+                      'y': 23625
+                    label:
+                      text: Room 21
+                      x: 19675
+                      'y': 23625
+                      offset_y: 35
+                    outline:
+                      - - 18350
+                        - 22100
+                      - - 21000
+                        - 22100
+                      - - 21000
+                        - 25150
+                      - - 18350
+                        - 25150
+                  - id: '22'
+                    icon:
+                      name: mdi:broom
+                      x: 21275
+                      'y': 27500
+                    label:
+                      text: Room 22
+                      x: 21275
+                      'y': 27500
+                      offset_y: 35
+                    outline:
+                      - - 20250
+                        - 27000
+                      - - 22300
+                        - 27000
+                      - - 22300
+                        - 28000
+                      - - 20250
+                        - 28000
+                  - id: '24'
+                    icon:
+                      name: mdi:broom
+                      x: 25325
+                      'y': 25175
+                    label:
+                      text: Room 24
+                      x: 25325
+                      'y': 25175
+                      offset_y: 35
+                    outline:
+                      - - 23450
+                        - 23950
+                      - - 27200
+                        - 23950
+                      - - 27200
+                        - 26400
+                      - - 23450
+                        - 26400
+              - template: vacuum_clean_segment
+                predefined_selections:
+                  - id: '16'
+                    icon:
+                      name: mdi:broom
+                      x: 17250
+                      'y': 24500
+                    label:
+                      text: Room 16
+                      x: 17250
+                      'y': 24500
+                      offset_y: 35
+                    outline:
+                      - - 16200
+                        - 23850
+                      - - 18300
+                        - 23850
+                      - - 18300
+                        - 25150
+                      - - 16200
+                        - 25150
+                  - id: '17'
+                    icon:
+                      name: mdi:broom
+                      x: 22300
+                      'y': 26100
+                    label:
+                      text: Room 17
+                      x: 22300
+                      'y': 26100
+                      offset_y: 35
+                    outline:
+                      - - 20950
+                        - 23850
+                      - - 23650
+                        - 23850
+                      - - 23650
+                        - 28350
+                      - - 20950
+                        - 28350
+                  - id: '18'
+                    icon:
+                      name: mdi:broom
+                      x: 24800
+                      'y': 27650
+                    label:
+                      text: Room 18
+                      x: 24800
+                      'y': 27650
+                      offset_y: 35
+                    outline:
+                      - - 22450
+                        - 26500
+                      - - 27150
+                        - 26500
+                      - - 27150
+                        - 28800
+                      - - 22450
+                        - 28800
+                  - id: '20'
+                    icon:
+                      name: mdi:broom
+                      x: 17950
+                      'y': 26750
+                    label:
+                      text: Room 20
+                      x: 17950
+                      'y': 26750
+                      offset_y: 35
+                    outline:
+                      - - 14850
+                        - 24800
+                      - - 21050
+                        - 24800
+                      - - 21050
+                        - 28700
+                      - - 14850
+                        - 28700
+                  - id: '21'
+                    icon:
+                      name: mdi:broom
+                      x: 19675
+                      'y': 23625
+                    label:
+                      text: Room 21
+                      x: 19675
+                      'y': 23625
+                      offset_y: 35
+                    outline:
+                      - - 18350
+                        - 22100
+                      - - 21000
+                        - 22100
+                      - - 21000
+                        - 25150
+                      - - 18350
+                        - 25150
+                  - id: '22'
+                    icon:
+                      name: mdi:broom
+                      x: 21275
+                      'y': 27500
+                    label:
+                      text: Room 22
+                      x: 21275
+                      'y': 27500
+                      offset_y: 35
+                    outline:
+                      - - 20250
+                        - 27000
+                      - - 22300
+                        - 27000
+                      - - 22300
+                        - 28000
+                      - - 20250
+                        - 28000
+                  - id: '24'
+                    icon:
+                      name: mdi:broom
+                      x: 25325
+                      'y': 25175
+                    label:
+                      text: Room 24
+                      x: 25325
+                      'y': 25175
+                      offset_y: 35
+                    outline:
+                      - - 23450
+                        - 23950
+                      - - 27200
+                        - 23950
+                      - - 27200
+                        - 26400
+                      - - 23450
+                        - 26400
+              - template: vacuum_clean_segment
+                predefined_selections:
+                  - id: '16'
+                    icon:
+                      name: mdi:broom
+                      x: 17250
+                      'y': 24500
+                    label:
+                      text: Room 16
+                      x: 17250
+                      'y': 24500
+                      offset_y: 35
+                    outline:
+                      - - 16200
+                        - 23850
+                      - - 18300
+                        - 23850
+                      - - 18300
+                        - 25150
+                      - - 16200
+                        - 25150
+                  - id: '17'
+                    icon:
+                      name: mdi:broom
+                      x: 22300
+                      'y': 26100
+                    label:
+                      text: Room 17
+                      x: 22300
+                      'y': 26100
+                      offset_y: 35
+                    outline:
+                      - - 20950
+                        - 23850
+                      - - 23650
+                        - 23850
+                      - - 23650
+                        - 28350
+                      - - 20950
+                        - 28350
+                  - id: '18'
+                    icon:
+                      name: mdi:broom
+                      x: 24800
+                      'y': 27650
+                    label:
+                      text: Room 18
+                      x: 24800
+                      'y': 27650
+                      offset_y: 35
+                    outline:
+                      - - 22450
+                        - 26500
+                      - - 27150
+                        - 26500
+                      - - 27150
+                        - 28800
+                      - - 22450
+                        - 28800
+                  - id: '20'
+                    icon:
+                      name: mdi:broom
+                      x: 17950
+                      'y': 26750
+                    label:
+                      text: Room 20
+                      x: 17950
+                      'y': 26750
+                      offset_y: 35
+                    outline:
+                      - - 14850
+                        - 24800
+                      - - 21050
+                        - 24800
+                      - - 21050
+                        - 28700
+                      - - 14850
+                        - 28700
+                  - id: '21'
+                    icon:
+                      name: mdi:broom
+                      x: 19675
+                      'y': 23625
+                    label:
+                      text: Room 21
+                      x: 19675
+                      'y': 23625
+                      offset_y: 35
+                    outline:
+                      - - 18350
+                        - 22100
+                      - - 21000
+                        - 22100
+                      - - 21000
+                        - 25150
+                      - - 18350
+                        - 25150
+                  - id: '22'
+                    icon:
+                      name: mdi:broom
+                      x: 21275
+                      'y': 27500
+                    label:
+                      text: Room 22
+                      x: 21275
+                      'y': 27500
+                      offset_y: 35
+                    outline:
+                      - - 20250
+                        - 27000
+                      - - 22300
+                        - 27000
+                      - - 22300
+                        - 28000
+                      - - 20250
+                        - 28000
+                  - id: '24'
+                    icon:
+                      name: mdi:broom
+                      x: 25325
+                      'y': 25175
+                    label:
+                      text: Room 24
+                      x: 25325
+                      'y': 25175
+                      offset_y: 35
+                    outline:
+                      - - 23450
+                        - 23950
+                      - - 27200
+                        - 23950
+                      - - 27200
+                        - 26400
+                      - - 23450
+                        - 26400
+              - template: vacuum_clean_segment
+                predefined_selections:
+                  - id: '16'
+                    icon:
+                      name: mdi:broom
+                      x: 17250
+                      'y': 24500
+                    label:
+                      text: Room 16
+                      x: 17250
+                      'y': 24500
+                      offset_y: 35
+                    outline:
+                      - - 16200
+                        - 23850
+                      - - 18300
+                        - 23850
+                      - - 18300
+                        - 25150
+                      - - 16200
+                        - 25150
+                  - id: '17'
+                    icon:
+                      name: mdi:broom
+                      x: 22300
+                      'y': 26100
+                    label:
+                      text: Room 17
+                      x: 22300
+                      'y': 26100
+                      offset_y: 35
+                    outline:
+                      - - 20950
+                        - 23850
+                      - - 23650
+                        - 23850
+                      - - 23650
+                        - 28350
+                      - - 20950
+                        - 28350
+                  - id: '18'
+                    icon:
+                      name: mdi:broom
+                      x: 24800
+                      'y': 27650
+                    label:
+                      text: Room 18
+                      x: 24800
+                      'y': 27650
+                      offset_y: 35
+                    outline:
+                      - - 22450
+                        - 26500
+                      - - 27150
+                        - 26500
+                      - - 27150
+                        - 28800
+                      - - 22450
+                        - 28800
+                  - id: '20'
+                    icon:
+                      name: mdi:broom
+                      x: 17950
+                      'y': 26750
+                    label:
+                      text: Room 20
+                      x: 17950
+                      'y': 26750
+                      offset_y: 35
+                    outline:
+                      - - 14850
+                        - 24800
+                      - - 21050
+                        - 24800
+                      - - 21050
+                        - 28700
+                      - - 14850
+                        - 28700
+                  - id: '21'
+                    icon:
+                      name: mdi:broom
+                      x: 19675
+                      'y': 23625
+                    label:
+                      text: Room 21
+                      x: 19675
+                      'y': 23625
+                      offset_y: 35
+                    outline:
+                      - - 18350
+                        - 22100
+                      - - 21000
+                        - 22100
+                      - - 21000
+                        - 25150
+                      - - 18350
+                        - 25150
+                  - id: '22'
+                    icon:
+                      name: mdi:broom
+                      x: 21275
+                      'y': 27500
+                    label:
+                      text: Room 22
+                      x: 21275
+                      'y': 27500
+                      offset_y: 35
+                    outline:
+                      - - 20250
+                        - 27000
+                      - - 22300
+                        - 27000
+                      - - 22300
+                        - 28000
+                      - - 20250
+                        - 28000
+                  - id: '24'
+                    icon:
+                      name: mdi:broom
+                      x: 25325
+                      'y': 25175
+                    label:
+                      text: Room 24
+                      x: 25325
+                      'y': 25175
+                      offset_y: 35
+                    outline:
+                      - - 23450
+                        - 23950
+                      - - 27200
+                        - 23950
+                      - - 27200
+                        - 26400
+                      - - 23450
+                        - 26400
+            title: ''
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: input_button.full_clean_g_floor
+              - entity: input_button.full_clean_kitchen
+              - entity: input_button.full_clean_dining
+              - entity: input_button.full_clean_living
+              - entity: input_button.full_clean_kitchen_dining
+              - entity: input_button.vacuum_kitchen
+              - entity: input_button.vacuum_dining
+              - entity: input_button.vacuum_living
+              - entity: input_button.vacuum_kitchen_dining
+              - entity: input_button.vacuum_2nd_floor
+            title: Cleaning Profiles
+      - type: grid
+        cards:
+          - type: heading
+            heading: Controls
+            heading_style: title
+          - type: tile
+            entity: vacuum.rocky
+          - type: tile
+            entity: number.rocky_sound_volume
+            name: Sound Volume
+            show_entity_picture: false
+            hide_state: true
+            vertical: false
+            hold_action:
+              action: url
+              url_path: >-
+                https://home.company.com/config/devices/device/6937f21dfdeaab4c2ecc6a89f8317435
+            features_position: bottom
+          - type: tile
+            entity: button.rocky_reset_filter_consumable
+            features_position: bottom
+            vertical: false
+            name: Reset filter consumable
+          - type: tile
+            entity: button.rocky_reset_main_brush_consumable
+            features_position: bottom
+            vertical: false
+            name: Reset main brush consumable
+          - type: tile
+            entity: button.rocky_reset_sensor_consumable
+            features_position: bottom
+            vertical: false
+            name: Reset sensor consumable
+          - type: tile
+            entity: button.rocky_reset_side_brush_consumable
+            features_position: bottom
+            vertical: false
+            name: Reset side brush consumable
+          - type: tile
+            entity: select.rocky_mop_intensity
+            features_position: bottom
+            vertical: false
+            name: Mop intensity
+          - type: tile
+            entity: select.rocky_route
+            features_position: bottom
+            vertical: false
+            name: Route
+          - type: heading
+            heading: Configuration
+            heading_style: title
+          - type: tile
+            entity: time.rocky_dnd_start
+            features_position: bottom
+            vertical: false
+            name: DnD start
+          - type: tile
+            entity: time.rocky_dnd_end
+            features_position: bottom
+            vertical: false
+            name: DnD end
+          - type: tile
+            entity: switch.rocky_child_lock
+            features_position: bottom
+            vertical: false
+            name: Child lock
+          - type: tile
+            entity: switch.rocky_dnd_switch
+            features_position: bottom
+            vertical: false
+            name: DnD switch
+          - type: tile
+            entity: time.rocky_off_peak_charging_start
+            features_position: bottom
+            vertical: false
+            name: Off-Peak charging start
+          - type: tile
+            entity: time.rocky_off_peak_charging_end
+            features_position: bottom
+            vertical: false
+            name: Off-Peak charging end
+          - type: tile
+            entity: switch.rocky_valley_electricity_switch
+            features_position: bottom
+            vertical: false
+            color: green
+            name: Valley electricity switch
+      - type: grid
+        cards:
+          - type: heading
+            heading: Diagnostic
+            heading_style: title
+          - type: tile
+            entity: device_tracker.roborock_vacuum_a70
+          - type: tile
+            entity: sensor.rocky_battery
+            features_position: bottom
+            vertical: false
+            name: Battery
+          - type: tile
+            entity: sensor.rocky_cleaning_progress
+            features_position: bottom
+            vertical: false
+            name: Cleaning progress
+          - type: tile
+            entity: sensor.rocky_current_clean_area
+            features_position: bottom
+            vertical: false
+            name: Current clean area
+          - type: tile
+            entity: sensor.rocky_current_clean_duration
+            features_position: bottom
+            vertical: false
+            name: Current clean duration
+          - type: tile
+            entity: sensor.rocky_current_error
+            features_position: bottom
+            vertical: false
+            name: Current error
+          - type: tile
+            entity: sensor.rocky_current_map_selected
+            features_position: bottom
+            vertical: false
+            name: Current map selected
+          - type: tile
+            entity: sensor.rocky_current_room
+            features_position: bottom
+            vertical: false
+            name: Current room
+          - type: tile
+            entity: sensor.rocky_dock_dust_collection_mode
+            features_position: bottom
+            vertical: false
+            name: Dock dust collection mode
+          - type: tile
+            entity: sensor.rocky_dock_mop_wash_mode_interval
+            features_position: bottom
+            vertical: false
+            name: Dock mop wash mode interval
+          - type: tile
+            entity: sensor.rocky_dock_status
+            features_position: bottom
+            vertical: false
+            name: Dock status
+          - type: tile
+            entity: sensor.rocky_dock_washing_mode
+            features_position: bottom
+            vertical: false
+            name: Dock washing mode
+          - type: tile
+            entity: sensor.rocky_filter_left
+            features_position: bottom
+            vertical: false
+            name: Filter left
+          - type: tile
+            entity: sensor.rocky_last_clean_area
+            features_position: bottom
+            vertical: false
+            name: Last clean area
+          - type: tile
+            entity: sensor.rocky_last_clean_duration
+            features_position: bottom
+            vertical: false
+            name: Last clean duration
+          - type: tile
+            entity: sensor.rocky_last_clean_end
+            features_position: bottom
+            vertical: false
+            name: Last clean end
+          - type: tile
+            entity: sensor.rocky_last_clean_start
+            features_position: bottom
+            vertical: false
+            name: Last clean start
+          - type: tile
+            entity: sensor.rocky_main_brush_left
+            features_position: bottom
+            vertical: false
+            name: Main brush left
+          - type: tile
+            entity: binary_sensor.rocky_mop_drying
+            features_position: bottom
+            vertical: false
+            name: Mop drying
+          - type: tile
+            entity: sensor.rocky_mop_drying_remaining_time
+            features_position: bottom
+            vertical: false
+            name: Mop drying remaining time
+          - type: tile
+            entity: sensor.rocky_sensor_dirty_left
+            features_position: bottom
+            vertical: false
+            name: Sensor dirty left
+          - type: tile
+            entity: sensor.rocky_side_brush_left
+            features_position: bottom
+            vertical: false
+            name: Side brush left
+          - type: tile
+            entity: sensor.rocky_total_clean_area
+            features_position: bottom
+            vertical: false
+            name: Total clean area
+          - type: tile
+            entity: sensor.rocky_total_clean_count
+            features_position: bottom
+            vertical: false
+            name: Total clean count
+          - type: tile
+            entity: sensor.rocky_total_duration
+          - type: tile
+            entity: sensor.rocky_total_dust_collection_count
+          - type: tile
+            entity: binary_sensor.rocky_water_box_attached
+          - type: tile
+            entity: binary_sensor.rocky_water_shortage
+    badges:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: back
+        alignment: justify
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: true
+        entity: weather.pirateweather_home
+        state_content: temperature
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: binary_sensor.rocky_water_shortage
+        visibility:
+          - condition: state
+            entity: binary_sensor.rocky_water_shortage
+            state_not: 'off'
+      - type: entity
+        show_name: false
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_cleaning_progress
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_cleaning_progress
+            above: 0
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: vacuum.rocky
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: switch.rocky_valley_electricity_switch
+        color: teal
+        visibility:
+          - condition: state
+            entity: switch.rocky_valley_electricity_switch
+            state_not: 'on'
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: sensor.rocky_battery
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_battery
+            below: 30
+        show_entity_picture: true
+      - type: entity
+        show_name: false
+        show_state: false
+        show_icon: true
+        entity: binary_sensor.rocky_mop_drying
+        visibility:
+          - condition: state
+            entity: binary_sensor.rocky_mop_drying
+            state: 'on'
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_main_brush_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_main_brush_left
+            below: 0
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_side_brush_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_side_brush_left
+            below: 0
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_filter_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_filter_left
+            below: 0
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: sensor.rocky_sensor_dirty_left
+        visibility:
+          - condition: numeric_state
+            entity: sensor.rocky_sensor_dirty_left
+            below: 0
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: device_tracker.roborock_vacuum_a70
+        visibility:
+          - condition: state
+            entity: device_tracker.roborock_vacuum_a70
+            state_not: home
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: menu
+        alignment: justify
+    visible:
+      - user: fake21c5f9d54sdad3aer23121random
+      - user: fake7df6fsac3rqb82cfe697f5random
+    cards: []
+    header:
+      layout: responsive
+      badges_position: bottom
+      badges_wrap: scroll

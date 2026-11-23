@@ -1,0 +1,29 @@
+script.executa_hisense_input_tv:
+  icon: 'mdi:antenna'
+  
+script.executa_hisense_input_hdmi_1:
+  icon: 'mdi:video-input-hdmi'
+  
+script.executa_hisense_input_hdmi_2:
+  icon: 'mdi:video-input-hdmi'
+  
+script.executa_hisense_input_hdmi_3:
+  icon: 'mdi:video-input-hdmi'
+
+script.executa_hisense_netflix:
+  icon: 'mdi:netflix'
+  
+script.executa_hisense_volume_up:
+  icon: 'mdi:volume-plus'
+
+script.executa_hisense_volume_down:
+  icon: 'mdi:volume-minus'  
+
+script.executa_hisense_channel_up:
+  icon: 'mdi:arrow-up-drop-circle'
+  
+script.executa_hisense_channel_down:
+  icon: 'mdi:arrow-down-drop-circle'
+  
+script.executa_hisense_home:
+  icon: 'mdi:menu-open'

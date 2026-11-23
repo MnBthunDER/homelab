@@ -1,0 +1,16 @@
+Power = KEY_POWER
+Back = KEY_RETURNS
+
+Exit = KEY_EXIT
+Pause = KEY_PAUSE
+Play = KEY_PLAY (play and pause work the same)
+Stop = KEY_STOP
+
+Fast Forward = KEY_FORWARDS
+Backwards = KEY_BACKWARDS
+
+RGYB Buttons = KEY_RED, KEY_BLUE, etc.
+
+Channeldot = KEY_CHANNELDOT
+
+Closed Captions = KEY_CC

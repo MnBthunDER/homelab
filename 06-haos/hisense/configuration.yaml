@@ -1,0 +1,74 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+homeassistant:
+  external_url: "https://home.company.com"
+
+# nginx proxy manager
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.1.30.0/24 # vlan-prod
+    - 10.0.0.0/8 # (Optional) Allow Docker overlay network
+
+# Hisense TV
+switch:
+  - platform: template
+    switches:
+      hisense_tv:
+        icon_template: >
+          {% if is_state('sensor.hisense_tv','fake_sleep_0') %}
+            {{ 'mdi:television-classic-off' }}
+          {% else %}
+            {{ 'mdi:television-classic' }}
+          {% endif %}
+        friendly_name: "Hisense TV"
+        value_template: >
+          {{ not is_state('sensor.hisense_tv', 'fake_sleep_0') }}
+        turn_on:
+          service: wake_on_lan.send_magic_packet
+          data:
+            mac: "00:00:00:00:00:00"
+        turn_off:
+          service: mqtt.publish
+          data:
+            topic: "/remoteapp/tv/remote_service/XX:XX:XX:XX:XX:XX$normal/actions/sendkey"
+            payload: "KEY_POWER"
+
+mqtt:
+  sensor:
+    - name: "Hisense TV Source"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: >
+        {% if value_json.statetype == "app" %}
+          {{ value_json.name }}
+        {% elif value_json.statetype == "sourceswitch" %}
+          {{ value_json.displayname }}
+        {% elif value_json.statetype == "livetv" %}
+          {{ value_json.channel_name }}
+        {% else %}
+          Unknown
+        {% endif %}
+      icon: mdi:video-input-hdmi
+    - name: "Hisense TV Channel"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: "{{ value_json.get('channel_name', 'Unknown') }}"
+
+    - name: "Hisense TV Program"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: "{{ value_json.get('progname', 'No Program Info') }}"
+
+    - name: "Hisense TV Program Details"
+      state_topic: "/remoteapp/mobile/broadcast/ui_service/state"
+      value_template: "{{ value_json.get('detail', 'No Details Available') }}"
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+# spotcast:
+#   sp_dc: !secret sp_dc
+#   sp_key: !secret sp_key
+#   country: AU #optional, added in 3.6.24

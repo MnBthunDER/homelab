@@ -1,0 +1,5 @@
+# https://www.youtube.com/watch?v=dZmjyMfJnCU
+# https://youtu.be/3aWua8vUHfE?si=zo8uxw90r5f2cKjv
+
+https://community.home-assistant.io/t/roborock-s8-with-xiaomi-vaccum-map-card/574144
+https://github.com/humbertogontijo/homeassistant-roborock
