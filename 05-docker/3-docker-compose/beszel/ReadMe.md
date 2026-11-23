@@ -6,3 +6,6 @@
 
 # Network Monitors
 ![Network Monitors](./beszel-network-monitors.png)
+
+# Device Details
+![Device Details](./beszel-device-details.png)
