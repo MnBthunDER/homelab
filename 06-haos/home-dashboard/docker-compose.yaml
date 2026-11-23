@@ -412,7 +412,7 @@ views:
                 cards:
                   - type: markdown
                     content: >-
-                      #  🏠 Dundas Weather Forecast
+                      #  🏠 Weather Forecast
 
                       {{  states('sensor.pirateweather_home_minutely_summary')}}
                       {{ states('sensor.pirateweather_home_hourly_summary') }} 
@@ -421,7 +421,7 @@ views:
                       {{ states('sensor.pirateweather_home_daily_summary') }}
 
 
-                      {{ states('sensor.dundas_uv_forecast_0') }}
+                      {{ states('sensor.uv_forecast_0') }}
                   - type: custom:clock-weather-card
                     entity: weather.pirateweather_home
                     sun_entity: sun.sun
@@ -524,7 +524,7 @@ views:
                           - entity: sensor.pirateweather_home_air_quality_index
                             name: PirateWeather
                         align_state: center
-                        name: Dundas AQI
+                        name: AQI
                         show:
                           legend: false
                           labels: false
@@ -661,7 +661,7 @@ views:
                     sunrise_entity: ''
                     sunset_entity: ''
                     type: custom:dynamic-weather-card
-                    entity: weather.dundas_hourly
+                    entity: weather.hourly
           - type: custom:bubble-card
             card_type: pop-up
             hash: '#pop-up-living'
@@ -2261,7 +2261,7 @@ views:
           - condition: numeric_state
             above: 35
         entity: sensor.pirateweather_home_air_quality_index
-        name: Dundas
+        name: Home
       - type: entity
         show_name: true
         show_state: true
@@ -2537,9 +2537,9 @@ views:
         content: >-
           # Welcome Home, {{ user }} 🏠
 
-          🌦️ Dundas Weather Forecast is {{ 
+          🌦️ Home Weather Forecast is {{ 
           states('sensor.pirateweather_home_minutely_summary')}}  {{
-          states('sensor.dundas_uv_forecast_0') }}
+          states('sensor.Home_uv_forecast_0') }}
         text_only: true
     visible:
       - user: ccad21c5f9d547c0b9c227b121be591c
